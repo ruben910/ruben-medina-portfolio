@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios & Precios | Rubén Medina Lebrón</title>
+    <meta name="description" content="Desarrollo de apps web y móviles de alto rendimiento. Diseños premium, sistemas robustos y control total. Made in Puerto Rico.">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Servicios & Precios — Rubén A. Medina Lebrón">
+    <meta property="og:description" content="Desarrollo de apps web y móviles de alto rendimiento. Diseños premium, sistemas robustos. Made in Puerto Rico.">
+    <meta property="og:image" content="https://ruben910.github.io/ruben-medina-portfolio/assets/og_preview.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+
+        @keyframes fade-in-up {
+            0%   { opacity: 0; transform: translateY(24px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
+        .delay-1 { animation-delay: 0.15s; opacity: 0; }
+        .delay-2 { animation-delay: 0.3s; opacity: 0; }
+        .delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+        /* Particle canvas behind everything */
+        #bg-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.35;
+        }
+
+        /* Scan line */
+        .scan {
+            position: fixed;
+            left: 0; top: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(251,191,36,0.5), transparent);
+            pointer-events: none;
+            z-index: 5;
+            animation: scan 10s linear infinite;
+        }
+        @keyframes scan {
+            0%   { top: 0; opacity: 0; }
+            5%   { opacity: 0.6; }
+            95%  { opacity: 0.6; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        /* Tech grid */
+        .tech-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(251,191,36,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(251,191,36,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Cursor glow */
+        .cursor-glow {
+            position: fixed;
+            width: 350px; height: 350px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(251,191,36,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.22;
+            animation: floatOrb linear infinite;
+        }
+        .orb1 { width:400px; height:400px; background: radial-gradient(rgba(59,130,246,0.5), transparent); top:-80px; left:-80px; animation-duration:22s; }
+        .orb2 { width:350px; height:350px; background: radial-gradient(rgba(251,191,36,0.5), transparent); bottom:-80px; right:-80px; animation-duration:18s; animation-direction:reverse; }
+
+        @keyframes floatOrb {
+            0%  { transform:translate(0,0) scale(1); }
+            25% { transform:translate(35px,-25px) scale(1.04); }
+            50% { transform:translate(15px,35px) scale(0.96); }
+            75% { transform:translate(-25px,12px) scale(1.02); }
+            100%{ transform:translate(0,0) scale(1); }
+        }
+
+        /* Above fixed layers */
+        nav, header, section, footer, .relative { position: relative; z-index: 2; }
+
+        /* Card hover glow */
+        .card-blue:hover  { box-shadow: 0 0 30px rgba(59,130,246,0.12); }
+        .card-amber:hover { box-shadow: 0 0 30px rgba(251,191,36,0.12); }
+        .card-green:hover { box-shadow: 0 0 30px rgba(16,185,129,0.12); }
+        .card-purple:hover{ box-shadow: 0 0 30px rgba(139,92,246,0.12); }
+        .card-rose:hover  { box-shadow: 0 0 30px rgba(244,63,94,0.12); }
+        .card-cyan:hover  { box-shadow: 0 0 30px rgba(0,242,254,0.12); }
+    </style>
+</head>
+<body class="bg-slate-950 text-white antialiased min-h-screen selection:bg-amber-500 selection:text-slate-900">
+
+    <!-- Tech Effects -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="scan"></div>
+    <div class="tech-grid"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <!-- ── NAVBAR ── -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex items-center justify-between border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-xl">
+        <a href="index.html" class="flex items-center gap-3 no-underline">
+            <img src="assets/ruben_executive.png" alt="Rubén" class="w-9 h-9 rounded-full object-cover border-2 border-amber-500 shadow-lg shadow-amber-500/30">
+            <span class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 text-sm">Rubén A. Medina Lebrón</span>
+        </a>
+        <div class="flex items-center gap-3">
+            <a href="presentacion.html" class="hidden md:inline text-slate-400 hover:text-amber-400 text-sm font-semibold transition-colors">▶ Presentación</a>
+            <a href="index.html#contacto" class="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 font-black text-xs uppercase tracking-wider px-4 py-2 rounded-full hover:scale-105 transition-transform shadow-lg shadow-amber-500/25">
+                Agendar Llamada
+            </a>
+        </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <header class="relative px-6 pt-40 pb-20 overflow-hidden flex flex-col items-center text-center">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/10 rounded-full blur-[120px]"></div>
+
+        <div class="relative z-10 max-w-3xl animate-fade-in-up">
+            <div class="w-20 h-20 mx-auto bg-gradient-to-tr from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-amber-500/40 mb-6">
+                <i class="fas fa-rocket text-3xl text-white"></i>
+            </div>
+            <p class="text-xs font-black uppercase tracking-[0.3em] text-amber-500 mb-4">Rubén A. Medina Lebrón · Made in Puerto Rico</p>
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-5 text-slate-100 leading-tight">
+                Lleva tu negocio al<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Siguiente Nivel</span>
+            </h1>
+            <p class="text-lg text-slate-400 mb-8 font-light max-w-2xl mx-auto leading-relaxed">
+                Desarrollo de aplicaciones web y móviles de alto rendimiento. Diseños premium, sistemas robustos y control total sobre tu empresa digital.
+            </p>
+            <a href="#precios" class="inline-block bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 font-black px-8 py-4 rounded-full text-sm uppercase tracking-wider hover:scale-105 transition-transform shadow-2xl shadow-amber-500/30">
+                Ver Planes &amp; Precios ↓
+            </a>
+        </div>
+    </header>
+
+    <!-- ── CAPACIDADES ── -->
+    <section class="max-w-6xl mx-auto px-6 py-16">
+        <p class="text-xs font-black uppercase tracking-[0.3em] text-slate-500 text-center mb-12">Capacidades del Sistema</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800 p-8 rounded-3xl hover:border-blue-500/50 transition-all group card-blue animate-fade-in-up delay-1">
+                <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-bolt text-blue-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-slate-200">Sincronización en Tiempo Real</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Mensajería instantánea y actualización de datos sin recargar. Ideal para chats en vivo, radios y control de usuarios al segundo.</p>
+            </div>
+
+            <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800 p-8 rounded-3xl hover:border-amber-500/50 transition-all group card-amber animate-fade-in-up delay-2">
+                <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-stopwatch text-amber-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-slate-200">Control de Expiración</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Sistemas inteligentes para negocios: ofertas, anuncios publicitarios y membresías que expiran automáticamente en tiempo récord.</p>
+            </div>
+
+            <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800 p-8 rounded-3xl hover:border-emerald-500/50 transition-all group card-green animate-fade-in-up delay-3">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-mobile-alt text-emerald-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-slate-200">Experiencia Premium</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Interfaces fluidas, modo oscuro nativo, reproductores multimedia y una estética diseñada para impresionar desde el primer segundo.</p>
+            </div>
+
+            <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800 p-8 rounded-3xl hover:border-purple-500/50 transition-all group card-purple">
+                <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-robot text-purple-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-slate-200">Agentes de IA Autónomos</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Flujos inteligentes que trabajan 24/7 por tu negocio: respuestas automáticas, análisis de datos y automatización de procesos críticos.</p>
+            </div>
+
+            <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800 p-8 rounded-3xl hover:border-rose-500/50 transition-all group card-rose">
+                <div class="w-12 h-12 bg-rose-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-shield-alt text-rose-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-slate-200">Canales Privados &amp; Seguros</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Infraestructura de comunicación B2B con alta disponibilidad, canales privados y control de acceso por rol o membresía.</p>
+            </div>
+
+            <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800 p-8 rounded-3xl hover:border-cyan-500/50 transition-all group card-cyan">
+                <div class="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-cloud text-cyan-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-slate-200">Cloud &amp; Despliegue Global</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Google Cloud Run, Oracle VPS, Supabase y Firebase. Infraestructura escalable lista para manejar miles de usuarios simultáneos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CASO REAL ── -->
+    <section class="max-w-5xl mx-auto px-6 py-12">
+        <div class="bg-gradient-to-r from-slate-900 to-slate-950 border border-amber-500/25 rounded-3xl p-10 flex flex-col md:flex-row items-center gap-10">
+            <img src="assets/logo_impulso.jpg" alt="Impulso PR" class="w-48 h-48 rounded-2xl object-cover shadow-2xl shadow-black/50 flex-shrink-0">
+            <div>
+                <p class="text-xs font-black uppercase tracking-[0.3em] text-amber-500 mb-3">✅ Caso Real Construido</p>
+                <h3 class="text-3xl font-black text-white mb-4">Impulso PR</h3>
+                <p class="text-slate-400 leading-relaxed mb-6">Plataforma de transmisión en vivo, comunicación B2B y alertas masivas construida desde cero. Alojamiento híbrido en Google Cloud + Oracle VPS, con Supabase y Firebase. Esto no es teoría — es lo que construyo para mis clientes.</p>
+                <a href="https://impulsopr-tv-apps-572316843568.us-east1.run.app/" target="_blank"
+                   class="inline-block bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 font-black text-sm uppercase tracking-wider px-6 py-3 rounded-full hover:scale-105 transition-transform shadow-lg shadow-amber-500/25">
+                    <i class="fas fa-external-link-alt mr-2"></i>Ver Proyecto en Vivo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PRECIOS ── -->
+    <section id="precios" class="max-w-5xl mx-auto px-6 py-20">
+        <h2 class="text-3xl md:text-4xl font-black text-center mb-3 uppercase tracking-tight text-white">Inversión del Proyecto</h2>
+        <p class="text-center text-slate-400 mb-14 text-sm max-w-xl mx-auto">
+            Elige el modelo que mejor se adapte a tu visión y presupuesto.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+            <!-- Plan 1: Pago Único -->
+            <div class="bg-slate-900 border border-slate-800 rounded-[2rem] p-8 flex flex-col relative overflow-hidden hover:border-slate-600 transition-all">
+                <div class="mb-6">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-800 px-3 py-1 rounded-full">Licencia Completa</span>
+                    <h3 class="text-2xl font-bold mt-4 text-white">Desarrollo Único</h3>
+                    <div class="mt-4 flex items-baseline text-5xl font-black text-white">
+                        $500 <span class="text-lg text-slate-500 font-normal ml-2">/ pago único</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-8 flex-1 text-sm text-slate-300">
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-blue-500"></i> Código fuente entregado 100% tuyo</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-blue-500"></i> Diseño UI/UX personalizado</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-blue-500"></i> Base de datos inicial configurada</li>
+                    <li class="flex items-center gap-3 text-slate-500"><i class="fas fa-times text-slate-700"></i> No incluye mantenimiento mensual</li>
+                    <li class="flex items-center gap-3 text-slate-500"><i class="fas fa-times text-slate-700"></i> No incluye pago de servidores</li>
+                </ul>
+                <a href="mailto:rubenmedina910@gmail.com?subject=Solicitud Plan Desarrollo Unico $500"
+                   class="block text-center py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold uppercase tracking-wider transition-colors text-sm">
+                    Solicitar Este Plan
+                </a>
+            </div>
+
+            <!-- Plan 2: Mensualidad (Destacado) -->
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/60 rounded-[2rem] p-8 flex flex-col relative transform md:-translate-y-4 shadow-2xl shadow-amber-500/15 hover:shadow-amber-500/25 transition-all">
+                <div class="absolute top-0 right-8 bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-b-xl shadow-lg">
+                    Más Popular ⭐
+                </div>
+                <div class="mb-6">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full">SaaS / Suscripción</span>
+                    <h3 class="text-2xl font-bold mt-4 text-white">Plan Todo Incluido</h3>
+                    <div class="mt-4 text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+                        Contáctame <span class="text-lg text-slate-500 font-normal">/ mensual</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">El precio se ajusta al alcance de tu proyecto</p>
+                </div>
+                <ul class="space-y-4 mb-8 flex-1 text-sm text-slate-200">
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-amber-500"></i> Desarrollo continuo de la App</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-amber-500"></i> Servidores y Bases de Datos incluidos</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-amber-500"></i> Mantenimiento y corrección de errores</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-amber-500"></i> Actualizaciones con nuevas funciones</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-amber-500"></i> Soporte técnico prioritario</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-amber-500"></i> Agentes de IA integrados</li>
+                </ul>
+                <a href="https://wa.me/17873786170?text=Hola%20Rubén,%20me%20interesa%20el%20Plan%20Todo%20Incluido" target="_blank"
+                   class="block text-center py-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-900 font-black uppercase tracking-wider transition-all hover:scale-105 active:scale-95 text-sm shadow-lg shadow-amber-500/30">
+                    <i class="fab fa-whatsapp mr-2"></i>Adquirir Membresía
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA FINAL ── -->
+    <section class="text-center px-6 py-20 relative overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[500px] h-[300px] bg-amber-500/08 rounded-full blur-[120px]"></div>
+        </div>
+        <p class="text-xs font-black uppercase tracking-[0.3em] text-amber-500 mb-4">¿Tienes una idea?</p>
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4 uppercase">Conviértela en realidad</h2>
+        <p class="text-slate-400 mb-8 max-w-md mx-auto">La primera sesión de diagnóstico es completamente sin costo. Analizo tu negocio y te digo exactamente qué necesitas.</p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="mailto:rubenmedina910@gmail.com" class="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 font-black px-8 py-4 rounded-full text-sm uppercase tracking-wider hover:scale-105 transition-transform shadow-2xl shadow-amber-500/30">
+                ✉️ Enviar Email
+            </a>
+            <a href="https://wa.me/17873786170" target="_blank" class="border-2 border-green-500 text-green-400 font-black px-8 py-4 rounded-full text-sm uppercase tracking-wider hover:bg-green-500/10 transition-colors">
+                <i class="fab fa-whatsapp mr-2"></i>WhatsApp Directo
+            </a>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="border-t border-slate-800 py-10 px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="text-center md:text-left">
+            <p class="font-black text-white text-sm">Rubén A. Medina Lebrón</p>
+            <p class="text-slate-500 text-xs mt-1">© 2026 · Consultor en IA &amp; Arquitecto de Ecosistemas Digitales · Puerto Rico</p>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-slate-500 hover:text-amber-400 text-xs font-bold transition-colors uppercase tracking-wider">Portafolio</a>
+            <a href="presentacion.html" class="text-slate-500 hover:text-amber-400 text-xs font-bold transition-colors uppercase tracking-wider">Presentación</a>
+            <img src="assets/made_in_pr2.jpg" alt="Made in Puerto Rico" class="h-10 rounded-xl opacity-80 hover:opacity-100 transition-opacity">
+        </div>
+    </footer>
+
+    <script>
+        // Cursor glow
+        const glow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', e => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top  = e.clientY + 'px';
+        });
+
+        // Particle canvas
+        const canvas = document.getElementById('bg-canvas');
+        const ctx    = canvas.getContext('2d');
+        let W, H, pts = [];
+        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        resize(); window.addEventListener('resize', resize);
+        class P {
+            constructor() { this.reset(); }
+            reset() { this.x = Math.random()*W; this.y = Math.random()*H; this.vx=(Math.random()-.5)*.35; this.vy=(Math.random()-.5)*.35; this.r=Math.random()*1.2+.4; this.a=Math.random()*.5+.15; }
+            update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>W||this.y<0||this.y>H) this.reset(); }
+            draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=`rgba(251,191,36,${this.a})`; ctx.fill(); }
+        }
+        for(let i=0;i<80;i++) pts.push(new P());
+        function connect() {
+            for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++) {
+                const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+                if(d<110){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=`rgba(251,191,36,${.1*(1-d/110)})`; ctx.lineWidth=.5; ctx.stroke(); }
+            }
+        }
+        (function loop(){ ctx.clearRect(0,0,W,H); pts.forEach(p=>{p.update();p.draw();}); connect(); requestAnimationFrame(loop); })();
+    </script>
+</body>
+</html>
