@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubén Medina Lebrón - Ecosistemas Digitales e IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050b14;
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --accent: #10b981;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 11, 20, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Puerto Rico badge in nav */
+        .pr-badge {
+            height: 40px;
+            margin-left: 20px;
+            filter: drop-shadow(0 0 8px rgba(0,242,254,0.5));
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            background-image: linear-gradient(to right, rgba(5,11,20,0.95), rgba(5,11,20,0.6)), url('assets/hero_bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 10;
+            animation: fadeUp 1s ease-out forwards;
+            position: relative;
+        }
+
+        .made-in-pr-hero {
+            position: absolute;
+            top: -100px;
+            right: 0;
+            width: 120px;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.5));
+            border-radius: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #000;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 242, 254, 0.5);
+        }
+
+        /* Section Global */
+        .section {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        /* About Me / Executive Profile */
+        .profile-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 50px;
+            margin-bottom: 50px;
+        }
+
+        .profile-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .profile-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 30px;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.02);
+            border-color: var(--primary);
+        }
+
+        .profile-info {
+            flex: 1.5;
+            min-width: 300px;
+        }
+
+        .profile-info h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .profile-info h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+        }
+
+        .profile-info p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* Timeline / Resume */
+        .timeline {
+            border-left: 2px solid var(--glass-border);
+            padding-left: 30px;
+            margin-top: 40px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .timeline-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Skills Tags */
+        .tech-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tags span {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tags span:hover {
+            background: rgba(16, 185, 129, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Featured Project */
+        .project-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.5) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 50px;
+            position: relative;
+        }
+
+        .project-info {
+            flex: 1.5;
+            min-width: 300px;
+        }
+
+        .project-info h2 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .project-info p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .project-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .project-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .project-image img:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        /* Services */
+        .services-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Contact CTA */
+        .cta-section {
+            text-align: center;
+            padding: 100px 5%;
+            background: linear-gradient(0deg, #050b14 0%, #0a1526 100%);
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            display: inline-block;
+            background: var(--glass-bg);
+            border: 1px solid var(--primary);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .footer-badge {
+            margin-top: 50px;
+            width: 150px;
+            border-radius: 20px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-badge:hover {
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .section-title { font-size: 2.2rem; }
+            .made-in-pr-hero { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">R. Medina Lebrón</div>
+        <a href="#contacto" class="nav-btn">Agendar Llamada</a>
+        <img src="assets/made_in_pr.jpg" alt="Made in Puerto Rico" class="pr-badge" />
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">Innovación & Inteligencia Artificial</span>
+            <h1>Evoluciona tu Ecosistema Digital</h1>
+            <p>Soy <strong>Rubén Medina Lebrón</strong>, consultor estratégico y desarrollador especialista. Potenciado por Antigravity, transformo la complejidad técnica en ecosistemas de ventas, PWA y soluciones IA que escalan tu negocio.</p>
+            <a href="#contacto" class="btn-primary">Inicia tu Transformación</a>
+        </div>
+    </header>
+
+    <!-- About Me Section -->
+    <section class="section" id="sobre-mi">
+        <h2 class="section-title">Sobre Rubén Medina Lebrón</h2>
+        <div class="about-wrapper" style="display:flex;align-items:center;gap:40px;flex-wrap:wrap;">
+            <img src="assets/ruben_executive.png" alt="Rubén ejecutivo" style="width:250px;border-radius:20px;box-shadow:0 10px 30px rgba(0,242,254,0.3);" />
+            <div class="about-text" style="max-width:600px;">
+                <p><strong>Dirección:</strong> Carr. 112, Km 12.8, Bo. Rocha, Moca, PR</p>
+                <p><strong>Teléfono:</strong> 787‑378‑6170 | <strong>Email:</strong> rubenmedina910@gmail.com</p>
+                <p>Ingeniero de campo con 11 años de experiencia en telecomunicaciones, especializado en arquitectura de soluciones digitales, IA y desarrollo de PWAs. Consultor de energía renovable y creador del proyecto <a href="https://impulsopr-tv-apps-572316843568.us-east1.run.app/" target="_blank" style="color:var(--primary);text-decoration:underline;">Impulso PR</a>, una plataforma de transmisión en vivo y comunicación B2B.</p>
+                <p>Capacitado en despliegue de infraestructura en la nube (Google Cloud, Oracle Cloud), bases de datos en tiempo real (Supabase) y automatización con Firebase. Actualmente enfocado en construir ecosistemas web/móviles escalables y en la implementación de agentes autónomos de IA.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section class="section" id="sobre-mi">
+        <h2 class="section-title">Perfil Ejecutivo & Capacitación</h2>
+        <div class="profile-container">
+            <div class="profile-image">
+                <!-- AI Generated Executive Photo -->
+                <img src="assets/ruben_executive.png" alt="Rubén Medina Ejecutivo">
+            </div>
+            <div class="profile-info">
+                <h2>Rubén A. Medina Lebrón</h2>
+                <h3>Arquitecto de Soluciones Cloud & Especialista en IA</h3>
+                <p>Profesional multidisciplinario con una trayectoria sólida que combina la ingeniería de campo, ventas estratégicas y desarrollo avanzado de software en Puerto Rico.</p>
+                <p>Mi enfoque actual es crear <strong>ecosistemas web/móviles escalables</strong>, integraciones en la nube (Google Cloud, Oracle Cloud) y la implementación de Inteligencia Artificial para maximizar la competitividad empresarial.</p>
+                
+                <h4 style="margin-top: 25px; margin-bottom: 15px; font-size: 1.2rem; color: #fff;">Competencias Clave</h4>
+                <div class="tech-tags">
+                    <span>Arquitectura Full-Stack</span>
+                    <span>Inteligencia Artificial (Agentes Autónomos)</span>
+                    <span>Supabase & Firebase</span>
+                    <span>Google Cloud & Oracle VPS</span>
+                    <span>Infraestructura de Redes & Fibra Óptica</span>
+                    <span>Ventas Estratégicas B2B/B2C</span>
+                </div>
+
+                <!-- Career Timeline -->
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mayo 2026 • BIG school</div>
+                        <h4 class="timeline-title">Certificación en IA — De 0 a Agentes</h4>
+                        <p class="timeline-desc">Curso certificado por Romuald Fons (CEO BIG school) y Jon Hernández (Director Máster de IA). Dominio de agentes autónomos, automatización y competitividad empresarial con IA. <strong>Duración: 6 horas.</strong></p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025 - Presente • Independiente</div>
+                        <h4 class="timeline-title">Arquitecto de Software</h4>
+                        <p class="timeline-desc">Creador de <strong>Impulso PR</strong>. Despliegue híbrido, bases de datos en tiempo real y flujos automatizados masivos.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024 - Presente • Sunrun, Planet Solar</div>
+                        <h4 class="timeline-title">Consultor de Energía Renovable</h4>
+                        <p class="timeline-desc">Asesoría comercial fotovoltaica, prospección de clientes y cierre de contratos de alto valor.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Trayectoria de 11 Años • Genesis Communications</div>
+                        <h4 class="timeline-title">Especialista en Telecomunicaciones</h4>
+                        <p class="timeline-desc">Mantenimiento de red troncal de fibra óptica (AT&T, Liberty). Restauración crítica post-Huracán María.</p>
+                    </div>
+                </div>
+
+                <!-- Certificate Display -->
+                <div style="margin-top: 40px;">
+                    <h4 style="font-size: 1.2rem; color: #fff; margin-bottom: 15px;">🏆 Certificaciones</h4>
+                    <div style="border-radius: 16px; overflow: hidden; border: 1px solid rgba(79, 172, 254, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 550px;">
+                        <img src="assets/certificado_ia.jpg" alt="Certificado de Asistencia al Curso de IA — BIG school — Ruben A Medina Lebrón" style="width: 100%; display: block;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Project Section -->
+    <section class="section" id="proyectos">
+        <h2 class="section-title">Caso de Éxito Destacado</h2>
+        <div class="project-container">
+            <div class="project-info">
+                <h2>Impulso PR</h2>
+                <div class="tech-tags" style="margin-bottom: 20px;">
+                    <span>Progressive Web App (PWA)</span>
+                    <span>Google Cloud Run</span>
+                    <span>Supabase / Firebase</span>
+                    <span>APIs Masivas</span>
+                </div>
+                <p>Ecosistema digital integral diseñado y desplegado desde cero. Alojamiento híbrido en servidores VPS de Oracle y Google Cloud.</p>
+                <p>Integra bases de datos en tiempo real, flujos automatizados de alertas masivas (Email/WhatsApp), y transmisión de video de alta disponibilidad para B2B.</p>
+                
+                <a href="#" class="btn-primary" style="margin-top: 15px; padding: 12px 30px; font-size: 1rem;">Explorar Proyecto</a>
+            </div>
+            <div class="project-image">
+                <!-- User Uploaded Impulso PR Logo -->
+                <img src="assets/logo_impulso.jpg" alt="Logo de Impulso PR">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="servicios">
+        <h2 class="section-title">Líneas de Negocio Estratégicas</h2>
+        
+        <div class="services-wrapper">
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>Automatización IA</h3>
+                    <p>Diseño de flujos de trabajo inteligentes y despliegue de agentes autónomos (Antigravity) para acelerar operaciones y ventas.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Progressive Web Apps</h3>
+                    <p>Aplicaciones modernas (como Impulso PR) con arquitectura robusta Full-Stack, listas para escalar en la nube.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Infraestructura Privada</h3>
+                    <p>Aplicando 11 años de experiencia técnica para crear canales privados de comunicación B2B seguros y de alta disponibilidad.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💳</div>
+                    <h3>Tiendas y Pagos</h3>
+                    <p>Construcción de infraestructuras de comercio electrónico completas: integración de pasarelas de pago, gestión de catálogos, configuraciones de envío y personalización total del flujo de compra.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="section testimonial-section" id="testimonios">
+        <h2 class="section-title">Testimonios & Casos de Éxito</h2>
+        <div class="testimonial-wrapper" style="display:flex;align-items:center;gap:30px;flex-wrap:wrap;">
+            <img src="assets/people_listening.png" alt="Audiencia escuchando" style="width:300px;border-radius:20px;box-shadow:0 10px 30px rgba(0,242,254,0.3);" />
+            <p style="max-width:600px;font-size:1.1rem;color:var(--text-muted);">Empresas que han implementado nuestras soluciones reportan aumentos de productividad del 30‑40% y mayor retención de clientes gracias a la automatización inteligente y a la infraestructura robusta.</p>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="section cta-section" id="contacto">
+        <h2>¿Listo para escalar tu infraestructura y tus ventas?</h2>
+        <p>Aprovecha la Inteligencia Artificial y la arquitectura de élite para tu empresa.</p>
+        
+        <div class="contact-info">
+            ✉️ rubenmedina910@gmail.com <br>
+            📞 787-378-6170
+        </div>
+        
+        <br>
+        <a href="mailto:rubenmedina910@gmail.com" class="btn-primary">Agendar Consultoría</a>
+        
+        <div style="margin-top: 50px;">
+            <img src="assets/made_in_pr.jpg" alt="Orgullosamente Hecho en Puerto Rico" class="footer-badge">
+        </div>
+    </section>
+
+    <footer class="pr-footer" style="background: linear-gradient(90deg, #0050A4 0%, #FFFFFF 33%, #FF0000 66%, #0050A4 100%); height: 20px; margin-top: 40px;">
+    </footer>
+
+</body>
+</html>
