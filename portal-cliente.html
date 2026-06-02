@@ -410,10 +410,10 @@
 
                 <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 relative h-[400px]">
                     <!-- Blurred iframe to create illusion of locked feature -->
-                    <iframe src="https://docs.google.com/document/d/1B71R9c4pD8g8hX6qG5V6w_eWjB8W9y3sK8q8E4xV3q8/preview" class="absolute inset-0 w-full h-full border-0 bg-white opacity-40 filter blur-[4px] pointer-events-none" allowfullscreen></iframe>
+                    <iframe id="sala-iframe" src="https://docs.google.com/document/d/1B71R9c4pD8g8hX6qG5V6w_eWjB8W9y3sK8q8E4xV3q8/preview" class="absolute inset-0 w-full h-full border-0 bg-white opacity-40 filter blur-[4px] pointer-events-none transition-all duration-1000" allowfullscreen></iframe>
                     
                     <!-- Locked Overlay -->
-                    <div class="absolute inset-0 locked-overlay flex flex-col items-center justify-center z-10 bg-[#020810]/60">
+                    <div id="sala-overlay" class="absolute inset-0 locked-overlay flex flex-col items-center justify-center z-10 bg-[#020810]/60 transition-opacity duration-1000">
                         <div class="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mb-4 border-2 border-slate-600 shadow-2xl">
                             <i class="fas fa-lock text-3xl text-slate-400"></i>
                         </div>
@@ -522,7 +522,30 @@
                 }
             }, 700);
         }
+        
+        // Calendly Event Listener for unlocking VIP Area
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.event && e.data.event.indexOf('calendly.event_scheduled') === 0) {
+                // Unlock the VIP Area
+                const overlay = document.getElementById('sala-overlay');
+                const iframe = document.getElementById('sala-iframe');
+                
+                if (overlay && iframe) {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.style.display = 'none', 1000);
+                    
+                    iframe.classList.remove('blur-[4px]', 'opacity-40', 'pointer-events-none');
+                    iframe.classList.add('opacity-100');
+                    
+                    // Show a quick success alert
+                    alert("¡Sesión confirmada! Tu Sala de Trabajo colaborativa ha sido desbloqueada con éxito.");
+                    
+                    // Scroll down to show them the unlocked area
+                    document.getElementById('sala').scrollIntoView({behavior: "smooth", block: "center"});
+                }
+            }
+        });
+
     </script>
 </body>
 </html>
-
