@@ -789,14 +789,9 @@
             .section-title { font-size: 2rem; }
             .nav-links { display: none; }
         }
-        /* Subtle text shadow pulse on scroll */
-        .glow-flash {
-            animation: textPulse 3s ease-in-out forwards;
-        }
-        @keyframes textPulse {
-            0% { text-shadow: none; }
-            50% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.15); }
-            100% { text-shadow: none; }
+        /* Permanent subtle glow for readability and premium feel */
+        .text-muted, p, .timeline-desc {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
         }
     </style>
     <!-- Favicons -->
@@ -1289,19 +1284,7 @@
             requestAnimationFrame(animate);
         }
         animate();
-        // ── Text Flash on Scroll ──
-        const textObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('glow-flash');
-                    textObserver.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('p, .text-muted, .timeline-desc').forEach(el => {
-            textObserver.observe(el);
-        });
+
     </script>
 
     <!-- ─── CALENDLY JS ─── -->
