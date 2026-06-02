@@ -789,6 +789,15 @@
             .section-title { font-size: 2rem; }
             .nav-links { display: none; }
         }
+        /* Glow flash animation */
+        .glow-flash {
+            animation: textFlash 1.5s ease-out forwards;
+        }
+        @keyframes textFlash {
+            0% { color: var(--text-muted); text-shadow: none; }
+            30% { color: #ffffff; text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 30px rgba(0,242,254,0.6); }
+            100% { color: var(--text-muted); text-shadow: none; }
+        }
     </style>
 </head>
 <body>
@@ -1138,7 +1147,7 @@
         </div>
 
         <br>
-        <a href="portal-cliente.html#entrenamiento" class="btn-primary" style="font-size: 1.1rem; padding: 16px 45px;">📅 Agendar Consultoría Gratuita</a>
+        <a href="portal-cliente.html#entrenamiento" class="btn-primary" style="position: relative; z-index: 10; font-size: 1.1rem; padding: 16px 45px;">📅 Agendar Consultoría Gratuita</a>
 
         <!-- Social Media Icons -->
         <p style="margin-top: 50px; margin-bottom: 0; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted);">Encuéntrame en redes</p>
@@ -1277,6 +1286,19 @@
             requestAnimationFrame(animate);
         }
         animate();
+        // ── Text Flash on Scroll ──
+        const textObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('glow-flash');
+                    textObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('p, .text-muted, .timeline-desc').forEach(el => {
+            textObserver.observe(el);
+        });
     </script>
 
     <!-- ─── CALENDLY JS ─── -->
