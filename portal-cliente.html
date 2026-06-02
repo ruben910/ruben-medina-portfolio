@@ -394,6 +394,9 @@
                     <div class="calendly-inline-widget w-full" data-url="https://calendly.com/rubenmedina910/30min" style="min-width:320px;height:1000px;"></div>
                     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                     <!-- Calendly inline widget end -->
+                    <div class="text-center p-4 border-t border-slate-800">
+                        <button onclick="unlockVIPArea()" class="text-xs text-slate-500 hover:text-white underline">Simular Cita Agendada (Solo para Pruebas)</button>
+                    </div>
                 </div>
             </section>
 
@@ -409,9 +412,26 @@
                 </div>
 
                 <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 relative h-[400px]">
+                <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 relative h-[450px]">
                     <!-- Blurred iframe to create illusion of locked feature -->
                     <iframe id="sala-iframe" src="https://docs.google.com/document/d/1B71R9c4pD8g8hX6qG5V6w_eWjB8W9y3sK8q8E4xV3q8/preview" class="absolute inset-0 w-full h-full border-0 bg-white opacity-40 filter blur-[4px] pointer-events-none transition-all duration-1000" allowfullscreen></iframe>
                     
+                    <!-- Dynamic Data Overlay (Shown when unlocked) -->
+                    <div id="sala-data-overlay" class="absolute inset-0 z-0 bg-[#020810]/90 backdrop-blur-sm p-8 opacity-0 pointer-events-none transition-opacity duration-1000 flex flex-col items-center justify-center">
+                        <div class="max-w-md w-full bg-slate-900/80 border border-blue-500/30 p-6 rounded-xl shadow-2xl">
+                            <h3 class="text-xl font-black text-white mb-4 border-b border-slate-700 pb-2"><i class="fas fa-file-invoice text-blue-400 mr-2"></i> Expediente Pre-Sesión</h3>
+                            <div class="space-y-3 text-sm">
+                                <p><span class="text-slate-400">Cliente/Empresa:</span> <strong id="vip-empresa" class="text-white">---</strong></p>
+                                <p><span class="text-slate-400">Industria:</span> <strong id="vip-industria" class="text-white uppercase">---</strong></p>
+                                <p><span class="text-slate-400">Facturación:</span> <strong id="vip-facturacion" class="text-white">---</strong></p>
+                                <p><span class="text-slate-400">Foco Estratégico:</span> <strong id="vip-problema" class="text-amber-400">---</strong></p>
+                            </div>
+                            <div class="mt-6 p-3 bg-blue-500/10 border border-blue-500/20 rounded text-xs text-blue-300 italic">
+                                "Este expediente ya fue enviado a mis agentes. En nuestra reunión, abriremos el documento oficial con la estrategia estructurada base."
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Locked Overlay -->
                     <div id="sala-overlay" class="absolute inset-0 locked-overlay flex flex-col items-center justify-center z-10 bg-[#020810]/60 transition-opacity duration-1000">
                         <div class="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mb-4 border-2 border-slate-600 shadow-2xl">
@@ -523,26 +543,45 @@
             }, 700);
         }
         
-        // Calendly Event Listener for unlocking VIP Area
+        // Function to unlock VIP area and inject data
+        function unlockVIPArea() {
+            const overlay = document.getElementById('sala-overlay');
+            const dataOverlay = document.getElementById('sala-data-overlay');
+            const iframe = document.getElementById('sala-iframe');
+            
+            // Get form values
+            const emp = document.getElementById('ai-empresa').value || 'Usuario Demo';
+            const ind = document.getElementById('ai-industria').options[document.getElementById('ai-industria').selectedIndex]?.text || 'No especificada';
+            const fac = document.getElementById('ai-facturacion').options[document.getElementById('ai-facturacion').selectedIndex]?.text || 'No especificada';
+            const prob = document.getElementById('ai-problema').options[document.getElementById('ai-problema').selectedIndex]?.text || 'No especificado';
+            
+            // Inject into VIP card
+            document.getElementById('vip-empresa').innerText = emp;
+            document.getElementById('vip-industria').innerText = ind;
+            document.getElementById('vip-facturacion').innerText = fac;
+            document.getElementById('vip-problema').innerText = prob;
+
+            if (overlay && iframe) {
+                // Fade out lock screen
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.style.display = 'none', 1000);
+                
+                // Dim the iframe further so data is readable
+                iframe.classList.add('opacity-10');
+                
+                // Show data overlay
+                dataOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                dataOverlay.classList.add('opacity-100', 'z-20');
+                
+                // Scroll down
+                document.getElementById('sala').scrollIntoView({behavior: "smooth", block: "center"});
+            }
+        }
+
+        // Calendly Event Listener for unlocking VIP Area automatically
         window.addEventListener('message', function(e) {
             if (e.data && e.data.event && e.data.event.indexOf('calendly.event_scheduled') === 0) {
-                // Unlock the VIP Area
-                const overlay = document.getElementById('sala-overlay');
-                const iframe = document.getElementById('sala-iframe');
-                
-                if (overlay && iframe) {
-                    overlay.style.opacity = '0';
-                    setTimeout(() => overlay.style.display = 'none', 1000);
-                    
-                    iframe.classList.remove('blur-[4px]', 'opacity-40', 'pointer-events-none');
-                    iframe.classList.add('opacity-100');
-                    
-                    // Show a quick success alert
-                    alert("¡Sesión confirmada! Tu Sala de Trabajo colaborativa ha sido desbloqueada con éxito.");
-                    
-                    // Scroll down to show them the unlocked area
-                    document.getElementById('sala').scrollIntoView({behavior: "smooth", block: "center"});
-                }
+                unlockVIPArea();
             }
         });
 
