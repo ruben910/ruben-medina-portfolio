@@ -139,7 +139,7 @@
             </div>
 
             <!-- TAB: AGENDAR -->
-            <div id="tab-agendar" class="tab-content max-w-4xl mx-auto h-full flex flex-col min-h-[700px]">
+            <div id="tab-agendar" class="tab-content max-w-4xl mx-auto h-full flex flex-col min-h-[1050px]">
                 <div class="mb-4 text-center">
                     <h1 class="text-3xl font-black text-white">Tu Diagnóstico Estratégico</h1>
                     <p class="text-slate-400 mt-2 max-w-xl mx-auto">Selecciona el día y hora que mejor te acomode. Esta primera sesión de 30 minutos es 100% sin costo. Diseñaremos la ruta de tu proyecto.</p>
@@ -147,7 +147,7 @@
                 
                 <div class="flex-1 glass-panel rounded-2xl overflow-hidden border border-slate-700/50">
                     <!-- Calendly inline widget begin -->
-                    <div class="calendly-inline-widget w-full h-full" data-url="https://calendly.com/rubenmedina910/30min" style="min-width:320px;height:700px;"></div>
+                    <div class="calendly-inline-widget w-full h-full" data-url="https://calendly.com/rubenmedina910/30min" style="min-width:320px;height:1050px;"></div>
                     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                     <!-- Calendly inline widget end -->
                 </div>
@@ -161,30 +161,46 @@
                     <p class="text-slate-400 mt-2">Al ser cliente, aquí podrás ver en tiempo real en qué fase se encuentra tu aplicación.</p>
                 </div>
                 
-                <!-- Roadmap / Timeline -->
+                <!-- Roadmap / Mind Map Visual -->
                 <div class="glass-panel p-8 rounded-2xl mb-8 mt-8">
-                    <h3 class="text-lg font-black text-white mb-6 flex items-center gap-2"><i class="fas fa-map-signs text-blue-500"></i> Roadmap de Desarrollo</h3>
+                    <h3 class="text-lg font-black text-white mb-6 flex items-center gap-2"><i class="fas fa-project-diagram text-blue-500"></i> Mapa Mental de la Dinámica de Trabajo</h3>
                     
-                    <div class="relative border-l-2 border-slate-700/50 ml-4 space-y-8 pb-4">
-                        <!-- Step 1 Done -->
-                        <div class="relative pl-8">
-                            <div class="absolute w-6 h-6 bg-green-500 rounded-full -left-[13px] top-0 flex items-center justify-center border-4 border-[#020810]">
-                                <i class="fas fa-check text-xs text-slate-900"></i>
+                    <div class="flex flex-col md:flex-row items-stretch justify-between gap-4 mt-8 relative">
+                        <!-- Línea conectora Desktop -->
+                        <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-slate-700/50 -translate-y-1/2 z-0"></div>
+                        
+                        <!-- Nodo 1 -->
+                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-green-500/50 p-5 rounded-2xl text-center shadow-[0_0_20px_rgba(34,197,94,0.15)]">
+                            <div class="w-12 h-12 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl border border-green-500">
+                                <i class="fas fa-search"></i>
                             </div>
-                            <h4 class="text-white font-bold text-lg">Fase 1: Diagnóstico Estratégico</h4>
-                            <p class="text-sm text-slate-400 mt-1">Análisis de la situación actual y definición de arquitectura técnica. Entregable aprobado.</p>
+                            <h4 class="text-white font-bold text-sm mb-2">1. Diagnóstico</h4>
+                            <p class="text-xs text-slate-400">Auditoría profunda de tu negocio actual. Identificamos fugas y oportunidades.</p>
                         </div>
-                        <!-- Step 2 Active -->
-                        <div class="relative pl-8">
-                            <div class="absolute w-6 h-6 bg-blue-500 rounded-full -left-[13px] top-0 flex items-center justify-center border-4 border-[#020810] shadow-[0_0_15px_rgba(59,130,246,0.6)] animate-pulse"></div>
-                            <h4 class="text-white font-bold text-lg">Fase 2: Construcción de Plataforma</h4>
-                            <p class="text-sm text-blue-200 mt-1">Desarrollo activo. Creación de UI/UX, bases de datos y agentes de IA.</p>
+                        
+                        <!-- Flecha móvil -->
+                        <div class="md:hidden flex justify-center text-slate-600"><i class="fas fa-arrow-down"></i></div>
+
+                        <!-- Nodo 2 -->
+                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-blue-500 p-5 rounded-2xl text-center shadow-[0_0_20px_rgba(59,130,246,0.3)] transform md:-translate-y-4">
+                            <div class="absolute -top-3 -right-3 bg-blue-500 text-[10px] font-black px-2 py-1 rounded text-slate-900 uppercase animate-pulse">Actual</div>
+                            <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl border border-blue-500">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-sm mb-2">2. Construcción IA</h4>
+                            <p class="text-xs text-blue-200">Arquitectura de la solución. Creamos tus agentes, bases de datos y la interfaz visual.</p>
                         </div>
-                        <!-- Step 3 Pending -->
-                        <div class="relative pl-8">
-                            <div class="absolute w-6 h-6 bg-slate-700 rounded-full -left-[13px] top-0 border-4 border-[#020810]"></div>
-                            <h4 class="text-slate-500 font-bold text-lg">Fase 3: Lanzamiento & Escalamiento</h4>
-                            <p class="text-sm text-slate-600 mt-1">Despliegue en servidores (Google Cloud) y capacitación de tu equipo.</p>
+
+                        <!-- Flecha móvil -->
+                        <div class="md:hidden flex justify-center text-slate-600"><i class="fas fa-arrow-down"></i></div>
+
+                        <!-- Nodo 3 -->
+                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-slate-700 p-5 rounded-2xl text-center">
+                            <div class="w-12 h-12 bg-slate-800 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl border border-slate-600">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h4 class="text-slate-300 font-bold text-sm mb-2">3. Lanzamiento</h4>
+                            <p class="text-xs text-slate-500">Despliegue en la nube. Te capacitamos a ti y a tu equipo para operar el nuevo ecosistema.</p>
                         </div>
                     </div>
                 </div>
