@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,18 +39,22 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out forwards; }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .nav-item.active {
             background: linear-gradient(90deg, rgba(59,130,246,0.15), transparent);
             border-left: 3px solid #3b82f6;
             color: #3b82f6;
+        }
+        
+        /* Video Card Hover Effects */
+        .video-card:hover .play-btn {
+            transform: scale(1.1);
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .locked-overlay {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
     </style>
 </head>
@@ -60,7 +64,7 @@
     <canvas id="bg-canvas"></canvas>
     <div class="tech-grid"></div>
 
-    <!-- Sidebar -->
+    <!-- Sidebar (Desktop) -->
     <aside class="w-64 glass-panel border-r border-slate-800/60 flex flex-col content-layer hidden md:flex transition-all fixed inset-y-0 left-0 z-40">
         <div class="p-6 border-b border-slate-800/60 flex items-center gap-3">
             <img src="assets/ruben_executive.png" alt="Rubén" class="w-10 h-10 rounded-full border-2 border-blue-500">
@@ -73,17 +77,21 @@
         <nav class="flex-1 p-4 space-y-2 mt-4">
             <p class="text-xs font-black uppercase tracking-widest text-slate-500 mb-4 px-4">Centro de Inicio</p>
             
-            <button onclick="switchTab('recursos')" id="btn-recursos" class="nav-item active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800/50 transition-colors text-left">
+            <a href="#entrenamiento" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800/50 transition-colors text-left">
                 <i class="fas fa-brain w-5 text-center text-amber-400"></i> Entrenamiento IA
-            </button>
+            </a>
 
-            <button onclick="switchTab('agendar')" id="btn-agendar" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-black text-slate-900 bg-blue-500 hover:bg-blue-400 transition-colors text-left shadow-lg shadow-blue-500/20 mt-2 mb-2">
-                <i class="fas fa-calendar-check w-5 text-center text-slate-900"></i> Agendar Diagnóstico
-            </button>
+            <a href="#roadmap" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800/50 transition-colors text-left">
+                <i class="fas fa-project-diagram w-5 text-center text-blue-400"></i> Ruta de Trabajo
+            </a>
             
-            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800/50 transition-colors text-left">
-                <i class="fas fa-map-signs w-5 text-center text-blue-400"></i> Ruta de Trabajo
-            </button>
+            <a href="#agendar" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-black text-slate-900 bg-blue-500 hover:bg-blue-400 transition-colors text-left shadow-lg shadow-blue-500/20 mt-4 mb-2">
+                <i class="fas fa-calendar-check w-5 text-center text-slate-900"></i> Agendar Sesión
+            </a>
+
+            <a href="#sala" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-500 hover:text-slate-300 transition-colors text-left mt-4">
+                <i class="fas fa-lock w-5 text-center text-slate-500"></i> Sala Privada VIP
+            </a>
         </nav>
 
         <div class="p-6 border-t border-slate-800/60">
@@ -103,160 +111,195 @@
                     <img src="assets/ruben_executive.png" alt="Rubén" class="w-8 h-8 rounded-full border border-blue-500">
                     <span class="text-sm font-black text-white">Portal Cliente</span>
                 </div>
-                <button onclick="switchTab('agendar')" class="bg-blue-500 text-slate-900 text-[10px] font-black uppercase px-3 py-1.5 rounded">Agendar</button>
+                <a href="#agendar" class="bg-blue-500 text-slate-900 text-[10px] font-black uppercase px-3 py-1.5 rounded">Agendar</a>
             </div>
-            <!-- Simple mobile tabs for demo -->
+            <!-- Mobile nav links -->
             <div class="flex gap-4 text-xs font-bold overflow-x-auto pb-1">
-                <button onclick="switchTab('recursos')" class="text-blue-400 whitespace-nowrap">Entrenamiento</button>
-                <button onclick="switchTab('dashboard')" class="text-slate-400 whitespace-nowrap">Ruta de Trabajo</button>
-                <button onclick="switchTab('sala-trabajo')" class="text-slate-400 whitespace-nowrap">Sala Privada</button>
+                <a href="#entrenamiento" class="text-slate-300 hover:text-amber-400 whitespace-nowrap">Entrenamiento</a>
+                <a href="#roadmap" class="text-slate-300 hover:text-blue-400 whitespace-nowrap">Ruta</a>
+                <a href="#sala" class="text-slate-500 hover:text-white whitespace-nowrap"><i class="fas fa-lock text-[10px]"></i> VIP</a>
             </div>
         </header>
 
-        <!-- Content Area -->
-        <div class="flex-1 p-6 md:p-10">
+        <!-- Content Area (Continuous Scroll) -->
+        <div class="flex-1 p-6 md:p-10 space-y-24 max-w-5xl mx-auto w-full pb-32">
 
-            <!-- TAB: RECURSOS IA (First View) -->
-            <div id="tab-recursos" class="tab-content active max-w-5xl mx-auto">
+            <!-- SECTION 1: ENTRENAMIENTO IA -->
+            <section id="entrenamiento" class="pt-8">
                 <div class="mb-8">
-                    <span class="px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">Módulo 1</span>
-                    <h1 class="text-3xl font-black text-white">Domina la IA en tu Negocio <i class="fas fa-bolt text-amber-400 ml-2"></i></h1>
-                    <p class="text-slate-400 mt-2">Bienvenido. Antes de agendar tu diagnóstico, quiero regalarte estos recursos sobre cómo la IA escalará tus ventas.</p>
-                </div>
-                    <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full border-4 border-blue-500 flex items-center justify-center font-black text-sm text-white relative">
-                            50%
-                            <div class="absolute inset-0 rounded-full border-4 border-slate-700 -z-10"></div>
-                        </div>
-                        <div>
-                            <p class="text-xs text-slate-400 uppercase font-bold tracking-wider">Estado Actual</p>
-                            <p class="text-sm font-bold text-white">Fase 2: Construcción</p>
-                        </div>
+                    <span class="px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">Módulo de Inducción</span>
+                    <h1 class="text-3xl md:text-5xl font-black text-white leading-tight">Preparando tu <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Mente para Escalar</span> <i class="fas fa-bolt text-amber-400 ml-2"></i></h1>
+                    
+                    <div class="mt-6 p-6 bg-blue-900/20 border border-blue-500/30 rounded-2xl">
+                        <p class="text-blue-200 text-lg md:text-xl font-light italic">"Imagina despertar mañana y ver 5 nuevas citas agendadas por tu propio Agente de IA mientras dormías. Tu negocio operando 24/7 sin depender de ti. Ese es el ecosistema que vamos a construir juntos."</p>
                     </div>
                 </div>
 
-                </div>
-            </div>
+                <p class="text-slate-400 mt-2 mb-8 text-lg">Antes de agendar tu diagnóstico, quiero regalarte estos recursos visuales sobre cómo la IA transformará tu negocio. Haz clic para explorar la librería.</p>
 
-            <!-- TAB: AGENDAR -->
-            <div id="tab-agendar" class="tab-content max-w-4xl mx-auto h-full flex flex-col">
-                <div class="mb-4 text-center">
-                    <h1 class="text-3xl font-black text-white">Tu Diagnóstico Estratégico</h1>
-                    <p class="text-slate-400 mt-2 max-w-xl mx-auto">Selecciona el día y hora que mejor te acomode. Esta primera sesión de 30 minutos es 100% sin costo. Diseñaremos la ruta de tu proyecto.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Video Card 1 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden cursor-pointer group video-card border border-slate-700/50 relative">
+                        <!-- Thumbnail Area -->
+                        <div class="h-48 bg-slate-800 relative flex items-center justify-center overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/40 to-blue-900/40 z-0"></div>
+                            <!-- Fake Play Button -->
+                            <div class="play-btn w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center z-10 transition-all duration-300 border border-white/20">
+                                <i class="fas fa-play text-2xl text-white ml-1"></i>
+                            </div>
+                            <span class="absolute bottom-3 right-3 bg-black/80 text-white text-xs font-bold px-2 py-1 rounded">12:45</span>
+                        </div>
+                        <div class="p-6 relative">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest mb-1 block">Lección 1</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Ingeniería de Prompts 101</h3>
+                            <p class="text-sm text-slate-400 line-clamp-2">La fórmula exacta para pedirle a la IA que redacte correos de ventas que conviertan, sin sonar a robot.</p>
+                            
+                            <!-- Lock overlay on click -->
+                            <div class="absolute inset-0 bg-[#020810]/90 flex flex-col items-center justify-center opacity-0 group-active:opacity-100 transition-opacity z-20">
+                                <i class="fas fa-lock text-3xl text-slate-500 mb-2"></i>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Desbloqueado para Clientes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden cursor-pointer group video-card border border-slate-700/50 relative">
+                        <!-- Thumbnail Area -->
+                        <div class="h-48 bg-slate-800 relative flex items-center justify-center overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-emerald-900/40 to-teal-900/40 z-0"></div>
+                            <div class="play-btn w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center z-10 transition-all duration-300 border border-white/20">
+                                <i class="fas fa-play text-2xl text-white ml-1"></i>
+                            </div>
+                            <span class="absolute bottom-3 right-3 bg-black/80 text-white text-xs font-bold px-2 py-1 rounded">08:20</span>
+                        </div>
+                        <div class="p-6 relative">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-1 block">Caso de Estudio</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Automatizando el Seguimiento</h3>
+                            <p class="text-sm text-slate-400 line-clamp-2">Cómo conectamos WhatsApp con IA para que un Agente responda FAQs de clientes 24/7 y cierre ventas automáticamente.</p>
+                            
+                            <!-- Lock overlay on click -->
+                            <div class="absolute inset-0 bg-[#020810]/90 flex flex-col items-center justify-center opacity-0 group-active:opacity-100 transition-opacity z-20">
+                                <i class="fas fa-lock text-3xl text-slate-500 mb-2"></i>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Desbloqueado para Clientes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 2: ROADMAP -->
+            <section id="roadmap" class="pt-8">
+                <div class="mb-10 text-center">
+                    <span class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">El Plan de Acción</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white">Mapa de Construcción <span class="text-blue-400">Paso a Paso</span></h2>
+                    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">Esta es la ruta exacta por la que llevaremos tu negocio desde el caos manual hasta la eficiencia impulsada por IA.</p>
                 </div>
                 
-                <div class="flex-1 overflow-hidden">
+                <!-- Roadmap / Mind Map Visual -->
+                <div class="glass-panel p-6 md:p-10 rounded-3xl mb-8 border border-slate-700/50">
+                    <div class="flex flex-col md:flex-row items-stretch justify-between gap-6 relative">
+                        <!-- Línea conectora Desktop -->
+                        <div class="hidden md:block absolute top-[40%] left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-blue-500 to-slate-700 -translate-y-1/2 z-0 opacity-50"></div>
+                        
+                        <!-- Nodo 1 -->
+                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-green-500/50 p-6 rounded-2xl text-center shadow-[0_0_30px_rgba(34,197,94,0.1)] hover:-translate-y-2 transition-transform">
+                            <div class="w-16 h-16 bg-green-500/10 text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border-2 border-green-500/50">
+                                <i class="fas fa-search-dollar"></i>
+                            </div>
+                            <h4 class="text-white font-black text-lg mb-2">1. Diagnóstico</h4>
+                            <p class="text-sm text-slate-400">Auditoría profunda de tu ecosistema actual. Identificamos dónde pierdes dinero y tiempo.</p>
+                        </div>
+                        
+                        <!-- Flecha móvil -->
+                        <div class="md:hidden flex justify-center text-slate-600"><i class="fas fa-chevron-down text-2xl"></i></div>
+
+                        <!-- Nodo 2 -->
+                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-blue-500 p-6 rounded-2xl text-center shadow-[0_0_30px_rgba(59,130,246,0.2)] transform md:-translate-y-6 hover:-translate-y-8 transition-transform">
+                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-500 text-xs font-black px-4 py-1 rounded-full text-slate-900 uppercase shadow-lg shadow-blue-500/50 animate-bounce">
+                                Fase Clave
+                            </div>
+                            <div class="w-16 h-16 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border-2 border-blue-500">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h4 class="text-white font-black text-lg mb-2">2. Construcción IA</h4>
+                            <p class="text-sm text-blue-200">Ingeniería pura. Entrenamos tus agentes, estructuramos tus bases de datos y creamos la plataforma.</p>
+                        </div>
+
+                        <!-- Flecha móvil -->
+                        <div class="md:hidden flex justify-center text-slate-600"><i class="fas fa-chevron-down text-2xl"></i></div>
+
+                        <!-- Nodo 3 -->
+                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-slate-700 p-6 rounded-2xl text-center hover:-translate-y-2 transition-transform">
+                            <div class="w-16 h-16 bg-slate-800 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border-2 border-slate-600">
+                                <i class="fas fa-space-shuttle"></i>
+                            </div>
+                            <h4 class="text-white font-black text-lg mb-2">3. Lanzamiento</h4>
+                            <p class="text-sm text-slate-500">Despliegue final. Te entregamos las llaves de tu nuevo ecosistema y capacitamos a tu equipo.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: AGENDAR (CALENDLY) -->
+            <section id="agendar" class="pt-12 border-t border-slate-800/60">
+                <div class="mb-8 text-center">
+                    <span class="px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">El Primer Paso</span>
+                    <h2 class="text-4xl font-black text-white">Agenda tu Diagnóstico <span class="text-green-400">Gratuito</span></h2>
+                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto text-lg">Ya viste lo que podemos lograr. Selecciona el día y hora para nuestra videollamada de 30 minutos. Hablaremos directamente sobre tu negocio.</p>
+                </div>
+                
+                <div class="glass-panel rounded-3xl overflow-hidden border border-slate-700/80 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
                     <!-- Calendly inline widget begin -->
                     <div class="calendly-inline-widget w-full" data-url="https://calendly.com/rubenmedina910/30min" style="min-width:320px;height:1000px;"></div>
                     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                     <!-- Calendly inline widget end -->
                 </div>
-            </div>
+            </section>
 
-            <!-- TAB: DASHBOARD / ROADMAP -->
-            <div id="tab-dashboard" class="tab-content max-w-5xl mx-auto">
-                <div class="mb-10">
-                    <span class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">Ruta de Construcción</span>
-                    <h1 class="text-3xl md:text-4xl font-black text-white">Así construiremos tu <span class="text-blue-400">Ecosistema</span></h1>
-                    <p class="text-slate-400 mt-2">Al ser cliente, aquí podrás ver en tiempo real en qué fase se encuentra tu aplicación.</p>
-                </div>
-                
-                <!-- Roadmap / Mind Map Visual -->
-                <div class="glass-panel p-8 rounded-2xl mb-8 mt-8">
-                    <h3 class="text-lg font-black text-white mb-6 flex items-center gap-2"><i class="fas fa-project-diagram text-blue-500"></i> Mapa Mental de la Dinámica de Trabajo</h3>
-                    
-                    <div class="flex flex-col md:flex-row items-stretch justify-between gap-4 mt-8 relative">
-                        <!-- Línea conectora Desktop -->
-                        <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-slate-700/50 -translate-y-1/2 z-0"></div>
-                        
-                        <!-- Nodo 1 -->
-                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-green-500/50 p-5 rounded-2xl text-center shadow-[0_0_20px_rgba(34,197,94,0.15)]">
-                            <div class="w-12 h-12 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl border border-green-500">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <h4 class="text-white font-bold text-sm mb-2">1. Diagnóstico</h4>
-                            <p class="text-xs text-slate-400">Auditoría profunda de tu negocio actual. Identificamos fugas y oportunidades.</p>
-                        </div>
-                        
-                        <!-- Flecha móvil -->
-                        <div class="md:hidden flex justify-center text-slate-600"><i class="fas fa-arrow-down"></i></div>
-
-                        <!-- Nodo 2 -->
-                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-blue-500 p-5 rounded-2xl text-center shadow-[0_0_20px_rgba(59,130,246,0.3)] transform md:-translate-y-4">
-                            <div class="absolute -top-3 -right-3 bg-blue-500 text-[10px] font-black px-2 py-1 rounded text-slate-900 uppercase animate-pulse">Actual</div>
-                            <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl border border-blue-500">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <h4 class="text-white font-bold text-sm mb-2">2. Construcción IA</h4>
-                            <p class="text-xs text-blue-200">Arquitectura de la solución. Creamos tus agentes, bases de datos y la interfaz visual.</p>
-                        </div>
-
-                        <!-- Flecha móvil -->
-                        <div class="md:hidden flex justify-center text-slate-600"><i class="fas fa-arrow-down"></i></div>
-
-                        <!-- Nodo 3 -->
-                        <div class="relative z-10 flex-1 bg-[#020810] border-2 border-slate-700 p-5 rounded-2xl text-center">
-                            <div class="w-12 h-12 bg-slate-800 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl border border-slate-600">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                            <h4 class="text-slate-300 font-bold text-sm mb-2">3. Lanzamiento</h4>
-                            <p class="text-xs text-slate-500">Despliegue en la nube. Te capacitamos a ti y a tu equipo para operar el nuevo ecosistema.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: SALA DE TRABAJO -->
-            <div id="tab-sala-trabajo" class="tab-content max-w-6xl mx-auto h-full flex flex-col min-h-[600px]">
-                <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <!-- SECTION 4: SALA DE TRABAJO (VIP PREVIEW) -->
+            <section id="sala" class="pt-12">
+                <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <h1 class="text-3xl font-black text-white flex items-center gap-3">
-                            Sala de Trabajo <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span></span>
-                        </h1>
-                        <p class="text-slate-400 mt-1 text-sm">Colaboración en vivo durante nuestras sesiones de Google Meet.</p>
+                        <h2 class="text-2xl font-black text-white flex items-center gap-3">
+                            Sala de Trabajo <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded border border-red-500/30 uppercase tracking-widest">Vista Previa</span>
+                        </h2>
+                        <p class="text-slate-500 mt-1 text-sm">Al ser cliente activo, aquí tendremos nuestros Google Docs integrados para trabajar en vivo en tus reuniones.</p>
                     </div>
-                    
-                    <a href="https://meet.google.com/new" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition-colors w-max shadow-lg shadow-blue-500/20">
-                        <i class="fas fa-video"></i> Entrar a Videollamada
-                    </a>
                 </div>
 
-                <!-- Iframe Embed for Google Docs -->
-                <div class="flex-1 glass-panel rounded-2xl overflow-hidden border border-slate-700/50 relative">
+                <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 relative h-[400px]">
+                    <!-- Blurred iframe to create illusion of locked feature -->
+                    <iframe src="https://docs.google.com/document/d/1B71R9c4pD8g8hX6qG5V6w_eWjB8W9y3sK8q8E4xV3q8/preview" class="absolute inset-0 w-full h-full border-0 bg-white opacity-40 filter blur-[4px] pointer-events-none" allowfullscreen></iframe>
                     
-                    <div class="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center z-0">
-                        <i class="fas fa-spinner fa-spin text-4xl text-blue-500 mb-4"></i>
-                        <p class="text-slate-400 text-sm font-bold uppercase tracking-widest">Cargando pizarra colaborativa...</p>
+                    <!-- Locked Overlay -->
+                    <div class="absolute inset-0 locked-overlay flex flex-col items-center justify-center z-10 bg-[#020810]/60">
+                        <div class="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mb-4 border-2 border-slate-600 shadow-2xl">
+                            <i class="fas fa-lock text-3xl text-slate-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-2">Área VIP Bloqueada</h3>
+                        <p class="text-slate-300 mb-6 text-center max-w-md">Esta sala colaborativa se activa únicamente después de nuestra sesión de diagnóstico estratégico.</p>
+                        <a href="#agendar" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg shadow-blue-600/30">
+                            Agendar para Desbloquear
+                        </a>
                     </div>
-                    
-                    <iframe src="https://docs.google.com/document/d/1B71R9c4pD8g8hX6qG5V6w_eWjB8W9y3sK8q8E4xV3q8/preview" class="relative z-10 w-full h-full border-0 bg-white" allowfullscreen></iframe>
                 </div>
-            </div>
+            </section>
 
         </div>
     </main>
 
     <script>
-        // Simple Tab Logic
-        function switchTab(tabId) {
-            // Hide all contents
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            // Remove active from nav items
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            // Reset mobile nav styles
-            document.querySelectorAll('header button').forEach(el => { el.classList.remove('text-blue-400'); el.classList.add('text-slate-400'); });
-            
-            // Show selected
-            document.getElementById('tab-' + tabId).classList.add('active');
-            
-            // Highlight nav (desktop)
-            const desktopBtn = document.getElementById('btn-' + tabId);
-            if(desktopBtn) desktopBtn.classList.add('active');
-            
-            // Highlight nav (mobile)
-            event.currentTarget.classList.remove('text-slate-400');
-            event.currentTarget.classList.add('text-blue-400');
-        }
+        // Smooth scrolling for sidebar links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
         // Background Particles
         const canvas = document.getElementById('bg-canvas');
