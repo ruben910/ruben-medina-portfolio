@@ -54,14 +54,14 @@
         }
     </style>
 </head>
-<body class="flex h-screen overflow-hidden selection:bg-blue-500 selection:text-white">
+<body class="flex min-h-screen selection:bg-blue-500 selection:text-white bg-[#020810]">
 
     <!-- Tech Background -->
     <canvas id="bg-canvas"></canvas>
     <div class="tech-grid"></div>
 
     <!-- Sidebar -->
-    <aside class="w-64 glass-panel border-r border-slate-800/60 flex flex-col content-layer h-full hidden md:flex transition-all">
+    <aside class="w-64 glass-panel border-r border-slate-800/60 flex flex-col content-layer hidden md:flex transition-all fixed inset-y-0 left-0 z-40">
         <div class="p-6 border-b border-slate-800/60 flex items-center gap-3">
             <img src="assets/ruben_executive.png" alt="Rubén" class="w-10 h-10 rounded-full border-2 border-blue-500">
             <div>
@@ -94,10 +94,10 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-full content-layer relative">
+    <main class="flex-1 flex flex-col min-h-screen content-layer relative md:ml-64">
         
         <!-- Mobile Header -->
-        <header class="md:hidden glass-panel p-4 flex flex-col gap-3 border-b border-slate-800/60">
+        <header class="md:hidden glass-panel p-4 flex flex-col gap-3 border-b border-slate-800/60 sticky top-0 z-50">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <img src="assets/ruben_executive.png" alt="Rubén" class="w-8 h-8 rounded-full border border-blue-500">
@@ -113,8 +113,8 @@
             </div>
         </header>
 
-        <!-- Scrollable Content Area -->
-        <div class="flex-1 overflow-y-auto p-6 md:p-10">
+        <!-- Content Area -->
+        <div class="flex-1 p-6 md:p-10">
 
             <!-- TAB: RECURSOS IA (First View) -->
             <div id="tab-recursos" class="tab-content active max-w-5xl mx-auto">
@@ -139,15 +139,15 @@
             </div>
 
             <!-- TAB: AGENDAR -->
-            <div id="tab-agendar" class="tab-content max-w-4xl mx-auto h-full flex flex-col min-h-[1050px]">
+            <div id="tab-agendar" class="tab-content max-w-4xl mx-auto h-full flex flex-col">
                 <div class="mb-4 text-center">
                     <h1 class="text-3xl font-black text-white">Tu Diagnóstico Estratégico</h1>
                     <p class="text-slate-400 mt-2 max-w-xl mx-auto">Selecciona el día y hora que mejor te acomode. Esta primera sesión de 30 minutos es 100% sin costo. Diseñaremos la ruta de tu proyecto.</p>
                 </div>
                 
-                <div class="flex-1 glass-panel rounded-2xl overflow-hidden border border-slate-700/50">
+                <div class="flex-1 overflow-hidden">
                     <!-- Calendly inline widget begin -->
-                    <div class="calendly-inline-widget w-full h-full" data-url="https://calendly.com/rubenmedina910/30min" style="min-width:320px;height:1050px;"></div>
+                    <div class="calendly-inline-widget w-full" data-url="https://calendly.com/rubenmedina910/30min" style="min-width:320px;height:1000px;"></div>
                     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                     <!-- Calendly inline widget end -->
                 </div>
