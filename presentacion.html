@@ -381,6 +381,7 @@
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
             z-index: 100;
+            transition: opacity 0.5s ease;
         }
 
         .topbar-brand {
@@ -673,6 +674,16 @@
 
             // Counter
             slideCount.textContent = `${current + 1} / ${total}`;
+
+            // Hide topbar on the last slide
+            const topbar = document.querySelector('.topbar');
+            if (current === total - 1) {
+                topbar.style.opacity = '0';
+                topbar.style.pointerEvents = 'none';
+            } else {
+                topbar.style.opacity = '1';
+                topbar.style.pointerEvents = 'all';
+            }
         }
 
         function changeSlide(dir) { goTo(current + dir); }
