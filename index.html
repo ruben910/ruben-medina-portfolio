@@ -21,6 +21,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Calendly link widget CSS -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #050b14;
@@ -783,7 +785,7 @@
 
         <!-- Right: CTA + badge -->
         <div class="nav-right">
-            <a href="#contacto" class="nav-cta">Agendar Llamada</a>
+            <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/rubenmedina910'});return false;" class="nav-cta">Agendar Llamada</a>
             <img src="assets/made_in_pr.jpg" alt="Made in Puerto Rico" class="pr-badge">
         </div>
     </nav>
@@ -1016,7 +1018,7 @@
         </div>
 
         <br>
-        <a href="mailto:rubenmedina910@gmail.com" class="btn-primary" style="font-size: 1.1rem; padding: 16px 45px;">Agendar Consultoría Gratuita</a>
+        <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/rubenmedina910'});return false;" class="btn-primary" style="font-size: 1.1rem; padding: 16px 45px;">📅 Agendar Consultoría Gratuita</a>
 
         <!-- Social Media Icons -->
         <p style="margin-top: 50px; margin-bottom: 0; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted);">Encuéntrame en redes</p>
@@ -1156,6 +1158,9 @@
         }
         animate();
     </script>
+
+    <!-- ─── CALENDLY JS ─── -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
 </body>
 </html>

@@ -9,6 +9,10 @@
     <meta property="og:title" content="Servicios & Precios — Rubén A. Medina Lebrón">
     <meta property="og:description" content="Desarrollo de apps web y móviles de alto rendimiento. Diseños premium, sistemas robustos. Made in Puerto Rico.">
     <meta property="og:image" content="https://ruben910.github.io/ruben-medina-portfolio/assets/og_preview.png">
+    
+    <!-- Calendly link widget CSS -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
@@ -124,8 +128,8 @@
         </a>
         <div class="flex items-center gap-3">
             <a href="presentacion.html" class="hidden md:inline text-slate-400 hover:text-amber-400 text-sm font-semibold transition-colors">▶ Presentación</a>
-            <a href="index.html#contacto" class="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 font-black text-xs uppercase tracking-wider px-4 py-2 rounded-full hover:scale-105 transition-transform shadow-lg shadow-amber-500/25">
-                Agendar Llamada
+            <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/rubenmedina910'});return false;" class="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 font-black text-xs uppercase tracking-wider px-4 py-2 rounded-full hover:scale-105 transition-transform shadow-lg shadow-amber-500/25">
+                📅 Agendar Llamada
             </a>
         </div>
     </nav>
@@ -293,8 +297,8 @@
         <p class="text-slate-400 mb-8 max-w-md mx-auto">La primera sesión de diagnóstico es completamente sin costo. Analizo tu negocio y te digo exactamente qué necesitas.</p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:rubenmedina910@gmail.com" class="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 font-black px-8 py-4 rounded-full text-sm uppercase tracking-wider hover:scale-105 transition-transform shadow-2xl shadow-amber-500/30">
-                ✉️ Enviar Email
+            <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/rubenmedina910'});return false;" class="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-900 font-black px-8 py-4 rounded-full text-sm uppercase tracking-wider hover:scale-105 transition-transform shadow-2xl shadow-amber-500/30">
+                📅 Agendar Sesión Gratuita
             </a>
             <a href="https://wa.me/17873786170" target="_blank" class="border-2 border-green-500 text-green-400 font-black px-8 py-4 rounded-full text-sm uppercase tracking-wider hover:bg-green-500/10 transition-colors">
                 <i class="fab fa-whatsapp mr-2"></i>WhatsApp Directo
@@ -344,5 +348,8 @@
         }
         (function loop(){ ctx.clearRect(0,0,W,H); pts.forEach(p=>{p.update();p.draw();}); connect(); requestAnimationFrame(loop); })();
     </script>
+    
+    <!-- Calendly JS -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
