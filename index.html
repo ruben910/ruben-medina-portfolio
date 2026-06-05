@@ -1090,7 +1090,14 @@
             </div>
 
             <!-- Odysseus Featured Card -->
-            <div class="service-card" style="border-color: rgba(224,108,117,0.3); background: rgba(224,108,117,0.03);">
+            <style>
+                @media (min-width: 900px) {
+                    .odysseus-card {
+                        grid-column: span 2;
+                    }
+                }
+            </style>
+            <div class="service-card odysseus-card" style="border-color: rgba(224,108,117,0.4); background: rgba(224,108,117,0.05);">
                 <div class="service-icon" style="color: #e06c75;">
                     <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                       <path d="M16 4L16 22L6 22Z" fill="#e06c75"/>
@@ -1099,10 +1106,11 @@
                     </svg>
                 </div>
                 <h3 style="color: #e06c75;">Servidores IA Privados</h3>
-                <p>Implementación corporativa <strong style="color:#fff; font-family:'Fira Code', monospace; font-size: 0.9em;">Odysseus</strong>. Tu propio espacio de trabajo IA. Tus modelos, tu hardware, tus datos.</p>
+                <p>Implementación corporativa del ecosistema <strong style="color:#b23545; font-family:'Fira Code', monospace; font-size: 0.9em; letter-spacing: 0.5px;">Odysseus</strong>. Tu propio espacio de trabajo IA. Tus modelos, tu hardware, tus datos. Demostrando que un servidor local cerrado y privado es 100% posible para tu empresa.</p>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(224,108,117,0.15); padding-top:12px;">
                     <span style="color:#e06c75; font-size:0.9rem; font-weight:800; font-family:'Fira Code', monospace;">ODYSSEUS</span>
-                    <span style="color:#fca5a5; font-size:0.8rem; font-weight:700;">Self-Hosted</span>
+                    <span style="color:#b23545; font-size:0.8rem; font-weight:700; border: 1px solid rgba(224,108,117,0.3); padding: 2px 8px; border-radius: 12px; margin-left: 8px;">Self-Hosted</span>
+                    <span style="color:#b23545; font-size:0.8rem; font-weight:700; border: 1px solid rgba(224,108,117,0.3); padding: 2px 8px; border-radius: 12px;">No Telemetry</span>
                 </div>
             </div>
         </div>
