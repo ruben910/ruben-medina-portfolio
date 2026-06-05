@@ -93,11 +93,11 @@
             z-index: 0;
         }
 
-        #slide-1::before { background-image: url('assets/hero_bg.png'); opacity: 0.25; }
-        #slide-2::before { background-image: url('assets/slide_problema.png'); opacity: 0.18; }
-        #slide-3::before { background-image: url('assets/slide_proceso.png'); opacity: 0.15; }
-        #slide-4::before { background-image: url('assets/impulso_pr.png'); opacity: 0.12; }
-        #slide-5::before { background-image: url('assets/services.png'); opacity: 0.1; }
+        #slide-1::before { background-image: url('assets/hero_bg.png'); opacity: 0.12; }
+        #slide-2::before { background-image: url('assets/slide_problema.png'); opacity: 0.06; }
+        #slide-3::before { background-image: url('assets/slide_proceso.png'); opacity: 0.05; }
+        #slide-4::before { background-image: url('assets/impulso_pr.png'); opacity: 0.04; }
+        #slide-5::before { background-image: url('assets/services.png'); opacity: 0.03; }
         #slide-6::before { 
             content: '';
             position: absolute;
@@ -132,6 +132,7 @@
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
 
         .slide-title .highlight {
@@ -143,8 +144,9 @@
         .slide-body {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: #94a3b8;
-            line-height: 1.75;
-            max-width: 560px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
         /* ── SLIDE IMAGE ── */
@@ -154,14 +156,19 @@
             max-width: 480px;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(0,242,254,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             border: 1px solid var(--border);
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .slide-img img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
             display: block;
         }
 
@@ -484,7 +491,7 @@
                 position: relative;
             }
             .slide-split { flex-direction: column; gap: 20px; text-align: center; }
-            .slide-img { max-width: 100%; max-height: 180px; order: -1; }
+            .slide-img { max-width: 100%; height: auto; max-height: 280px; order: -1; }
             .slide-title { font-size: 2rem; margin-bottom: 12px; }
             .slide-body { font-size: 1rem; }
             .services-mini { grid-template-columns: 1fr 1fr; gap: 12px; }
