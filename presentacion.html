@@ -96,7 +96,8 @@
         #slide-3::before { background-image: url('assets/slide_proceso.png'); opacity: 0.15; }
         #slide-4::before { background-image: url('assets/impulso_pr.png'); opacity: 0.12; }
         #slide-5::before { background-image: url('assets/services.png'); opacity: 0.1; }
-        #slide-6::before { background-image: url('assets/slide_resultados.png'); opacity: 0.18; }
+        #slide-6::before { background-image: url('assets/slide_resultados.png'); opacity: 0.15; }
+        #slide-7::before { background-image: url('assets/slide_resultados.png'); opacity: 0.18; }
 
         .slide > * { position: relative; z-index: 1; }
 
@@ -599,8 +600,29 @@
             </div>
         </div>
 
-        <!-- SLIDE 6: CTA FINAL -->
+        <!-- SLIDE 6: ODYSSEUS (NUEVO) -->
         <div class="slide" id="slide-6">
+            <div class="slide-center">
+                <span class="eyebrow" style="color:#e06c75;">🔒 Seguridad y Control Total</span>
+                <h2 class="slide-title">Tu Propio<br><span style="color:#e06c75; text-shadow: 0 0 10px rgba(224,108,117,0.3);">Servidor de IA Privado</span></h2>
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div style="background: rgba(224,108,117,0.05); border: 1px solid rgba(224,108,117,0.3); padding: 25px; border-radius: 20px; box-shadow: 0 0 30px rgba(224,108,117,0.1), inset 0 0 20px rgba(224,108,117,0.05);">
+                        <svg width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 15px; filter: drop-shadow(0 0 8px rgba(224,108,117,0.6));">
+                          <path d="M16 4L16 22L6 22Z" fill="#e06c75"/>
+                          <path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/>
+                          <path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        </svg>
+                        <p class="slide-body" style="font-size: 1.1rem; text-align: left; margin-bottom: 0;">
+                            Implementamos el ecosistema corporativo <strong style="color:#e06c75; font-family:'Fira Code', monospace;">Odysseus</strong>.<br><br>
+                            Tus propios modelos de inteligencia artificial ejecutándose localmente. <strong>Tus modelos, tu hardware, tus datos.</strong> 100% libre de telemetría y diseñado para empresas que exigen privacidad absoluta sin comprometer potencia.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: CTA FINAL -->
+        <div class="slide" id="slide-7">
             <div class="slide-center">
                 <span class="eyebrow">🎯 El Momento es Ahora</span>
                 <h2 class="slide-title">¿Listo para tener un<br><span class="highlight">ecosistema digital</span><br>que trabaja por ti?</h2>
@@ -641,7 +663,7 @@
     <div class="controls">
         <button class="ctrl-btn" id="prevBtn" onclick="changeSlide(-1)">&#8592;</button>
         <div class="dots" id="dots"></div>
-        <span class="slide-count" id="slideCount">1 / 6</span>
+        <span class="slide-count" id="slideCount">1 / 7</span>
         <button class="ctrl-btn" id="nextBtn" onclick="changeSlide(1)">&#8594;</button>
     </div>
 
