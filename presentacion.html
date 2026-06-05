@@ -458,12 +458,30 @@
         }
 
         @media (max-width: 768px) {
+            body, html {
+                overflow-y: auto;
+                height: auto;
+            }
+            .deck {
+                height: auto;
+                overflow: visible;
+            }
             .slide { 
-                padding-top: 50px; 
-                padding-bottom: 130px; 
+                inset: auto;
+                top: 0;
+                left: 0;
+                width: 100%;
+                min-height: 100vh;
+                position: absolute;
+                padding-top: 60px; 
+                padding-bottom: 140px; 
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center; 
+                overflow-y: visible;
+            }
+            .slide.active {
+                position: relative;
             }
             .slide-split { flex-direction: column; gap: 20px; text-align: center; }
             .slide-img { max-width: 100%; max-height: 180px; order: -1; }
