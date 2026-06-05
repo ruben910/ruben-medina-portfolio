@@ -25,14 +25,14 @@
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #ffffff;
+            --bg-dark: #f8fafc;
             --primary: #1a73e8;
             --secondary: #4285f4;
             --accent: #0f9d58;
             --text-light: #202124;
             --text-muted: #4b5563;
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-bg: #ffffff;
+            --glass-border: rgba(0, 0, 0, 0.08);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
@@ -776,12 +776,22 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            color: var(--text-main);
             font-size: 1.4rem;
-            font-weight: 700;
+            font-weight: 800;
             white-space: nowrap;
             padding: 0 40px;
             flex-shrink: 0;
+            background: linear-gradient(135deg, #94a3b8 0%, #e2e8f0 40%, #ffffff 50%, #e2e8f0 60%, #94a3b8 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+        .logo-item img, .logo-item svg {
+            -webkit-text-fill-color: initial;
         }
 
         @media (max-width: 768px) {
@@ -851,14 +861,14 @@
             <div class="marquee-track">
                 <!-- Set 1 -->
                 <div class="logo-item"><img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:26px;"> Google Cloud</div>
-                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px; "> ChatGPT</div>
+                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px; filter:invert(1) brightness(0.2);"> ChatGPT</div>
                 <div class="logo-item"><img src="assets/logos/gemini.svg" alt="Gemini" style="height:26px;"> Gemini</div>
-                <div class="logo-item" style="font-style:italic; font-weight:400; color:#e2d9f3;"><span style="color:#d97757; font-size:1.8rem;">&#10022;</span> Claude 3.5</div>
-                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px;"> Apple</div>
+                <div class="logo-item" style="font-style:italic; font-weight:400; background:none; -webkit-text-fill-color: #64748b;"><span style="color:#d97757; font-size:1.8rem;">&#10022;</span> Claude 3.5</div>
+                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px; filter:invert(1);"> Apple</div>
                 <div class="logo-item"><img src="assets/logos/android.svg" alt="Android" style="height:30px;"> Android</div>
-                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px; "> GitHub</div>
+                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px; filter:invert(1);"> GitHub</div>
                 <div class="logo-item">
-                    <svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#64748b"/></svg>
                     Vercel
                 </div>
                 <div class="logo-item"><img src="assets/logos/supabase.svg" alt="Supabase" style="height:26px;"> Supabase</div>
@@ -873,14 +883,14 @@
                 <div class="logo-item"><img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:30px;"> Antigravity AI</div>
                 <!-- Set 2 (exact duplicate for seamless loop) -->
                 <div class="logo-item"><img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:26px;"> Google Cloud</div>
-                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px; "> ChatGPT</div>
+                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px; filter:invert(1) brightness(0.2);"> ChatGPT</div>
                 <div class="logo-item"><img src="assets/logos/gemini.svg" alt="Gemini" style="height:26px;"> Gemini</div>
-                <div class="logo-item" style="font-style:italic; font-weight:400; color:#e2d9f3;"><span style="color:#d97757; font-size:1.8rem;">&#10022;</span> Claude 3.5</div>
-                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px;"> Apple</div>
+                <div class="logo-item" style="font-style:italic; font-weight:400; background:none; -webkit-text-fill-color: #64748b;"><span style="color:#d97757; font-size:1.8rem;">&#10022;</span> Claude 3.5</div>
+                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px; filter:invert(1);"> Apple</div>
                 <div class="logo-item"><img src="assets/logos/android.svg" alt="Android" style="height:30px;"> Android</div>
-                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px; "> GitHub</div>
+                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px; filter:invert(1);"> GitHub</div>
                 <div class="logo-item">
-                    <svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#64748b"/></svg>
                     Vercel
                 </div>
                 <div class="logo-item"><img src="assets/logos/supabase.svg" alt="Supabase" style="height:26px;"> Supabase</div>
@@ -1193,31 +1203,7 @@
     </footer>
 
     <!-- ─── AMBIENT BACKGROUND ─── -->
-    <div style="position: fixed; inset: 0; background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); z-index: -1;"></div>
-
-    <!-- ─── AMBIENT AUDIO ─── -->
-    <audio id="ambient-audio" loop>
-        <source src="https://actions.google.com/sounds/v1/science_fiction/ambient_hum.ogg" type="audio/ogg">
-    </audio>
-    <button id="audio-toggle" style="
-        position: fixed; 
-        bottom: 30px; 
-        right: 30px; 
-        z-index: 999; 
-        background: #ffffff; 
-        border: 1px solid rgba(0,0,0,0.1); 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-        width: 50px; 
-        height: 50px; 
-        border-radius: 50%; 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s;
-    ">
-        <span id="audio-icon" style="font-size: 1.2rem;">🔇</span>
-    </button>
+    <div style="position: fixed; inset: 0; background: #f8fafc; z-index: -1;"></div>
 
     <!-- ─── SCRIPTS ─── -->
     <script>
@@ -1235,24 +1221,6 @@
 
         // ── Minimalist Interactions ──
         console.log("Light Theme Active");
-
-        // ── Ambient Audio Toggle ──
-        const audio = document.getElementById('ambient-audio');
-        const audioToggle = document.getElementById('audio-toggle');
-        const audioIcon = document.getElementById('audio-icon');
-
-        audioToggle.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    audioIcon.textContent = '🔊';
-                    audioToggle.style.boxShadow = '0 0 15px rgba(26, 115, 232, 0.4)';
-                }).catch(err => console.log("Audio play prevented", err));
-            } else {
-                audio.pause();
-                audioIcon.textContent = '🔇';
-                audioToggle.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
-            }
-        });
 
     </script>
 
