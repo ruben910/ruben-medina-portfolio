@@ -25,7 +25,8 @@
             color: #f8fafc;
             overflow: hidden;
             height: 100vh;
-            width: 100vw;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         /* ── DECK WRAPPER ── */
@@ -33,6 +34,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
+            overflow-x: hidden;
         }
 
         /* ── SLIDES ── */
@@ -473,9 +475,10 @@
             
             /* Mejoras de usabilidad móvil para los controles */
             .controls {
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                transform: none;
                 bottom: 20px;
                 width: 90%;
                 max-width: 320px;
