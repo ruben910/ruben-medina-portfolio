@@ -25,14 +25,14 @@
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #f8fafc;
+            --bg-dark: #ffffff;
             --primary: #1a73e8;
             --secondary: #4285f4;
             --accent: #0f9d58;
             --text-light: #202124;
             --text-muted: #4b5563;
-            --glass-bg: #ffffff;
-            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(0, 0, 0, 0.1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
@@ -443,8 +443,9 @@
         }
 
         .service-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03), inset 0 2px 0 rgba(255,255,255,0.8);
             border-radius: 20px;
             padding: 35px 28px;
             transition: all 0.4s ease;
@@ -475,6 +476,14 @@
         .service-icon { font-size: 2.2rem; margin-bottom: 18px; }
         .service-card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--text-main); }
         .service-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .silver-text {
+            background: linear-gradient(to bottom right, #64748b 0%, #cbd5e1 50%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+            font-weight: 900;
+        }
 
         /* ─── CONTACT CTA ─── */
         .cta-section {
@@ -776,22 +785,12 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
+            color: var(--text-main);
             font-size: 1.4rem;
-            font-weight: 800;
+            font-weight: 700;
             white-space: nowrap;
             padding: 0 40px;
             flex-shrink: 0;
-            background: linear-gradient(135deg, #94a3b8 0%, #e2e8f0 40%, #ffffff 50%, #e2e8f0 60%, #94a3b8 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
-        }
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-        .logo-item img, .logo-item svg {
-            -webkit-text-fill-color: initial;
         }
 
         @media (max-width: 768px) {
@@ -860,49 +859,49 @@
             <!-- Single track with items duplicated for seamless loop -->
             <div class="marquee-track">
                 <!-- Set 1 -->
-                <div class="logo-item"><img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:26px;"> Google Cloud</div>
-                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px; filter:invert(1) brightness(0.2);"> ChatGPT</div>
-                <div class="logo-item"><img src="assets/logos/gemini.svg" alt="Gemini" style="height:26px;"> Gemini</div>
-                <div class="logo-item" style="font-style:italic; font-weight:400; background:none; -webkit-text-fill-color: #64748b;"><span style="color:#d97757; font-size:1.8rem;">&#10022;</span> Claude 3.5</div>
-                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px; filter:invert(1);"> Apple</div>
-                <div class="logo-item"><img src="assets/logos/android.svg" alt="Android" style="height:30px;"> Android</div>
-                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px; filter:invert(1);"> GitHub</div>
+                <div class="logo-item"><img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:26px;"> <span class="silver-text">Google Cloud</span></div>
+                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px; "> <span class="silver-text">ChatGPT</span></div>
+                <div class="logo-item"><img src="assets/logos/gemini.svg" alt="Gemini" style="height:26px;"> <span class="silver-text">Gemini</span></div>
+                <div class="logo-item" style="font-style:italic; font-weight:400; color:#e2d9f3;"><span style="color:#d97757; font-size:1.8rem;">&#10022;</span> Claude 3.5</div>
+                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px;"> <span class="silver-text">Apple</span></div>
+                <div class="logo-item"><img src="assets/logos/android.svg" alt="Android" style="height:30px;"> <span class="silver-text">Android</span></div>
+                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px; "> <span class="silver-text">GitHub</span></div>
                 <div class="logo-item">
-                    <svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#64748b"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white"/></svg>
                     Vercel
                 </div>
-                <div class="logo-item"><img src="assets/logos/supabase.svg" alt="Supabase" style="height:26px;"> Supabase</div>
-                <div class="logo-item"><img src="assets/logos/oracle.svg" alt="Oracle" style="height:22px;"> Oracle</div>
-                <div class="logo-item"><img src="assets/logos/stripe.svg" alt="Stripe" style="height:26px;"> Stripe</div>
-                <div class="logo-item"><img src="assets/logos/youtube.svg" alt="YouTube" style="height:26px;"> YouTube</div>
-                <div class="logo-item"><img src="assets/logos/meta.svg" alt="Meta" style="height:26px;"> Meta</div>
-                <div class="logo-item"><img src="assets/logos/instagram.svg" alt="Instagram" style="height:28px;"> Instagram</div>
-                <div class="logo-item"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:28px;"> WhatsApp</div>
-                <div class="logo-item"><img src="assets/logos/google-one.svg" alt="Google One" style="height:28px;"> Google One</div>
-                <div class="logo-item"><img src="assets/logos/google-docs.svg" alt="Google Docs" style="height:28px;"> Google Docs</div>
-                <div class="logo-item"><img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:30px;"> Antigravity AI</div>
+                <div class="logo-item"><img src="assets/logos/supabase.svg" alt="Supabase" style="height:26px;"> <span class="silver-text">Supabase</span></div>
+                <div class="logo-item"><img src="assets/logos/oracle.svg" alt="Oracle" style="height:22px;"> <span class="silver-text">Oracle</span></div>
+                <div class="logo-item"><img src="assets/logos/stripe.svg" alt="Stripe" style="height:26px;"> <span class="silver-text">Stripe</span></div>
+                <div class="logo-item"><img src="assets/logos/youtube.svg" alt="YouTube" style="height:26px;"> <span class="silver-text">YouTube</span></div>
+                <div class="logo-item"><img src="assets/logos/meta.svg" alt="Meta" style="height:26px;"> <span class="silver-text">Meta</span></div>
+                <div class="logo-item"><img src="assets/logos/instagram.svg" alt="Instagram" style="height:28px;"> <span class="silver-text">Instagram</span></div>
+                <div class="logo-item"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:28px;"> <span class="silver-text">WhatsApp</span></div>
+                <div class="logo-item"><img src="assets/logos/google-one.svg" alt="Google One" style="height:28px;"> <span class="silver-text">Google One</span></div>
+                <div class="logo-item"><img src="assets/logos/google-docs.svg" alt="Google Docs" style="height:28px;"> <span class="silver-text">Google Docs</span></div>
+                <div class="logo-item"><img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:30px;"> <span class="silver-text">Antigravity AI</span></div>
                 <!-- Set 2 (exact duplicate for seamless loop) -->
-                <div class="logo-item"><img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:26px;"> Google Cloud</div>
-                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px; filter:invert(1) brightness(0.2);"> ChatGPT</div>
-                <div class="logo-item"><img src="assets/logos/gemini.svg" alt="Gemini" style="height:26px;"> Gemini</div>
-                <div class="logo-item" style="font-style:italic; font-weight:400; background:none; -webkit-text-fill-color: #64748b;"><span style="color:#d97757; font-size:1.8rem;">&#10022;</span> Claude 3.5</div>
-                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px; filter:invert(1);"> Apple</div>
-                <div class="logo-item"><img src="assets/logos/android.svg" alt="Android" style="height:30px;"> Android</div>
-                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px; filter:invert(1);"> GitHub</div>
+                <div class="logo-item"><img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:26px;"> <span class="silver-text">Google Cloud</span></div>
+                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px; "> <span class="silver-text">ChatGPT</span></div>
+                <div class="logo-item"><img src="assets/logos/gemini.svg" alt="Gemini" style="height:26px;"> <span class="silver-text">Gemini</span></div>
+                <div class="logo-item" style="font-style:italic; font-weight:400; color:#e2d9f3;"><span style="color:#d97757; font-size:1.8rem;">&#10022;</span> Claude 3.5</div>
+                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px;"> <span class="silver-text">Apple</span></div>
+                <div class="logo-item"><img src="assets/logos/android.svg" alt="Android" style="height:30px;"> <span class="silver-text">Android</span></div>
+                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px; "> <span class="silver-text">GitHub</span></div>
                 <div class="logo-item">
-                    <svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#64748b"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white"/></svg>
                     Vercel
                 </div>
-                <div class="logo-item"><img src="assets/logos/supabase.svg" alt="Supabase" style="height:26px;"> Supabase</div>
-                <div class="logo-item"><img src="assets/logos/oracle.svg" alt="Oracle" style="height:22px;"> Oracle</div>
-                <div class="logo-item"><img src="assets/logos/stripe.svg" alt="Stripe" style="height:26px;"> Stripe</div>
-                <div class="logo-item"><img src="assets/logos/youtube.svg" alt="YouTube" style="height:26px;"> YouTube</div>
-                <div class="logo-item"><img src="assets/logos/meta.svg" alt="Meta" style="height:26px;"> Meta</div>
-                <div class="logo-item"><img src="assets/logos/instagram.svg" alt="Instagram" style="height:28px;"> Instagram</div>
-                <div class="logo-item"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:28px;"> WhatsApp</div>
-                <div class="logo-item"><img src="assets/logos/google-one.svg" alt="Google One" style="height:28px;"> Google One</div>
-                <div class="logo-item"><img src="assets/logos/google-docs.svg" alt="Google Docs" style="height:28px;"> Google Docs</div>
-                <div class="logo-item"><img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:30px;"> Antigravity AI</div>
+                <div class="logo-item"><img src="assets/logos/supabase.svg" alt="Supabase" style="height:26px;"> <span class="silver-text">Supabase</span></div>
+                <div class="logo-item"><img src="assets/logos/oracle.svg" alt="Oracle" style="height:22px;"> <span class="silver-text">Oracle</span></div>
+                <div class="logo-item"><img src="assets/logos/stripe.svg" alt="Stripe" style="height:26px;"> <span class="silver-text">Stripe</span></div>
+                <div class="logo-item"><img src="assets/logos/youtube.svg" alt="YouTube" style="height:26px;"> <span class="silver-text">YouTube</span></div>
+                <div class="logo-item"><img src="assets/logos/meta.svg" alt="Meta" style="height:26px;"> <span class="silver-text">Meta</span></div>
+                <div class="logo-item"><img src="assets/logos/instagram.svg" alt="Instagram" style="height:28px;"> <span class="silver-text">Instagram</span></div>
+                <div class="logo-item"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:28px;"> <span class="silver-text">WhatsApp</span></div>
+                <div class="logo-item"><img src="assets/logos/google-one.svg" alt="Google One" style="height:28px;"> <span class="silver-text">Google One</span></div>
+                <div class="logo-item"><img src="assets/logos/google-docs.svg" alt="Google Docs" style="height:28px;"> <span class="silver-text">Google Docs</span></div>
+                <div class="logo-item"><img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:30px;"> <span class="silver-text">Antigravity AI</span></div>
             </div>
         </div>
     </section>
@@ -1009,9 +1008,9 @@
                 <h3>Automatización con IA</h3>
                 <p>Agentes autónomos que trabajan por ti 24/7. Flujos inteligentes que eliminan tareas repetitivas y liberan tu tiempo para lo que importa.</p>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
-                    <img src="assets/logos/chatgpt.svg" alt="OpenAI" style="height:18px;  opacity:0.6;">
-                    <img src="assets/logos/gemini.svg" alt="Gemini" style="height:18px; opacity:0.6;">
-                    <img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:20px; opacity:0.6;">
+                    <img src="assets/logos/chatgpt.svg" alt="OpenAI" style="height:18px;">
+                    <img src="assets/logos/gemini.svg" alt="Gemini" style="height:18px;">
+                    <img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:20px;">
                 </div>
             </div>
             <div class="service-card">
@@ -1019,8 +1018,8 @@
                 <h3>Progressive Web Apps</h3>
                 <p>Aplicaciones modernas, rápidas e instalables en cualquier dispositivo. Sin tiendas. Sin esperas. Desde el concepto hasta la nube.</p>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
-                    <img src="assets/logos/apple.svg" alt="Apple" style="height:18px; opacity:0.6;">
-                    <img src="assets/logos/android.svg" alt="Android" style="height:22px; opacity:0.6;">
+                    <img src="assets/logos/apple.svg" alt="Apple" style="height:18px;">
+                    <img src="assets/logos/android.svg" alt="Android" style="height:22px;">
                     <svg width="16" height="16" viewBox="0 0 76 65" fill="none" style="opacity:0.5;"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white"/></svg>
                 </div>
             </div>
@@ -1029,9 +1028,9 @@
                 <h3>Canales Privados</h3>
                 <p>Infraestructura de comunicación segura para corporaciones, comunidades exclusivas y equipos B2B de alto rendimiento.</p>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
-                    <img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:20px; opacity:0.6;">
-                    <img src="assets/logos/meta.svg" alt="Meta" style="height:16px; opacity:0.6;">
-                    <img src="assets/logos/youtube.svg" alt="YouTube" style="height:18px; opacity:0.6;">
+                    <img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:20px;">
+                    <img src="assets/logos/meta.svg" alt="Meta" style="height:16px;">
+                    <img src="assets/logos/youtube.svg" alt="YouTube" style="height:18px;">
                 </div>
             </div>
             <div class="service-card">
@@ -1039,8 +1038,8 @@
                 <h3>Tiendas &amp; Pagos</h3>
                 <p>E-commerce completo con pasarelas de pago globales, catálogos dinámicos y flujos de compra optimizados para convertir.</p>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
-                    <img src="assets/logos/stripe.svg" alt="Stripe" style="height:20px; opacity:0.6;">
-                    <img src="assets/logos/supabase.svg" alt="Supabase" style="height:18px; opacity:0.6;">
+                    <img src="assets/logos/stripe.svg" alt="Stripe" style="height:20px;">
+                    <img src="assets/logos/supabase.svg" alt="Supabase" style="height:18px;">
                 </div>
             </div>
             <div class="service-card">
@@ -1048,8 +1047,8 @@
                 <h3>Streaming &amp; Media</h3>
                 <p>Plataformas de transmisión en vivo o bajo demanda con baja latencia, alta disponibilidad y monetización integrada.</p>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
-                    <img src="assets/logos/youtube.svg" alt="YouTube" style="height:18px; opacity:0.6;">
-                    <img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:18px; opacity:0.6;">
+                    <img src="assets/logos/youtube.svg" alt="YouTube" style="height:18px;">
+                    <img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:18px;">
                 </div>
             </div>
             <div class="service-card">
@@ -1057,10 +1056,10 @@
                 <h3>Infraestructura Cloud</h3>
                 <p>Arquitectura y despliegue de alta disponibilidad. Tu sistema siempre activo, escalable y seguro desde el día uno.</p>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
-                    <img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:18px; opacity:0.6;">
-                    <img src="assets/logos/oracle.svg" alt="Oracle" style="height:14px; opacity:0.6;">
-                    <img src="assets/logos/supabase.svg" alt="Supabase" style="height:18px; opacity:0.6;">
-                    <img src="assets/logos/github.svg" alt="GitHub" style="height:16px;  opacity:0.5;">
+                    <img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:18px;">
+                    <img src="assets/logos/oracle.svg" alt="Oracle" style="height:14px;">
+                    <img src="assets/logos/supabase.svg" alt="Supabase" style="height:18px;">
+                    <img src="assets/logos/github.svg" alt="GitHub" style="height:16px;">
                 </div>
             </div>
         </div>
@@ -1203,7 +1202,8 @@
     </footer>
 
     <!-- ─── AMBIENT BACKGROUND ─── -->
-    <div style="position: fixed; inset: 0; background: #f8fafc; z-index: -1;"></div>
+    <div style="position: fixed; inset: 0; background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); z-index: -1;"></div>
+
 
     <!-- ─── SCRIPTS ─── -->
     <script>
@@ -1221,6 +1221,7 @@
 
         // ── Minimalist Interactions ──
         console.log("Light Theme Active");
+
 
     </script>
 
