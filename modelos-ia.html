@@ -33,84 +33,115 @@
         </p>
     </header>
 
-    <!-- Grid de Modelos -->
-    <section class="max-w-6xl mx-auto px-6 pb-32">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Listado de Modelos -->
+    <section class="max-w-4xl mx-auto px-6 pb-32">
+        <div class="flex flex-col gap-6">
             <!-- ChatGPT & Gemini -->
-            <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-700 text-xl"><i class="fas fa-brain"></i></div>
-                    <h3 class="text-2xl font-black tracking-tight text-slate-900">ChatGPT &amp; Gemini</h3>
+            <a href="https://chatgpt.com" target="_blank" class="group flex flex-col md:flex-row gap-6 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-slate-300 hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 shrink-0 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-700 text-2xl group-hover:bg-slate-900 group-hover:text-white transition-colors"><i class="fas fa-brain"></i></div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-black tracking-tight text-slate-900">ChatGPT &amp; Gemini</h3>
+                        <i class="fas fa-arrow-right text-slate-300 group-hover:text-slate-900 transition-colors -rotate-45"></i>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                        <strong>El estándar de la industria.</strong> Integro estos modelos versátiles para tareas generales de procesamiento de lenguaje, redacción automatizada, asistentes conversacionales rápidos y análisis de datos masivos.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-full">OpenAI</span>
+                        <span class="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-full">Google</span>
+                    </div>
                 </div>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    <strong>El estándar de la industria.</strong> Integro estos modelos versátiles para tareas generales de procesamiento de lenguaje, redacción automatizada, asistentes conversacionales rápidos y análisis de datos masivos. Perfectos para optimizar la comunicación diaria de tu empresa.
-                </p>
-            </div>
+            </a>
 
             <!-- Claude -->
-            <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 text-xl"><i class="fas fa-bolt"></i></div>
-                    <h3 class="text-2xl font-black tracking-tight text-slate-900">Claude</h3>
+            <a href="https://claude.ai" target="_blank" class="group flex flex-col md:flex-row gap-6 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-orange-300 hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 shrink-0 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 text-2xl group-hover:bg-orange-600 group-hover:text-white transition-colors"><i class="fas fa-bolt"></i></div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-black tracking-tight text-slate-900">Claude</h3>
+                        <i class="fas fa-arrow-right text-slate-300 group-hover:text-orange-600 transition-colors -rotate-45"></i>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                        <strong>El analista superior.</strong> Utilizo Claude cuando tu negocio requiere razonamiento lógico profundo, lectura de documentos extensos (contratos, reportes financieros) y generación de código complejo.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-bold px-3 py-1 bg-orange-50 text-orange-700 rounded-full">Anthropic</span>
+                    </div>
                 </div>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    <strong>El analista superior.</strong> Utilizo Claude cuando tu negocio requiere razonamiento lógico profundo, lectura de documentos extensos (contratos, reportes financieros) y generación de código complejo con un contexto narrativo casi humano y preciso.
-                </p>
-            </div>
+            </a>
 
             <!-- DeepSeek -->
-            <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 text-xl"><i class="fas fa-code"></i></div>
-                    <h3 class="text-2xl font-black tracking-tight text-slate-900">DeepSeek</h3>
+            <a href="https://deepseek.com" target="_blank" class="group flex flex-col md:flex-row gap-6 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 shrink-0 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 text-2xl group-hover:bg-blue-600 group-hover:text-white transition-colors"><i class="fas fa-code"></i></div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-black tracking-tight text-slate-900">DeepSeek</h3>
+                        <i class="fas fa-arrow-right text-slate-300 group-hover:text-blue-600 transition-colors -rotate-45"></i>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                        <strong>Optimización brutal.</strong> Especializado para el desarrollo avanzado de software y algoritmos. Me permite construir y depurar infraestructura a una velocidad insuperable.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-bold px-3 py-1 bg-blue-50 text-blue-700 rounded-full">DeepSeek AI</span>
+                    </div>
                 </div>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    <strong>Optimización brutal.</strong> Un modelo especializado que integro para el desarrollo avanzado de software y algoritmos. Me permite construir y depurar la infraestructura de tus aplicaciones a una velocidad y precisión técnica insuperable.
-                </p>
-            </div>
+            </a>
 
             <!-- GLM & Kimi -->
-            <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 text-xl"><i class="fas fa-network-wired"></i></div>
-                    <h3 class="text-2xl font-black tracking-tight text-slate-900">GLM &amp; Kimi</h3>
+            <a href="https://kimi.moonshot.cn" target="_blank" class="group flex flex-col md:flex-row gap-6 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-emerald-300 hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 shrink-0 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors"><i class="fas fa-network-wired"></i></div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-black tracking-tight text-slate-900">GLM &amp; Kimi</h3>
+                        <i class="fas fa-arrow-right text-slate-300 group-hover:text-emerald-600 transition-colors -rotate-45"></i>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                        <strong>Rendimiento específico.</strong> Kimi destaca en contextos largos y procesamiento masivo de archivos, mientras que GLM aporta solidez en tareas bilingües y analíticas.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-bold px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full">Moonshot AI</span>
+                        <span class="text-xs font-bold px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full">Zhipu AI</span>
+                    </div>
                 </div>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    <strong>Rendimiento específico.</strong> Modelos emergentes de alto rendimiento que utilizo para diversificar la carga de trabajo de tu ecosistema. Kimi destaca en contextos largos y procesamiento de archivos, mientras que GLM aporta solidez en tareas bilingües y analíticas.
-                </p>
-            </div>
+            </a>
 
             <!-- Odysseus -->
-            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-2xl hover:shadow-slate-900/50 hover:-translate-y-1 transition-all duration-300 md:col-span-2 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-8 opacity-5">
+            <a href="https://pewdiepie-archdaemon.github.io/odysseus/" target="_blank" class="group flex flex-col md:flex-row gap-6 bg-slate-900 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl hover:shadow-slate-900/50 hover:border-[#e06c75] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-5 transition-opacity group-hover:opacity-10">
                     <svg width="150" height="150" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                       <path d="M16 4L16 22L6 22Z" fill="#e06c75"/>
                       <path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/>
                       <path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                     </svg>
                 </div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 bg-[#e06c75]/10 border border-[#e06c75]/30 rounded-full flex items-center justify-center">
-                            <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M16 4L16 22L6 22Z" fill="#e06c75"/>
-                              <path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/>
-                              <path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-black tracking-tight text-white" style="letter-spacing: 0.5px;">Odysseus</h3>
-                    </div>
-                    <p class="text-sm text-slate-300 leading-relaxed max-w-2xl mb-6">
-                        <strong>La revolución del Open Source y la Seguridad Local (Self-Hosted AI Workspace).</strong><br><br>
-                        Para corporaciones e instituciones con datos altamente sensibles, utilizo Odysseus. Es la solución definitiva que permite tener tu propio espacio de trabajo con IA (chat, agentes, herramientas y model serving) ejecutándose directamente en los servidores locales de tu empresa. 
-                    </p>
-                    <ul class="text-sm text-slate-400 space-y-2 font-light">
-                        <li><i class="fas fa-check text-[#e06c75] mr-2"></i> <strong>Tus modelos, tu hardware, tus datos:</strong> 100% de privacidad sin salir de tu red.</li>
-                        <li><i class="fas fa-check text-[#e06c75] mr-2"></i> Ecosistema local cerrado e inquebrantable para herramientas y agentes de investigación.</li>
-                        <li><i class="fas fa-check text-[#e06c75] mr-2"></i> Cumplimiento estricto de regulaciones corporativas y confidencialidad.</li>
-                    </ul>
+                
+                <div class="w-16 h-16 shrink-0 bg-[#e06c75]/10 border border-[#e06c75]/30 rounded-2xl flex items-center justify-center group-hover:bg-[#e06c75]/20 transition-colors z-10">
+                    <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M16 4L16 22L6 22Z" fill="#e06c75"/>
+                      <path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/>
+                      <path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    </svg>
                 </div>
-            </div>
+                <div class="flex-1 z-10">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-black tracking-tight text-white" style="letter-spacing: 0.5px;">Odysseus</h3>
+                        <i class="fas fa-arrow-right text-slate-500 group-hover:text-[#e06c75] transition-colors -rotate-45"></i>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <strong>La revolución del Open Source y la Seguridad Local.</strong><br>
+                        Para corporaciones e instituciones con datos altamente sensibles. Es la solución definitiva que permite tener tu propio espacio de trabajo con IA ejecutándose directamente en los servidores locales de tu empresa. 
+                    </p>
+                    <ul class="text-sm text-slate-400 space-y-2 font-light mb-4">
+                        <li><i class="fas fa-check text-[#e06c75] mr-2"></i> <strong>Tus modelos, tu hardware, tus datos:</strong> 100% privacidad.</li>
+                        <li><i class="fas fa-check text-[#e06c75] mr-2"></i> Cumplimiento estricto de regulaciones corporativas.</li>
+                    </ul>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-bold px-3 py-1 bg-[#e06c75]/10 text-[#e06c75] border border-[#e06c75]/30 rounded-full">Self-Hosted</span>
+                        <span class="text-xs font-bold px-3 py-1 bg-[#e06c75]/10 text-[#e06c75] border border-[#e06c75]/30 rounded-full">No Telemetry</span>
+                    </div>
+                </div>
+            </a>
         </div>
     </section>
 
