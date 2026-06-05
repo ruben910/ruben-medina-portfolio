@@ -528,9 +528,6 @@
             font-weight: 600;
             color: var(--text-light);
             margin-bottom: 35px;
-            position: relative;
-        }
-
         .contact-card a {
             color: var(--primary);
             text-decoration: none;
@@ -1113,51 +1110,62 @@
             <!-- Odysseus Featured Card -->
             <style>
                 @media (min-width: 900px) {
-                    .odysseus-card {
+                    .odysseus-card-wrapper {
                         grid-column: span 2;
                     }
                 }
                 
-                @keyframes odysseus-glow {
-                    0% { box-shadow: 0 0 10px rgba(224,108,117,0.1), inset 0 0 20px rgba(224,108,117,0.05); border-color: rgba(224,108,117,0.3); }
-                    50% { box-shadow: 0 0 30px rgba(224,108,117,0.4), inset 0 0 40px rgba(224,108,117,0.1); border-color: rgba(224,108,117,0.8); }
-                    100% { box-shadow: 0 0 10px rgba(224,108,117,0.1), inset 0 0 20px rgba(224,108,117,0.05); border-color: rgba(224,108,117,0.3); }
-                }
-                
-                .odysseus-card {
-                    animation: odysseus-glow 4s infinite alternate;
+                .odysseus-card-wrapper {
                     position: relative;
+                    border-radius: 20px;
+                    padding: 2px; /* Grosor del circuito / borde */
                     overflow: hidden;
+                    box-shadow: 0 10px 30px -10px rgba(224,108,117,0.2);
                 }
                 
-                .odysseus-card::before {
+                /* Circuito de datos viajando (Láser rotatorio) */
+                .odysseus-card-wrapper::before {
                     content: '';
                     position: absolute;
                     top: -50%; left: -50%; width: 200%; height: 200%;
-                    background: conic-gradient(transparent, rgba(224,108,117,0.1), transparent 30%);
-                    animation: rotate-bg 8s linear infinite;
-                    pointer-events: none;
+                    background: conic-gradient(from 0deg, transparent 60%, rgba(224,108,117, 1) 80%, transparent 100%);
+                    animation: data-circuit 4s linear infinite;
                     z-index: 0;
                 }
                 
-                @keyframes rotate-bg {
+                @keyframes data-circuit {
                     100% { transform: rotate(360deg); }
                 }
+                
+                /* Fondo interno sólido para que solo se vea el borde */
+                .odysseus-inner {
+                    background: #0b1120;
+                    border-radius: 18px;
+                    padding: 35px 28px;
+                    height: 100%;
+                    position: relative;
+                    z-index: 1;
+                    /* Fondo de malla de puntos tecnológico interno */
+                    background-image: radial-gradient(rgba(224,108,117,0.1) 1px, transparent 1px);
+                    background-size: 20px 20px;
+                }
             </style>
-            <div class="service-card odysseus-card" style="background: rgba(17,17,17,0.85); backdrop-filter: blur(10px);">
-                <div class="service-icon" style="color: #e06c75; position: relative; z-index: 2;">
-                    <svg width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 8px rgba(224,108,117,0.6));">
-                      <path d="M16 4L16 22L6 22Z" fill="#e06c75"/>
-                      <path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/>
-                      <path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <h3 style="color: #e06c75; position: relative; z-index: 2; text-shadow: 0 0 10px rgba(224,108,117,0.3);">Servidores IA Privados</h3>
-                <p style="position: relative; z-index: 2; color: #cbd5e1;">Implementación corporativa del ecosistema <strong style="color:#e06c75; font-family:'Fira Code', monospace; font-size: 0.95em; letter-spacing: 0.5px; text-shadow: 0 0 8px rgba(224,108,117,0.4);">Odysseus</strong>. Tu propio espacio de trabajo IA local y cerrado.</p>
-                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(224,108,117,0.2); padding-top:12px; position: relative; z-index: 2;">
-                    <span style="color:#e06c75; font-size:0.9rem; font-weight:800; font-family:'Fira Code', monospace;">ODYSSEUS</span>
-                    <span style="color:#fca5a5; font-size:0.8rem; font-weight:700; border: 1px solid rgba(224,108,117,0.4); padding: 2px 8px; border-radius: 12px; margin-left: 8px; background: rgba(224,108,117,0.1);">Self-Hosted</span>
-                    <span style="color:#fca5a5; font-size:0.8rem; font-weight:700; border: 1px solid rgba(224,108,117,0.4); padding: 2px 8px; border-radius: 12px; background: rgba(224,108,117,0.1);">No Telemetry</span>
+            <div class="odysseus-card-wrapper">
+                <div class="odysseus-inner">
+                    <div class="service-icon" style="color: #e06c75; position: relative; z-index: 2;">
+                        <svg width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 8px rgba(224,108,117,0.6));">
+                          <path d="M16 4L16 22L6 22Z" fill="#e06c75"/>
+                          <path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/>
+                          <path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: #e06c75; position: relative; z-index: 2;">Servidores IA Privados</h3>
+                    <p style="position: relative; z-index: 2; color: #cbd5e1;">Implementación corporativa del ecosistema <strong style="color:#e06c75; font-family:'Fira Code', monospace; font-size: 0.95em; letter-spacing: 0.5px;">Odysseus</strong>. Tu propio espacio de trabajo IA local y cerrado.</p>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(224,108,117,0.2); padding-top:12px; position: relative; z-index: 2;">
+                        <span style="color:#e06c75; font-size:0.9rem; font-weight:800; font-family:'Fira Code', monospace;">ODYSSEUS</span>
+                        <span style="color:#fca5a5; font-size:0.8rem; font-weight:700; border: 1px solid rgba(224,108,117,0.4); padding: 2px 8px; border-radius: 12px; margin-left: 8px; background: rgba(224,108,117,0.1);">Self-Hosted</span>
+                        <span style="color:#fca5a5; font-size:0.8rem; font-weight:700; border: 1px solid rgba(224,108,117,0.4); padding: 2px 8px; border-radius: 12px; background: rgba(224,108,117,0.1);">No Telemetry</span>
+                    </div>
                 </div>
             </div>
         </div>
