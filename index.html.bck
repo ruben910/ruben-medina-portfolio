@@ -1,6 +1,5 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-    <!-- Lucide Icons (Professional SVGs) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
+    
     <style>
         :root {
-            --bg-color: #f7f7f7;
+            --bg-color: #f7f7f7; /* Light grey matching the concrete background */
             --text-main: #1a1a1a;
             --text-secondary: #5f5f5f;
             --card-bg: #ffffff;
+            --btn-hover: #ececec;
             --accent: #2b2b2b;
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -29,8 +27,7 @@
             box-sizing: border-box;
         }
 
-        body,
-        html {
+        body, html {
             height: 100%;
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-color);
@@ -44,6 +41,7 @@
             width: 100%;
         }
 
+        /* Izquierda: Imagen Inmersiva */
         .image-section {
             flex: 1.2;
             position: relative;
@@ -62,6 +60,7 @@
             animation: fadeIn 1s ease-out forwards;
         }
 
+        /* Derecha: Hub de Acción */
         .action-section {
             flex: 1;
             display: flex;
@@ -69,8 +68,15 @@
             justify-content: center;
             padding: 5rem 6rem;
             background-color: var(--card-bg);
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.02);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.02);
             z-index: 10;
+        }
+
+        .profile-header {
+            margin-bottom: 3rem;
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
         .profile-header h1 {
@@ -78,6 +84,7 @@
             font-weight: 800;
             letter-spacing: -1.5px;
             margin-bottom: 0.5rem;
+            color: var(--text-main);
             line-height: 1.1;
         }
 
@@ -85,17 +92,69 @@
             font-size: 1.4rem;
             font-weight: 300;
             color: var(--text-secondary);
-            margin-bottom: 1rem;
         }
 
+        .action-hub {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            animation: slideUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            padding: 1.4rem 2rem;
+            background-color: transparent;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn:hover {
+            border-color: var(--accent);
+            background-color: var(--text-main);
+            color: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+        }
+
+        .action-btn .icon {
+            font-size: 1.6rem;
+            margin-right: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .action-btn:hover .icon {
+            transform: scale(1.1);
+        }
+
+        .action-btn.primary {
+            background-color: var(--text-main);
+            color: #ffffff;
+            border-color: var(--text-main);
+        }
+
+        .action-btn.primary:hover {
+            background-color: #333333;
+            border-color: #333333;
+        }
+
+        
         .brands-carousel {
             position: relative;
             height: 40px;
-            margin-top: 1.5rem;
-            margin-bottom: 2rem;
+            margin-top: 1rem;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
         }
 
         .brand-item {
@@ -122,85 +181,31 @@
         }
 
         @keyframes fadeCarousel {
-            0% {
-                opacity: 0;
-                transform: translateY(10px);
-            }
+            0% { opacity: 0; transform: translateY(10px); }
+            4% { opacity: 1; transform: translateY(0); }
+            16% { opacity: 1; transform: translateY(0); }
+            20% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
 
-            4% {
-                opacity: 1;
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
                 transform: translateY(0);
             }
-
-            16% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            20% {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
         }
 
-        .action-hub {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .action-btn {
-            display: flex;
-            align-items: center;
-            padding: 1.4rem 2rem;
-            background-color: transparent;
-            border: 2px solid #e0e0e0;
-            border-radius: 16px;
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .action-btn:hover {
-            border-color: var(--accent);
-            background-color: var(--text-main);
-            color: #ffffff;
-            transform: translateY(-4px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .action-btn .icon {
-            margin-right: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .action-btn:hover .icon i {
-            stroke: #ffffff;
-        }
-
-        .action-btn.primary {
-            background-color: var(--text-main);
-            color: #ffffff;
-            border-color: var(--text-main);
-        }
-
-        .action-btn.primary:hover {
-            background-color: #333333;
-            border-color: #333333;
-        }
-
-        .action-btn.primary .icon i {
-            stroke: #ffffff;
-        }
-
+        /* Diseño Responsivo (Móvil) */
         @media (max-width: 992px) {
             .landing-container {
                 flex-direction: column;
@@ -225,44 +230,50 @@
                 font-size: 2.8rem;
             }
 
-            .brands-carousel {
-                margin-bottom: 2rem;
+            .profile-header p {
+                font-size: 1.2rem;
             }
 
-            .action-btn {
-                padding: 1.1rem 1.5rem;
-                font-size: 1.1rem;
-            }
-
+            
             .action-hub {
                 max-height: 250px;
                 overflow-y: auto;
                 padding-right: 10px;
+                /* Optional scrollbar styling */
                 scrollbar-width: thin;
                 scrollbar-color: #dcdcdc transparent;
             }
-
             .action-hub::-webkit-scrollbar {
                 width: 6px;
             }
-
             .action-hub::-webkit-scrollbar-thumb {
                 background-color: #dcdcdc;
                 border-radius: 10px;
             }
+
+            .action-btn {
+                padding: 1.2rem 1.5rem;
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
-
 <body>
+
     <div class="landing-container">
+        <!-- Panel Izquierdo: Fotografía -->
         <div class="image-section">
             <img src="assets/perfil_ruben.jpg" alt="Rubén Medina - Developer">
         </div>
+
+        <!-- Panel Derecho: Hub de Acciones "Un Toque" -->
         <div class="action-section">
+            
             <div class="profile-header">
                 <h1>Rubén Medina</h1>
                 <p>Developer & Especialista AI</p>
+
+                <!-- Carrusel de Marcas -->
                 <div class="brands-carousel">
                     <div class="brand-item" style="animation-delay: 0s;">
                         <img src="assets/logos/google-cloud.svg" alt="Google Cloud">
@@ -286,32 +297,29 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="action-hub">
                 <a href="servicios.html" class="action-btn">
-                    <span class="icon"><i data-lucide="terminal"></i></span>
+                    <span class="icon">💻</span>
                     <span class="text">Servicios Tecnológicos</span>
                 </a>
                 <a href="modelos-ia.html" class="action-btn">
-                    <span class="icon"><i data-lucide="cpu"></i></span>
+                    <span class="icon">✨</span>
                     <span class="text">Experimentos AI</span>
                 </a>
                 <a href="portal-cliente.html" class="action-btn primary">
-                    <span class="icon"><i data-lucide="lock"></i></span>
+                    <span class="icon">🔐</span>
                     <span class="text">Portal de Clientes</span>
                 </a>
                 <a href="presentacion.html" class="action-btn">
-                    <span class="icon"><i data-lucide="bar-chart-2"></i></span>
+                    <span class="icon">📊</span>
                     <span class="text">Presentación</span>
                 </a>
             </div>
+
         </div>
     </div>
 
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
 </body>
-
 </html>
+

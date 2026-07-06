@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubén Medina Lebrón - Ecosistemas Digitales e IA</title>
+    <meta name="description" content="Consultor estratégico en Inteligencia Artificial y Creador de Ecosistemas Digitales. Puerto Rico.">
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ruben910.github.io/ruben-medina-portfolio/">
+    <meta property="og:title" content="Rubén A. Medina Lebrón — Especialista en IA & Ecosistemas Digitales">
+    <meta property="og:description" content="Ecosistemas digitales, PWAs, IA y soluciones cloud de élite. Made in Puerto Rico.">
+    <meta property="og:image" content="https://ruben910.github.io/ruben-medina-portfolio/assets/og_preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rubén A. Medina Lebrón — Especialista en IA & Ecosistemas Digitales">
+    <meta name="twitter:description" content="Ecosistemas digitales, PWAs, IA y soluciones cloud de élite. Made in Puerto Rico.">
+    <meta name="twitter:image" content="https://ruben910.github.io/ruben-medina-portfolio/assets/og_preview.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Calendly link widget CSS -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #ffffff;
+            --primary: #1a73e8;
+            --secondary: #4285f4;
+            --accent: #0f9d58;
+            --text-light: #202124;
+            --text-muted: #4b5563;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 0 5%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 200;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Left: avatar + name */
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 12px rgba(0,242,254,0.5);
+        }
+
+        .nav-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .nav-name strong {
+            font-size: 1rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-name span {
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Center: nav links */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Right: CTA button + PR badge */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: var(--text-main);
+            padding: 9px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(26, 115, 232, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 115, 232, 0.4);
+        }
+
+        .pr-badge {
+            height: 38px;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 6px rgba(0,242,254,0.4));
+            transition: transform 0.3s;
+        }
+
+        .pr-badge:hover { transform: scale(1.08); }
+
+        .hamburger { display: none; }
+
+        @media (max-width: 768px) {
+            .nav-name span { display: none; }
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 5px;
+                z-index: 201;
+            }
+            .hamburger span {
+                width: 25px;
+                height: 3px;
+                background-color: var(--primary);
+                border-radius: 3px;
+                transition: all 0.3s;
+            }
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 30px 0;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+                border-top: 1px solid var(--glass-border);
+                transform: translateY(-200%);
+                opacity: 0;
+                transition: transform 0.4s ease, opacity 0.4s ease;
+                z-index: 199;
+                pointer-events: none;
+            }
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            padding-top: 70px;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0.6) 100%),
+                url('assets/pictures/hero_bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        .hero-subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 580px;
+        }
+
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        /* ─── BUTTONS ─── */
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(26, 115, 232, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: rgba(26, 115, 232, 0.05);
+            box-shadow: 0 4px 6px rgba(26, 115, 232, 0.1);
+        }
+
+        /* ─── COLORED SECTION DIVIDERS ─── */
+        .section-divider-teal {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 50%, #e8eaed 100%);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .section-divider-green {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #f1f3f4 100%);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .section-divider-purple {
+            background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 50%, #dadce0 100%);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* ─── SECTIONS ─── */
+        .section {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ─── ABOUT / PROFILE ─── */
+        .profile-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 50px;
+        }
+
+        .profile-image {
+            flex: 1;
+            min-width: 260px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-image img {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 24px;
+            border: 2px solid rgba(0,242,254,0.3);
+            box-shadow: 0 0 40px rgba(0,242,254,0.15), 0 20px 50px rgba(0,0,0,0.5);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 60px rgba(0,242,254,0.3), 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .profile-info { flex: 1.5; min-width: 300px; }
+
+        .profile-info h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .profile-info h3 {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .profile-info p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* ─── TIMELINE ─── */
+        .timeline { border-left: 2px solid rgba(0,242,254,0.2); padding-left: 30px; margin-top: 30px; }
+
+        .timeline-item { position: relative; margin-bottom: 35px; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .timeline-date { color: var(--secondary); font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 4px; }
+        .timeline-title { font-size: 1.2rem; color: var(--text-light); margin-bottom: 6px; }
+        .timeline-desc { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* ─── TECH TAGS ─── */
+        .tech-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+
+        .tech-tags span {
+            background: rgba(16,185,129,0.1);
+            color: var(--accent);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(16,185,129,0.3);
+            transition: all 0.3s;
+        }
+
+        .tech-tags span:hover { background: rgba(16,185,129,0.25); transform: translateY(-2px); }
+
+        /* ─── PROJECT ─── */
+        .project-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            background: linear-gradient(135deg, rgba(0,242,254,0.04) 0%, rgba(0,0,0,0.4) 100%);
+            border: 1px solid rgba(0,242,254,0.15);
+            border-radius: 30px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-container::before {
+            content: '';
+            position: absolute;
+            top: -100px; right: -100px;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,242,254,0.07) 0%, transparent 70%);
+        }
+
+        .project-info { flex: 1.5; min-width: 280px; position: relative; z-index: 1; }
+
+        .project-info h2 {
+            font-size: 3.2rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .project-info p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .project-image {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(0,242,254,0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .project-image img:hover { transform: scale(1.06) translateY(-8px); }
+
+        /* ─── SERVICES ─── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03), inset 0 2px 0 rgba(255,255,255,0.8);
+            border-radius: 20px;
+            padding: 35px 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(0,242,254,0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,242,254,0.05);
+        }
+
+        .service-card:hover::before { transform: scaleX(1); }
+
+        .service-icon { font-size: 2.2rem; margin-bottom: 18px; }
+        .service-card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--text-main); }
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .silver-text {
+            background: linear-gradient(to bottom right, #64748b 0%, #cbd5e1 50%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+            font-weight: 900;
+        }
+
+        /* ─── CONTACT CTA ─── */
+        .cta-section {
+            text-align: center;
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,242,254,0.06) 0%, transparent 70%);
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .cta-section > p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .contact-card {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(0,242,254,0.04);
+            border: 1px solid rgba(0,242,254,0.25);
+            padding: 25px 45px;
+            border-radius: 20px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 35px;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .contact-card a:hover { opacity: 0.8; }
+
+        /* ─── FOOTER ─── */
+        footer.site-footer {
+            background: #020710;
+            border-top: 1px solid var(--glass-border);
+            padding: 40px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-left p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-left strong {
+            color: var(--primary);
+        }
+
+        .footer-badge {
+            height: 55px;
+            border-radius: 12px;
+            opacity: 0.85;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .footer-badge:hover { opacity: 1; transform: scale(1.05); }
+
+        /* ─── SCROLL ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── KEYFRAMES ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to   { opacity: 1; transform: translateY(0);    }
+        }
+
+        /* ─── SOCIAL ICONS ─── */
+        .social-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-6px) scale(1.12);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+
+        .social-btn:hover::before { opacity: 1; }
+
+        .social-btn svg { width: 26px; height: 26px; position: relative; z-index: 1; }
+
+        .social-btn.whatsapp:hover { border-color: #25d366; box-shadow: 0 12px 30px rgba(37,211,102,0.35); }
+        .social-btn.instagram:hover { border-color: #e1306c; box-shadow: 0 12px 30px rgba(225,48,108,0.35); }
+        .social-btn.facebook:hover  { border-color: #1877f2; box-shadow: 0 12px 30px rgba(24,119,242,0.35); }
+        .social-btn.youtube:hover   { border-color: #ff0000; box-shadow: 0 12px 30px rgba(255,0,0,0.35); }
+        .social-btn.linkedin:hover  { border-color: #0a66c2; box-shadow: 0 12px 30px rgba(10,102,194,0.35); }
+        .social-btn.gmail:hover     { border-color: #ea4335; box-shadow: 0 12px 30px rgba(234,67,53,0.35); }
+
+        /* ─── TECH EFFECTS ─── */
+
+        /* Particle canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.45;
+        }
+
+        /* Cursor glow */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,242,254,0.07) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: opacity 0.3s;
+        }
+
+        /* Floating ambient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb linear infinite;
+            opacity: 0.25;
+        }
+
+        .orb1 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(0,242,254,0.4), transparent);
+            top: -100px; left: -100px;
+            animation-duration: 25s;
+        }
+
+        .orb2 {
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(79,172,254,0.35), transparent);
+            bottom: -80px; right: -80px;
+            animation-duration: 20s;
+            animation-direction: reverse;
+        }
+
+        .orb3 {
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(16,185,129,0.3), transparent);
+            top: 50%; left: 60%;
+            animation-duration: 30s;
+        }
+
+        @keyframes floatOrb {
+            0%   { transform: translate(0, 0) scale(1); }
+            25%  { transform: translate(40px, -30px) scale(1.05); }
+            50%  { transform: translate(20px, 40px) scale(0.95); }
+            75%  { transform: translate(-30px, 15px) scale(1.03); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* Grid line overlay */
+        .tech-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,242,254,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,242,254,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animated border on profile card */
+        .profile-container {
+            animation: borderPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes borderPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,242,254,0); }
+            50%       { box-shadow: 0 0 30px rgba(0,242,254,0.08); }
+        }
+
+        /* Typing cursor on hero */
+        .type-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: var(--primary);
+            margin-left: 4px;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0; }
+        }
+
+        /* Scan line sweep */
+        .scan-line {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0,242,254,0.4), transparent);
+            pointer-events: none;
+            z-index: 5;
+            animation: scanLine 8s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes scanLine {
+            0%   { top: 0; opacity: 0; }
+            5%   { opacity: 0.6; }
+            95%  { opacity: 0.6; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        /* Make content sit above fixed bg layers */
+        header, section, footer { position: relative; z-index: 2; }
+
+        /* ─── MARQUEE SEAMLESS ─── */
+        .marquee-wrapper {
+            overflow: hidden;
+            width: 100%;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 45s linear infinite;
+        }
+        .marquee-wrapper:hover .marquee-track {
+            animation-play-state: paused;
+        }
+        @keyframes marqueeScroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .logo-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-main);
+            font-size: 1.4rem;
+            font-weight: 700;
+            white-space: nowrap;
+            padding: 0 40px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2rem; }
+        }
+        /* Permanent subtle glow for readability and premium feel */
+        .text-muted, p, .timeline-desc {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="assets/pictures/ruben_executive.png">
+    <link rel="apple-touch-icon" href="assets/pictures/ruben_executive.png">
+</head>
+<body>
+
+    <!-- ─── NAVBAR ─── -->
+    <nav>
+        <!-- Left: avatar + name -->
+        <a href="#" class="nav-brand">
+            <img src="assets/pictures/ruben_executive.png" alt="Rubén Medina" class="nav-avatar">
+            <div class="nav-name">
+                <strong>Rubén A. Medina Lebrón</strong>
+                <span>Consultor IA &amp; Negocios</span>
+            </div>
+        </a>
+
+        <!-- Center: links -->
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#sobre-mi">Perfil</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="presentacion.html" style="color: var(--primary); font-weight: 800;">&#9658; Ver Presentación</a></li>
+            <li><a href="servicios.html" style="color: #f59e0b; font-weight: 800;">💰 Precios</a></li>
+            <li><a href="portal-cliente.html#agendar" style="color: var(--primary); font-weight: 800;">Agendar Llamada</a></li>
+        </ul>
+
+        <!-- Right: CTA + badge -->
+        <div class="nav-right">
+            <img src="assets/pictures/made_in_pr.jpg" alt="Made in Puerto Rico" class="pr-badge">
+            <!-- Hamburger Menu -->
+            <button class="hamburger" id="hamburger-menu" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ─── HERO ─── -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">⚡ Consultoría en IA &amp; Ecosistemas Digitales</span>
+            <h1>Evoluciona tu<br><span>Ecosistema Digital</span></h1>
+            <p>Soy <strong>Rubén Medina Lebrón</strong>, consultor tecnológico y creador de ecosistemas impulsados por Inteligencia Artificial. Construyo herramientas, aplicaciones y flujos automatizados que escalan tu negocio sin complicaciones técnicas para ti.</p>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn-primary">Inicia tu Transformación</a>
+                <a href="#proyectos" class="btn-outline">Ver Proyectos</a>
+                <a href="presentacion.html" class="btn-outline" style="border-color: var(--accent); color: var(--accent);">▶ Ver Presentación</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ─── TRUST BADGES / LOGOS ─── -->
+    <section style="background: rgba(5,11,20,0.97); padding: 32px 0; border-top: 1px solid rgba(0,242,254,0.1); border-bottom: 1px solid rgba(0,242,254,0.1); position: relative; z-index: 2; overflow: hidden;">
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 28px; font-weight: 600;">Soluciones impulsadas por la tecnología de las empresas más grandes del mundo</p>
+        
+        <div class="marquee-wrapper">
+            <!-- Single track with items duplicated for seamless loop -->
+            <div class="marquee-track">
+                <!-- Set 1 -->
+                <div class="logo-item"><img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:26px;"> <span class="silver-text">Google Cloud</span></div>
+                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px;"> <span class="silver-text">ChatGPT</span></div>
+                <div class="logo-item"><img src="assets/logos/gemini.svg" alt="Gemini" style="height:26px;"> <span class="silver-text">Gemini</span></div>
+                <div class="logo-item" style="color:#e2d9f3; font-weight:600;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg> Claude</div>
+                <div class="logo-item" style="color:#dbeafe; font-weight:700;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c4-8 10-8 14 0s10 8 14 0" transform="scale(0.8) translate(1,2)"/><circle cx="12" cy="12" r="10"/></svg> DeepSeek</div>
+                <div class="logo-item" style="color:#d1fae5; font-weight:600;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><circle cx="12" cy="12" r="3"/></svg> GLM</div>
+                <div class="logo-item" style="color:#fee2e2; font-weight:700;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fca5a5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Kimi</div>
+                <div class="logo-item" style="color:#e2e8f0; font-weight:800; letter-spacing:0.5px;"><svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 2px 4px rgba(224,108,117,0.3));"><path d="M16 4L16 22L6 22Z" fill="#e06c75"/><path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/><path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg> Odysseus</div>
+                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px;"> <span class="silver-text">Apple</span></div>
+                <div class="logo-item"><img src="assets/logos/android.svg" alt="Android" style="height:30px;"> <span class="silver-text">Android</span></div>
+                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px;"> <span class="silver-text">GitHub</span></div>
+                <div class="logo-item"><svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white"/></svg> Vercel</div>
+                <div class="logo-item"><img src="assets/logos/supabase.svg" alt="Supabase" style="height:26px;"> <span class="silver-text">Supabase</span></div>
+                <div class="logo-item"><img src="assets/logos/oracle.svg" alt="Oracle" style="height:22px;"> <span class="silver-text">Oracle</span></div>
+                <div class="logo-item"><img src="assets/logos/stripe.svg" alt="Stripe" style="height:26px;"> <span class="silver-text">Stripe</span></div>
+                <div class="logo-item"><img src="assets/logos/youtube.svg" alt="YouTube" style="height:26px;"> <span class="silver-text">YouTube</span></div>
+                <div class="logo-item"><img src="assets/logos/meta.svg" alt="Meta" style="height:26px;"> <span class="silver-text">Meta</span></div>
+                <div class="logo-item"><img src="assets/logos/instagram.svg" alt="Instagram" style="height:28px;"> <span class="silver-text">Instagram</span></div>
+                <div class="logo-item"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:28px;"> <span class="silver-text">WhatsApp</span></div>
+                <div class="logo-item"><img src="assets/logos/google-one.svg" alt="Google One" style="height:28px;"> <span class="silver-text">Google One</span></div>
+                <div class="logo-item"><img src="assets/logos/google-docs.svg" alt="Google Docs" style="height:28px;"> <span class="silver-text">Google Docs</span></div>
+                <div class="logo-item"><img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:30px;"> <span class="silver-text">Antigravity AI</span></div>
+                <!-- Set 2 (exact duplicate for seamless loop) -->
+                <div class="logo-item"><img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:26px;"> <span class="silver-text">Google Cloud</span></div>
+                <div class="logo-item"><img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:26px;"> <span class="silver-text">ChatGPT</span></div>
+                <div class="logo-item"><img src="assets/logos/gemini.svg" alt="Gemini" style="height:26px;"> <span class="silver-text">Gemini</span></div>
+                <div class="logo-item" style="color:#e2d9f3; font-weight:600;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg> Claude</div>
+                <div class="logo-item" style="color:#dbeafe; font-weight:700;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c4-8 10-8 14 0s10 8 14 0" transform="scale(0.8) translate(1,2)"/><circle cx="12" cy="12" r="10"/></svg> DeepSeek</div>
+                <div class="logo-item" style="color:#d1fae5; font-weight:600;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><circle cx="12" cy="12" r="3"/></svg> GLM</div>
+                <div class="logo-item" style="color:#fee2e2; font-weight:700;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fca5a5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Kimi</div>
+                <div class="logo-item" style="color:#e2e8f0; font-weight:800; letter-spacing:0.5px;"><svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 2px 4px rgba(224,108,117,0.3));"><path d="M16 4L16 22L6 22Z" fill="#e06c75"/><path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/><path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg> Odysseus</div>
+                <div class="logo-item"><img src="assets/logos/apple.svg" alt="Apple" style="height:26px;"> <span class="silver-text">Apple</span></div>
+                <div class="logo-item"><img src="assets/logos/android.svg" alt="Android" style="height:30px;"> <span class="silver-text">Android</span></div>
+                <div class="logo-item"><img src="assets/logos/github.svg" alt="GitHub" style="height:26px;"> <span class="silver-text">GitHub</span></div>
+                <div class="logo-item"><svg width="22" height="22" viewBox="0 0 76 65" fill="none"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white"/></svg> Vercel</div>
+                <div class="logo-item"><img src="assets/logos/supabase.svg" alt="Supabase" style="height:26px;"> <span class="silver-text">Supabase</span></div>
+                <div class="logo-item"><img src="assets/logos/oracle.svg" alt="Oracle" style="height:22px;"> <span class="silver-text">Oracle</span></div>
+                <div class="logo-item"><img src="assets/logos/stripe.svg" alt="Stripe" style="height:26px;"> <span class="silver-text">Stripe</span></div>
+                <div class="logo-item"><img src="assets/logos/youtube.svg" alt="YouTube" style="height:26px;"> <span class="silver-text">YouTube</span></div>
+                <div class="logo-item"><img src="assets/logos/meta.svg" alt="Meta" style="height:26px;"> <span class="silver-text">Meta</span></div>
+                <div class="logo-item"><img src="assets/logos/instagram.svg" alt="Instagram" style="height:28px;"> <span class="silver-text">Instagram</span></div>
+                <div class="logo-item"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:28px;"> <span class="silver-text">WhatsApp</span></div>
+                <div class="logo-item"><img src="assets/logos/google-one.svg" alt="Google One" style="height:28px;"> <span class="silver-text">Google One</span></div>
+                <div class="logo-item"><img src="assets/logos/google-docs.svg" alt="Google Docs" style="height:28px;"> <span class="silver-text">Google Docs</span></div>
+                <div class="logo-item"><img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:30px;"> <span class="silver-text">Antigravity AI</span></div>
+            </div>
+        </div>
+
+        <div class="text-center mt-10 relative z-10 pb-8">
+            <a href="modelos-ia.html" class="inline-block bg-white/5 border border-white/10 hover:bg-white/10 text-slate-300 hover:text-white px-6 py-2 rounded-full text-sm font-semibold transition-all">Desglose de Modelos IA &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ─── PERFIL EJECUTIVO ─── -->
+    <section class="section section-divider-teal reveal" id="sobre-mi">
+        <h2 class="section-title">Perfil Ejecutivo &amp; Capacitación</h2>
+        <p class="section-subtitle">Una trayectoria que combina la ingeniería de campo, las ventas estratégicas y el desarrollo de software de élite.</p>
+
+        <div class="profile-container">
+            <div class="profile-image">
+                <img src="assets/pictures/ruben_executive.png" alt="Rubén Medina Lebrón — Ejecutivo">
+            </div>
+            <div class="profile-info">
+                <h2>Rubén A. Medina Lebrón</h2>
+                <h3>Consultor Tecnológico &amp; Especialista en IA</h3>
+                <p>Profesional multidisciplinario con experiencia robusta en telecomunicaciones, energía renovable y creación de plataformas digitales. Creador del ecosistema <strong>Impulso PR</strong> y certificado en Inteligencia Artificial por la BIG school. Entiendo el negocio desde las ventas hasta la operación.</p>
+
+                <h4 style="margin: 20px 0 12px; font-size: 1rem; color: var(--text-main);">Competencias Clave</h4>
+                <div class="tech-tags">
+                    <span>Ecosistemas Digitales</span>
+                    <span>Agentes de IA Autónomos</span>
+                    <span>Automatización de Ventas</span>
+                    <span>Bases de Datos &amp; Nube</span>
+                    <span>Procesos Operativos</span>
+                    <span>Ventas B2B/B2C</span>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025 - Presente (Últimos 2 años) · IA y Ecosistemas Digitales</div>
+                        <h4 class="timeline-title">Consultor Tecnológico &amp; Creador de Impulso PR</h4>
+                        <p class="timeline-desc">Diseño y automatización de flujos de trabajo, creación de agentes de IA y desarrollo integral de plataformas digitales (bases de datos, alertas masivas y streaming de alto tráfico).<br><br>
+                        <strong>🏆 Mayo 2026: Certificación en IA — De 0 a Agentes (BIG school).</strong> Especialización en agentes autónomos y automatización empresarial impartida por Romuald Fons y Jon Hernández.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024 - Presente · Home Power / Planet Solar / Freedom Solar</div>
+                        <h4 class="timeline-title">Consultor de Energía Renovable</h4>
+                        <p class="timeline-desc">Asesoría fotovoltaica, prospección y cierre de contratos de alto valor para empresas y clientes en Puerto Rico.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022 - 2024 · RG FOTS (Fiber Optic Tech Service)</div>
+                        <h4 class="timeline-title">Fundador &amp; Contratista (Empalmador de Fibra)</h4>
+                        <p class="timeline-desc">Operación como subcontratista especializado para Genesis Communications y R&amp;R Construction en la ejecución de proyectos de infraestructura técnica y telecomunicaciones.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">11 años (Experiencia Base) · Genesis Communications Inc.</div>
+                        <h4 class="timeline-title">Especialista en Infraestructura de Telecomunicaciones</h4>
+                        <p class="timeline-desc">Construcción de infraestructura técnica, instalaciones de fibra óptica y redes aéreas/subterráneas. Experiencia crítica en la recuperación de sistemas tras desastres naturales. Entendimiento profundo del negocio desde la base técnica operativa hasta la gestión de campo.</p>
+                    </div>
+                </div>
+
+                <!-- Certificado -->
+                <div style="margin-top: 35px;">
+                    <h4 style="font-size: 1rem; color: var(--text-main); margin-bottom: 12px;">📜 Certificado Oficial</h4>
+                    <div style="border-radius: 14px; overflow: hidden; border: 1px solid rgba(79,172,254,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 500px;">
+                        <img src="assets/pictures/certificado_ia.jpg" alt="Certificado BIG school — Rubén A Medina Lebrón" style="width:100%; display:block;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PROYECTO IMPULSO PR ─── -->
+    <section class="section reveal" id="proyectos">
+        <h2 class="section-title">Caso de Éxito Destacado</h2>
+        <p class="section-subtitle">Impulso PR: un ecosistema digital construido desde cero con tecnología de nivel enterprise.</p>
+
+        <div class="project-container">
+            <div class="project-info">
+                <h2>Impulso PR</h2>
+                <div class="tech-tags" style="margin-bottom: 20px;">
+                    <span>PWA</span>
+                    <span>Google Cloud Run</span>
+                    <span>Supabase / Firebase</span>
+                    <span>Oracle VPS</span>
+                    <span>APIs Masivas</span>
+                </div>
+                <p>Plataforma de transmisión en vivo, comunicación B2B y alertas masivas. Alojamiento híbrido con alta disponibilidad y bases de datos en tiempo real.</p>
+                <p>Integra flujos automatizados de Email/WhatsApp, módulos de chat privado y APIs de streaming de alta carga.</p>
+                <div style="display:flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
+                    <a href="https://impulsopr-tv-apps-572316843568.us-east1.run.app/" target="_blank" class="btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">🚀 Explorar Proyecto</a>
+                    <a href="portal-cliente.html#entrenamiento" class="btn-outline" style="padding: 10px 24px; font-size: 0.95rem;">Quiero algo así</a>
+                </div>
+            </div>
+            <div class="project-image">
+                <img src="assets/pictures/logo_impulso.jpg" alt="Impulso PR — Progressive Web App">
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── SERVICIOS ─── -->
+    <section class="section section-divider-green reveal" id="servicios">
+        <h2 class="section-title">Líneas de Negocio Estratégicas</h2>
+        <p class="section-subtitle">Todo lo que tu empresa necesita para competir en la era digital, construido por una sola mano experta.</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>Automatización con IA</h3>
+                <p>Agentes autónomos que trabajan por ti 24/7. Flujos inteligentes que eliminan tareas repetitivas y liberan tu tiempo para lo que importa.</p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
+                    <img src="assets/logos/chatgpt.svg" alt="OpenAI" title="ChatGPT" style="height:18px;">
+                    <img src="assets/logos/gemini.svg" alt="Gemini" title="Gemini" style="height:18px;">
+                    
+                    <!-- Claude Logo (Anthropic Spark approx) -->
+                    <svg title="Claude" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/>
+                    </svg>
+                    
+                    <!-- DeepSeek Logo (Abstract Wave approx) -->
+                    <svg title="DeepSeek" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 12c4-8 10-8 14 0s10 8 14 0" transform="scale(0.8) translate(1,2)"/>
+                        <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                    
+                    <!-- GLM Logo (Network Node approx) -->
+                    <svg title="GLM" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    
+                    <!-- Kimi Logo (Red Mountain approx) -->
+                    <svg title="Kimi" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fca5a5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+
+                    <img src="assets/logos/antigravity.svg" alt="Antigravity" style="height:20px; margin-left: auto;">
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Progressive Web Apps</h3>
+                <p>Aplicaciones modernas, rápidas e instalables en cualquier dispositivo. Sin tiendas. Sin esperas. Desde el concepto hasta la nube.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
+                    <img src="assets/logos/apple.svg" alt="Apple" style="height:18px;">
+                    <img src="assets/logos/android.svg" alt="Android" style="height:22px;">
+                    <svg width="16" height="16" viewBox="0 0 76 65" fill="none" style="opacity:0.5;"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white"/></svg>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3>Canales Privados</h3>
+                <p>Infraestructura de comunicación segura para corporaciones, comunidades exclusivas y equipos B2B de alto rendimiento.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
+                    <img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:20px;">
+                    <img src="assets/logos/meta.svg" alt="Meta" style="height:16px;">
+                    <img src="assets/logos/youtube.svg" alt="YouTube" style="height:18px;">
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛒</div>
+                <h3>Tiendas &amp; Pagos</h3>
+                <p>E-commerce completo con pasarelas de pago globales, catálogos dinámicos y flujos de compra optimizados para convertir.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
+                    <img src="assets/logos/stripe.svg" alt="Stripe" style="height:20px;">
+                    <img src="assets/logos/supabase.svg" alt="Supabase" style="height:18px;">
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎥</div>
+                <h3>Streaming &amp; Media</h3>
+                <p>Plataformas de transmisión en vivo o bajo demanda con baja latencia, alta disponibilidad y monetización integrada.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
+                    <img src="assets/logos/youtube.svg" alt="YouTube" style="height:18px;">
+                    <img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:18px;">
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">☁️</div>
+                <h3>Infraestructura Cloud</h3>
+                <p>Arquitectura y despliegue de alta disponibilidad. Tu sistema siempre activo, escalable y seguro desde el día uno.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
+                    <img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:18px;">
+                    <img src="assets/logos/oracle.svg" alt="Oracle" style="height:14px;">
+                    <img src="assets/logos/supabase.svg" alt="Supabase" style="height:18px;">
+                    <img src="assets/logos/github.svg" alt="GitHub" style="height:16px;">
+                </div>
+            </div>
+
+            <!-- Odysseus Featured Card -->
+            <style>
+                @media (min-width: 900px) {
+                    .odysseus-card-wrapper {
+                        grid-column: span 2;
+                    }
+                }
+                
+                .odysseus-card-wrapper {
+                    position: relative;
+                    border-radius: 20px;
+                    padding: 2px; /* Grosor del circuito / borde */
+                    overflow: hidden;
+                    box-shadow: 0 10px 30px -10px rgba(224,108,117,0.2);
+                }
+                
+                /* Circuito de datos viajando (Láser rotatorio) */
+                .odysseus-card-wrapper::before {
+                    content: '';
+                    position: absolute;
+                    top: -50%; left: -50%; width: 200%; height: 200%;
+                    background: conic-gradient(from 0deg, transparent 60%, rgba(224,108,117, 1) 80%, transparent 100%);
+                    animation: data-circuit 4s linear infinite;
+                    z-index: 0;
+                }
+                
+                @keyframes data-circuit {
+                    100% { transform: rotate(360deg); }
+                }
+                
+                /* Fondo interno sólido para que solo se vea el borde */
+                .odysseus-inner {
+                    background: #0b1120;
+                    border-radius: 18px;
+                    padding: 35px 28px;
+                    height: 100%;
+                    position: relative;
+                    z-index: 1;
+                    /* Fondo de malla de puntos tecnológico interno */
+                    background-image: radial-gradient(rgba(224,108,117,0.1) 1px, transparent 1px);
+                    background-size: 20px 20px;
+                }
+            </style>
+            <div class="odysseus-card-wrapper">
+                <div class="odysseus-inner">
+                    <div class="service-icon" style="color: #e06c75; position: relative; z-index: 2;">
+                        <svg width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 8px rgba(224,108,117,0.6));">
+                          <path d="M16 4L16 22L6 22Z" fill="#e06c75"/>
+                          <path d="M16 8L16 22L24 22Z" fill="#e06c75" opacity="0.6"/>
+                          <path d="M4 24Q10 20 16 24Q22 28 28 24" stroke="#e06c75" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: #e06c75; position: relative; z-index: 2;">Servidores IA Privados</h3>
+                    <p style="position: relative; z-index: 2; color: #cbd5e1;">Implementación corporativa del ecosistema <strong style="color:#e06c75; font-family:'Fira Code', monospace; font-size: 0.95em; letter-spacing: 0.5px;">Odysseus</strong>. Tu propio espacio de trabajo IA local y cerrado.</p>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; align-items:center; border-top:1px solid rgba(224,108,117,0.2); padding-top:12px; position: relative; z-index: 2;">
+                        <span style="color:#e06c75; font-size:0.9rem; font-weight:800; font-family:'Fira Code', monospace;">ODYSSEUS</span>
+                        <span style="color:#fca5a5; font-size:0.8rem; font-weight:700; border: 1px solid rgba(224,108,117,0.4); padding: 2px 8px; border-radius: 12px; margin-left: 8px; background: rgba(224,108,117,0.1);">Self-Hosted</span>
+                        <span style="color:#fca5a5; font-size:0.8rem; font-weight:700; border: 1px solid rgba(224,108,117,0.4); padding: 2px 8px; border-radius: 12px; background: rgba(224,108,117,0.1);">No Telemetry</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🚀🚀🚀 RESUMEN CORPORATIVO (INFOGRAFÍA) 🚀🚀🚀 -->
+    <section class="section section-divider reveal" id="resumen-corporativo">
+        <h2 class="section-title">Soluciones Digitales Pensadas<br><span class="highlight">para Puerto Rico y el Mercado Global.</span></h2>
+        <p class="section-subtitle" style="margin-bottom: 50px;">El ecosistema completo de servicios, de inicio a fin.</p>
+        
+        <div style="position: relative; border-radius: 24px; overflow: hidden; background: url('assets/pictures/vision_real_2.png') center/cover no-repeat; padding: 60px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+            <!-- Overlay oscuro para que el texto sea legible -->
+            <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.6) 50%, rgba(15,23,42,0.95) 100%);"></div>
+            
+            <div style="position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; max-width: 1000px; margin: 0 auto;">
+                
+                <!-- Columna Izquierda: ¿QUÉ HACEMOS? -->
+                <div style="flex: 1; min-width: 280px;">
+                    <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; color: #fff; text-transform: uppercase; letter-spacing: 1px;">¿Qué Hacemos?</h3>
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">📐</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">DISEÑO Y ARQUITECTURA</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">💻</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">DESARROLLO FULL-STACK</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">🧠</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">INTEGRACIÓN DE IA</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">🚀</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">DESPLIEGUE EN PRODUCCIÓN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: BENEFICIOS -->
+                <div style="flex: 1; min-width: 280px; text-align: right;">
+                    <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; color: #fff; text-transform: uppercase; letter-spacing: 1px;">Beneficios Para Ti</h3>
+                    <div style="display: flex; flex-direction: column; gap: 15px; align-items: flex-end;">
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; flex-direction: row-reverse; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(-10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">🎯</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">ESPECIALIZACIÓN DIRECTA</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; flex-direction: row-reverse; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(-10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">⏱️</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">EFICIENCIA EN COSTOS Y TIEMPO</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; flex-direction: row-reverse; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(-10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">📈</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">PLATAFORMAS ESCALABLES</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; flex-direction: row-reverse; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(-10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">🏆</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">CASOS DE ÉXITO PROBADOS</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 15px; flex-direction: row-reverse; transition: transform 0.3s;" onmouseover="this.style.transform='translateX(-10px)'" onmouseout="this.style.transform='translateX(0)'">
+                            <span style="font-size: 1.5rem;">🌴</span>
+                            <span style="font-weight: 700; color: #e2e8f0; font-size: 0.95rem; letter-spacing: 0.5px;">AUTENTICIDAD LOCAL</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div style="position: relative; z-index: 2; margin-top: 50px; text-align: center;">
+                <div style="display: inline-block; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4); padding: 15px 30px; border-radius: 50px; backdrop-filter: blur(10px);">
+                    <p style="color: #f59e0b; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">¿Listo para escalar tu infraestructura?</p>
+                    <a href="portal-cliente.html" style="color: #fff; font-family: 'Outfit', sans-serif; text-decoration: none; font-weight: 700; font-size: 1.2rem; transition: color 0.3s; display: inline-flex; align-items: center; gap: 8px;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#fff'">📅 Agendar Consultoría Gratuita <span>→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PROYECCIONES A FUTURO ─── -->
+    <section class="section section-divider-purple reveal" id="testimonios">
+        <h2 class="section-title">Proyecciones a Futuro</h2>
+        <p class="section-subtitle">Hacia dónde dirijo la infraestructura tecnológica en Puerto Rico.</p>
+        <div style="display:flex; align-items:center; gap:40px; flex-wrap:wrap;">
+            <style>
+                .vision-carousel {
+                    flex: 1;
+                    min-width: 280px;
+                    max-width: 420px;
+                    aspect-ratio: 4/3;
+                    border-radius: 20px;
+                    box-shadow: 0 10px 40px rgba(139,92,246,0.3);
+                    overflow: hidden;
+                    position: relative;
+                }
+                .vision-img {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    opacity: 0;
+                    animation: visionCrossfade 15s infinite;
+                }
+                .v-img-1 { animation-delay: 0s; }
+                .v-img-2 { animation-delay: 5s; }
+                .v-img-3 { animation-delay: 10s; }
+                @keyframes visionCrossfade {
+                    0%, 25% { opacity: 1; }
+                    33%, 92% { opacity: 0; }
+                    100% { opacity: 1; }
+                }
+            </style>
+            <div class="vision-carousel">
+                <img src="assets/pictures/vision_real_1.png" class="vision-img v-img-1" alt="Visión a Futuro - Infraestructura 1">
+                <img src="assets/pictures/vision_real_2.png" class="vision-img v-img-2" alt="Visión a Futuro - Corporativo 2">
+                <img src="assets/pictures/vision_real_3.png" class="vision-img v-img-3" alt="Visión a Futuro - Data Center 3">
+            </div>
+            <div style="flex:1; min-width:280px;">
+                <blockquote style="font-size:1.2rem; color: var(--text-light); line-height:1.8; font-style:italic; border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom:20px;">
+                    "Mi propósito va más allá de escribir código; estoy cimentando la próxima revolución tecnológica en Puerto Rico. Visualizo un ecosistema donde la inteligencia artificial privada y la infraestructura híbrida convergen, otorgando a las empresas autonomía absoluta sobre sus datos. No solo construimos software, diseñamos el futuro corporativo que permitirá a nuestros negocios competir con eficiencia y seguridad a nivel global."
+                </blockquote>
+                <p style="color: var(--text-muted); font-size:0.9rem;">— Rubén Medina Lebrón</p>
+                <div style="display:flex; gap:30px; margin-top:30px; flex-wrap:wrap;">
+                    <div>
+                        <p style="font-size:2rem; font-weight:800; color:var(--primary);">2+</p>
+                        <p style="color:var(--text-muted); font-size:0.9rem;">Años de exp. ecosistemas digitales</p>
+                    </div>
+                    <div>
+                        <p style="font-size:2rem; font-weight:800; color:var(--accent);">100%</p>
+                        <p style="color:var(--text-muted); font-size:0.9rem;">Proyectos entregados a tiempo</p>
+                    </div>
+                    <div>
+                        <p style="font-size:2rem; font-weight:800; color:var(--secondary);">15+</p>
+                        <p style="color:var(--text-muted); font-size:0.9rem;">Plataformas e IAs dominadas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── YO TAMBIÉN ESTUVE ASÍ ─── -->
+    <section class="section reveal" style="padding-top: 0; padding-bottom: 0; overflow: hidden;">
+        <div style="
+            position: relative;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            border-radius: 30px;
+            overflow: hidden;
+            background: #020810;
+        ">
+            <!-- Foto con overlay dramático -->
+            <img src="assets/pictures/ruben_laptop.jpg" alt="Rubén trabajando en su laptop"
+                 style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position: center 30%; opacity:0.35; filter: grayscale(20%) contrast(1.1);">
+
+            <!-- Gradiente sobre la foto -->
+            <div style="position:absolute; inset:0; background: linear-gradient(90deg, rgba(5,11,20,0.98) 45%, rgba(5,11,20,0.4) 100%);"></div>
+            <div style="position:absolute; inset:0; background: linear-gradient(0deg, rgba(5,11,20,0.9) 0%, transparent 60%);"></div>
+
+            <!-- Línea de acento top -->
+            <div style="position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--primary), var(--secondary), transparent);"></div>
+
+            <!-- Contenido -->
+            <div style="position:relative; z-index:2; padding: 70px 5%; max-width: 640px;">
+                <span style="display:inline-block; background: rgba(0,242,254,0.1); border: 1px solid rgba(0,242,254,0.3); color: var(--primary); font-size: 0.75rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; padding: 6px 18px; border-radius: 50px; margin-bottom: 25px;">
+                    💡 Un mensaje honesto
+                </span>
+                <h2 style="font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.15; margin-bottom: 20px; color: var(--text-main);">
+                    Yo también estuve<br>
+                    <span style="background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        así. Indeciso.
+                    </span>
+                </h2>
+                <p style="font-size: 1.1rem; color: #94a3b8; line-height: 1.8; margin-bottom: 15px;">
+                    Sentado frente a la pantalla, viendo posibilidades que no sabía cómo alcanzar. Sin saber por dónde empezar, con miedo a invertir en algo que no funcionara.
+                </p>
+                <p style="font-size: 1.1rem; color: #94a3b8; line-height: 1.8; margin-bottom: 35px;">
+                    Por eso hoy mi trabajo es convertir esa incertidumbre en <strong style="color: var(--text-main);">claridad, estrategia y acción.</strong> Para que tú no tengas que descubrirlo solo.
+                </p>
+                <a href="#contacto" style="display:inline-block; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #000; padding: 14px 36px; border-radius: 50px; font-weight: 900; font-size: 1rem; text-decoration: none; box-shadow: 0 8px 25px rgba(0,242,254,0.3); transition: transform 0.3s, box-shadow 0.3s;"
+                   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 14px 35px rgba(0,242,254,0.5)'"
+                   onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 25px rgba(0,242,254,0.3)'">
+                    Hablemos ahora →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CONTACTO ─── -->
+    <section class="section cta-section reveal" id="contacto">
+        <h2>¿Listo para escalar tu negocio?</h2>
+        <p>Diseñemos juntos tu próximo ecosistema digital. Primera sesión de diagnóstico sin costo.</p>
+
+        <div class="contact-card">
+            <span>✉️ <a href="mailto:rubenmedina910@gmail.com">rubenmedina910@gmail.com</a></span>
+            <span>📞 <a href="tel:+17873786170">787-378-6170</a></span>
+        </div>
+
+        <br>
+        <a href="portal-cliente.html#entrenamiento" class="btn-primary" style="position: relative; z-index: 10; font-size: 1.1rem; padding: 16px 45px;">📅 Agendar Consultoría Gratuita</a>
+
+        <!-- Social Media Icons -->
+        <p style="margin-top: 50px; margin-bottom: 0; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted);">Encuéntrame en redes</p>
+        <div class="social-row">
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/17873786170" target="_blank" class="social-btn whatsapp" title="WhatsApp">
+                <svg viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/" target="_blank" class="social-btn instagram" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="url(#igGrad)"><defs><linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://facebook.com/" target="_blank" class="social-btn facebook" title="Facebook">
+                <svg viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://youtube.com/" target="_blank" class="social-btn youtube" title="YouTube">
+                <svg viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/" target="_blank" class="social-btn linkedin" title="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+
+            <!-- Gmail -->
+            <a href="mailto:rubenmedina910@gmail.com" class="social-btn gmail" title="Email / Gmail">
+                <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" fill="#ea4335"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="site-footer">
+        <div class="footer-left">
+            <p><strong>Rubén A. Medina Lebrón</strong></p>
+            <p>&copy; 2026 • Consultor en IA &amp; Creador de Ecosistemas Digitales • Puerto Rico</p>
+        </div>
+        <img src="assets/pictures/made_in_pr2.jpg" alt="Orgullosamente Made in Puerto Rico" class="footer-badge">
+    </footer>
+
+    <!-- ─── AMBIENT BACKGROUND ─── -->
+    <div style="position: fixed; inset: 0; background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); z-index: -1;"></div>
+
+
+    <!-- ─── SCRIPTS ─── -->
+    <script>
+        // ── Scroll Reveal ──
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(r => observer.observe(r));
+
+        // ── Hamburger Menu ──
+        const hamburger = document.getElementById('hamburger-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navLinksItems = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinksItems.forEach(item => {
+            item.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // ── Minimalist Interactions ──
+        console.log("Light Theme Active");
+
+
+    </script>
+
+    <!-- ─── CALENDLY JS ─── -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+</body>
+</html>
+
