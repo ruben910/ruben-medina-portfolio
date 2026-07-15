@@ -4,16 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio AI | Rubén Medina</title>
+    <title>Orquestador AI | Rubén Medina</title>
 
-    <!-- Modern Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -23,9 +21,7 @@
             --text-primary: #ffffff;
             --text-secondary: #a1a1aa;
             --accent-primary: #06b6d4;
-            /* Cyan/Tech focus */
             --accent-secondary: #3b82f6;
-            /* Electric Blue */
             --glass-bg: rgba(255, 255, 255, 0.02);
             --glass-border: rgba(255, 255, 255, 0.08);
             --terminal-green: #10b981;
@@ -50,7 +46,6 @@
             line-height: 1.6;
         }
 
-        /* Ambient Glows */
         .bg-glow-1 {
             position: absolute;
             top: 0;
@@ -71,7 +66,6 @@
             z-index: 10;
         }
 
-        /* Navbar */
         nav {
             padding: 1.5rem 0;
             display: flex;
@@ -117,7 +111,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Header */
         .hero {
             padding: 6rem 0 4rem;
             text-align: center;
@@ -138,7 +131,6 @@
             margin: 0 auto 3rem;
         }
 
-        /* "The Problem vs The Solution" Banner */
         .insight-banner {
             background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(6, 182, 212, 0.05));
             border: 1px solid var(--glass-border);
@@ -165,7 +157,6 @@
             color: var(--text-primary);
         }
 
-        /* Interactive AI Playground */
         .playground-title {
             text-align: center;
             font-size: 2rem;
@@ -176,7 +167,7 @@
         .playground {
             display: flex;
             gap: 2rem;
-            margin-bottom: 8rem;
+            margin-bottom: 4rem;
             background: var(--bg-card);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
@@ -184,7 +175,6 @@
             backdrop-filter: blur(10px);
         }
 
-        /* Selectors */
         .agent-list {
             flex: 1;
             display: flex;
@@ -240,7 +230,6 @@
             color: var(--text-secondary);
         }
 
-        /* Terminal Simulator */
         .terminal-container {
             flex: 1.2;
             background: #050505;
@@ -302,76 +291,85 @@
             color: var(--terminal-green);
         }
 
-        /* Architecture Grid */
-        .arch-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .arch-desc {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 6rem;
-        }
-
-        .brain-card {
-            background: linear-gradient(180deg, rgba(20, 20, 25, 0.8), rgba(0, 0, 0, 0.4));
-            border: 1px solid var(--glass-border);
-            padding: 3rem 2rem;
-            border-radius: 24px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .brain-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(6, 182, 212, 0.3);
-        }
-
-        .brain-card i {
-            width: 40px;
-            height: 40px;
-            color: var(--accent-primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .brain-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-        }
-
-        .brain-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tags {
+        /* Leaderboard Specific Styles */
+        .leaderboard-section {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 8rem;
         }
 
-        .tech-tags span {
-            background: rgba(255, 255, 255, 0.05);
+        .arch-desc-box {
+            flex: 1;
+        }
+
+        .leaderboard-box {
+            flex: 1.3;
+            background: var(--bg-card);
             border: 1px solid var(--glass-border);
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            color: var(--text-primary);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .leaderboard-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--accent-primary);
+        }
+
+        .leaderboard-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .bar-row {
+            margin-bottom: 1.2rem;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .bar-label .elo {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .bar-track {
+            width: 100%;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px currentColor;
+            animation: growBar 1.5s ease-out forwards;
+            transform-origin: left;
+            opacity: 0.9;
+        }
+
+        @keyframes growBar {
+            from {
+                transform: scaleX(0);
+            }
+
+            to {
+                transform: scaleX(1);
+            }
         }
 
         @keyframes fadeInTerm {
@@ -386,7 +384,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
             .playground {
                 flex-direction: column;
@@ -398,6 +395,10 @@
 
             .hero h1 {
                 font-size: 2.8rem;
+            }
+
+            .leaderboard-section {
+                flex-direction: column;
             }
         }
     </style>
@@ -424,19 +425,18 @@
                 conectarlos para construir <strong>Agentes Autónomos</strong> que escalen tu facturación.</p>
         </section>
 
-        <!-- Insight / Value Prop -->
+        <!-- Insight -->
         <div class="insight-banner">
             <i data-lucide="lightbulb"></i>
-            <p><strong>El Error Común:</strong> Las empresas intentan usar "ChatGPT" para todo.<br>
+            <p><strong>El Error Común:</strong> Las empresas intentan usar un solo chat para todo.<br>
                 <strong>La Arquitectura Premium:</strong> Asignamos un modelo específico (Visión, Voz, Lógica, RAG)
-                exclusivamente para la tarea donde es más eficiente. Eso crea Ecosistemas indestructibles.
+                exclusivamente para la tarea donde es más eficiente.
             </p>
         </div>
 
         <!-- The Interactive Playground -->
         <h2 class="playground-title">Simulador de Agentes</h2>
         <section class="playground">
-
             <div class="agent-list">
                 <div class="agent-card active" onclick="simulateAgent('soporte', this)">
                     <div class="header">
@@ -472,103 +472,123 @@
                 <div class="terminal-body" id="term-body">
                     <div class="term-line" style="animation-delay: 0.1s">>> INICIALIZANDO ENTORNO NEURONAL...</div>
                     <div class="term-line term-sys" style="animation-delay: 0.4s">[SISTEMA] Selecciona un agente en el
-                        panel izquierdo para observar su flujo de ensamblaje.</div>
+                        panel izquierdo para observar su flujo.</div>
                 </div>
             </div>
-
         </section>
 
-        <!-- The Tech Arch -->
-        <h2 class="arch-title">Modelos que integran tu Ecosistema</h2>
-        <p class="arch-desc">No estamos atados a una sola tecnología. Utilizamos APIs multimodales de última generación
-            dependiendo del requerimiento técnico de tu portal.</p>
+        <!-- New Leaderboard 2026 -->
+        <section class="leaderboard-section">
+            <div class="arch-desc-box">
+                <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">Status y Tendencias IA <br><span
+                        class="text-gradient">Julio 2026</span></h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem;">Monitoreamos en
+                    directo el estado de los modelos fundacionales más potentes del mundo usando los datos globales de
+                    <strong>LMSYS Chatbot Arena</strong>.</p>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Las empresas no pueden arriesgar su
+                    operación usando modelos obsoletos. Nosotros integramos a los 4 grandes titanes de la industria
+                    directamente en el núcleo de tu ecosistema.</p>
 
-        <div class="grid-3">
-            <div class="brain-card">
-                <i data-lucide="cpu"></i>
-                <h3>Cerebro Analítico</h3>
-                <p>Modelos de razonamiento profundo para cruzar datos financieros o estructurar información masiva
-                    (RAG).</p>
-                <div class="tech-tags">
-                    <span>Claude 3.5 Sonnet</span>
-                    <span>Gemini 1.5 Pro</span>
-                    <span>Bases Vectoriales</span>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <span
+                        style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem;"><strong
+                            style="color: #d97757;">#1</strong> Claude Fable 5</span>
+                    <span
+                        style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem;"><strong
+                            style="color: #3b82f6;">#2</strong> Gemini 3.1 Pro</span>
+                    <span
+                        style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem;"><strong
+                            style="color: #10b981;">#3</strong> GPT-5.6 Sol</span>
+                    <span
+                        style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem;"><strong
+                            style="color: #06b6d4;">#4</strong> Muse Spark 1.1</span>
                 </div>
             </div>
 
-            <div class="brain-card">
-                <i data-lucide="messages-square"></i>
-                <h3>Cerebro Interactivo</h3>
-                <p>Procesamiento de Lenguaje Natural (NLP) súper rápido para chats en tiempo real sin latencia que
-                    suenan 100% humanos.</p>
-                <div class="tech-tags">
-                    <span>GPT-4o (Omni)</span>
-                    <span>Llama 3 Local</span>
-                    <span>Groq</span>
-                </div>
-            </div>
+            <div class="leaderboard-box">
+                <h3 class="leaderboard-title"><i data-lucide="bar-chart-3"></i> Top Leaderboard Global (Julio 2026)</h3>
+                <p class="leaderboard-subtitle">Clasificación ELO Rating - Chatbot Arena</p>
 
-            <div class="brain-card">
-                <i data-lucide="mic"></i>
-                <h3>Cerebro Creativo</h3>
-                <p>Clonación neuronal de voces y procesamiento visual para integraciones en redes o avatares de servicio
-                    al cliente.</p>
-                <div class="tech-tags">
-                    <span>ElevenLabs (Voice)</span>
-                    <span>Midjourney / DALL-E</span>
-                    <span>Whisper V3</span>
+                <div class="bar-container">
+                    <div class="bar-row">
+                        <div class="bar-label"><span>Claude Fable 5 <small
+                                    style="color: #888;">(Anthropic)</small></span> <span class="elo">1505 Elo</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 100%; background: #d97757; color: #d97757;"></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label"><span>Muse Spark 1.1 <small style="color: #888;">(Meta)</small></span>
+                            <span class="elo">1490 Elo</span></div>
+                        <div class="bar-track">
+                            <div class="bar-fill"
+                                style="width: 85%; background: #06b6d4; color: #06b6d4; animation-delay: 0.1s;"></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label"><span>GPT-5.6 Sol <small style="color: #888;">(OpenAI)</small></span>
+                            <span class="elo">1486 Elo</span></div>
+                        <div class="bar-track">
+                            <div class="bar-fill"
+                                style="width: 82%; background: #10b981; color: #10b981; animation-delay: 0.2s;"></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label"><span>Gemini 3.1 Pro <small style="color: #888;">(Google)</small></span>
+                            <span class="elo">1485 Elo</span></div>
+                        <div class="bar-track">
+                            <div class="bar-fill"
+                                style="width: 81%; background: #3b82f6; color: #3b82f6; animation-delay: 0.3s;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
     </div>
 
     <script>
         lucide.createIcons();
 
-        // Terminal Simulator Logic
         const flows = {
             soporte: [
-                ">> Conectando con Base de Conocimiento Vectorial (Pinecone)...",
-                "> Extraiendo manuales corporativos: 14,320 tokens...",
-                "[SOPORTE] Agente indexado con éxito.",
+                ">> Conectando con Base de Conocimiento Vectorial...",
+                "> Extrayendo manuales corporativos: 14,320 tokens...",
+                "[SOPORTE] Agente índice (Claude Fable 5) configurado.",
                 "[USER] '¿Cuál es su política de devoluciones?'",
                 "[AGENTE] Generando respuesta RAG en 0.8s...",
-                "[AGENTE] -> 'Tienes 30 días para devoluciones gratuitas. Inicia el proceso en /retornos.'"
+                "[AGENTE] -> 'Tienes 30 días para devoluciones. Visita /retornos.'"
             ],
             ventas: [
                 ">> Iniciando Pipeline de Persuasión...",
                 "> Cargando memoria de interacciones previas (Redis)...",
-                "[VENTAS] Agente operativo en modo de alta conversión.",
+                "[VENTAS] Agente operativo (GPT-5.6 Voice) encendido.",
                 "[USER] 'Quizás más adelante, está algo caro.'",
                 "[AGENTE] Aplicando modelo de manejo de objeciones...",
-                "[AGENTE] -> 'Lo entiendo completamente. Si el costo mensual es un factor, tenemos un plan anual que te ahorra $200. ¿Lo revisamos?'"
+                "[AGENTE] -> 'Lo entiendo. Tenemos un plan anual que te ahorra $200. ¿Lo revisamos?'"
             ],
             analista: [
                 ">> Activando Análisis Multimodal (Visión)...",
-                "> Recibiendo dataset: 'Q3_Ventas.csv' (2.5M filas)...",
-                "[ANALISTA] Limpiando datos estructurados...",
-                "[ANALISTA] Detectada anomalía en sector logístico (-14% rendimiento)...",
-                "[AGENTE] -> 'Generando reporte y gráficas. Recomendación: Revisar proveedor marítimo.'"
+                "> Procesando 'Q3_Ventas.csv' (2.5M filas)...",
+                "[ANALISTA] Motor Analítico (Gemini 3.1 Pro) ejecutando...",
+                "[ANALISTA] Detectada anomalía en sector logístico (-14%).",
+                "[AGENTE] -> 'Generando reporte. Recomendación: Revisar proveedor.'"
             ]
         };
 
         function simulateAgent(agentId, element) {
-            // Update active state
             document.querySelectorAll('.agent-card').forEach(c => c.classList.remove('active'));
             element.classList.add('active');
 
             const term = document.getElementById('term-body');
-            term.innerHTML = ''; // clear
+            term.innerHTML = '';
 
             const lines = flows[agentId];
-
             lines.forEach((line, index) => {
                 const div = document.createElement('div');
                 div.className = 'term-line';
                 div.style.animationDelay = `${(index * 0.4)}s`;
-
-                // Color formatting
                 if (line.includes('[USER]')) div.classList.add('term-user');
                 else if (line.includes('[AGENTE]') || line.includes('[SOPORTE]') || line.includes('[VENTAS]') || line.includes('[ANALISTA]')) div.classList.add('term-sys');
 

@@ -1,586 +1,563 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal del Cliente | Rubén Medina Lebrón</title>
+    <title>Centro de Comando | Portal VIP</title>
+
+    <!-- Tailwind CSS (Configurado para tema Titanium) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        main: '#09090b',
+                        card: '#121215',
+                        glass: 'rgba(255, 255, 255, 0.03)',
+                        glassborder: 'rgba(255, 255, 255, 0.08)',
+                        glasshover: 'rgba(255, 255, 255, 0.06)',
+                        primary: '#3b82f6',
+                        secondary: '#6366f1'
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        body { font-family: 'Outfit', sans-serif; background-color: #f8fafc; color: #0f172a; }
-        
-        /* Minimalist Tech grid */
-        .tech-grid {
-            position: fixed; inset: 0; pointer-events: none; z-index: 0;
-            background-image:
-                linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
+        body {
+            background-color: theme('colors.main');
+            color: #ffffff;
         }
 
-        .content-layer { position: relative; z-index: 10; }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f8fafc; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        /* Grid de partículas tecnológicas */
+        .tech-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
 
         .glass-panel {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            border-radius: 16px;
+            background: theme('colors.glass');
+            border: 1px solid theme('colors.glassborder');
+            backdrop-filter: blur(12px);
         }
 
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(9, 9, 11, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Custom Scrollbar Dashboard */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: theme('colors.main');
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        /* Estilos del Nav */
+        .nav-item {
+            transition: all 0.3s ease;
+            color: #a1a1aa;
+            /* slate-400 equivalent */
+        }
+
+        .nav-item:hover,
         .nav-item.active {
-            background: #eff6ff;
-            border-left: 3px solid #3b82f6;
-            color: #1e40af;
-            font-weight: 700;
+            background: theme('colors.glasshover');
+            color: #ffffff;
+            border-left: 3px solid theme('colors.primary');
         }
-        
-        /* Video Card Hover Effects */
-        .video-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .video-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+
+        /* Estilos Base para Inputs Oscuros */
+        .dark-input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid theme('colors.glassborder');
+            color: #fff;
         }
-        .video-card:hover .play-btn {
-            transform: scale(1.1);
-            background-color: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
+
+        .dark-input:focus {
+            border-color: theme('colors.primary');
+            outline: none;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
         }
-        
+
         .locked-overlay {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(9, 9, 11, 0.85);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.secondary'));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" href="assets/pictures/ruben_executive.png">
-    <link rel="apple-touch-icon" href="assets/pictures/ruben_executive.png">
 </head>
-<body class="flex min-h-screen selection:bg-blue-500 selection:text-white bg-slate-50">
 
-    <!-- Tech Background -->
+<body class="flex min-h-screen selection:bg-blue-500 selection:text-white font-sans">
+
     <div class="tech-grid"></div>
 
     <!-- Sidebar (Desktop) -->
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col content-layer hidden md:flex transition-all fixed inset-y-0 left-0 z-40">
-        <div class="p-6 border-b border-slate-200/60 flex items-center gap-3">
-            <img src="assets/pictures/ruben_executive.png" alt="Rubén" class="w-10 h-10 rounded-full border-2 border-blue-500">
+    <aside class="w-64 bg-card border-r border-[#1f1f22] flex flex-col hidden md:flex fixed inset-y-0 left-0 z-40">
+        <div class="p-6 border-b border-[#1f1f22] flex items-center gap-3">
+            <img src="assets/perfil_ruben.jpg" alt="Rubén"
+                class="w-10 h-10 rounded-full border-2 border-primary object-cover">
             <div>
-                <h2 class="text-sm font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">Rubén Medina</h2>
-                <p class="text-[10px] text-slate-600 uppercase tracking-widest">Portal Cliente</p>
+                <h2 class="text-sm font-black text-white">Rubén Medina</h2>
+                <p class="text-[9px] text-blue-400 uppercase tracking-widest font-mono">Comando Central</p>
             </div>
         </div>
 
-        <nav class="flex-1 p-4 space-y-2 mt-4">
-            <p class="text-xs font-black uppercase tracking-widest text-slate-600 mb-4 px-4">Centro de Inicio</p>
-            
-            <a href="#entrenamiento" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-100/50 transition-colors text-left">
-                <i class="fas fa-brain w-5 text-center text-amber-400"></i> Entrenamiento IA
+        <nav class="flex-1 py-4 space-y-1 mt-2">
+            <p class="text-[10px] font-black uppercase tracking-widest text-[#52525b] mb-4 px-6">Terminal VIP</p>
+
+            <a href="#onboarding" class="nav-item flex items-center gap-3 px-6 py-3 text-sm font-medium">
+                <i data-lucide="rocket" class="w-5 text-blue-400"></i> Despliegue Express
             </a>
 
-            <a href="#roadmap" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-100/50 transition-colors text-left">
-                <i class="fas fa-project-diagram w-5 text-center text-blue-400"></i> Ruta de Trabajo
-            </a>
-            
-            <a href="#agendar" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-black text-slate-900 bg-blue-500 hover:bg-blue-400 transition-colors text-left shadow-lg shadow-blue-500/20 mt-4 mb-2">
-                <i class="fas fa-calendar-check w-5 text-center text-slate-900"></i> Agendar Sesión
+            <a href="#analizador" class="nav-item flex items-center gap-3 px-6 py-3 text-sm font-medium">
+                <i data-lucide="brain-circuit" class="w-5 text-emerald-400"></i> Escáner de Negocio
             </a>
 
-            <a href="#sala" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-600 transition-colors text-left mt-4">
-                <i class="fas fa-lock w-5 text-center text-slate-600"></i> Sala Privada VIP
+            <a href="#analizador"
+                class="mt-4 mx-4 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-black text-main bg-white hover:bg-gray-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <i data-lucide="calendar-check" class="w-4"></i> Agendar Onboarding
+            </a>
+
+            <a href="#caja-fuerte" class="nav-item flex items-center gap-3 px-6 py-3 text-sm font-medium mt-4">
+                <i data-lucide="folder-lock" class="w-5 text-slate-500"></i> Bóveda Digital
             </a>
         </nav>
 
-        <div class="p-6 border-t border-slate-200/60">
-            <a href="index.html" class="flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors">
-                <i class="fas fa-arrow-left"></i> Volver a web pública
+        <div class="p-6 border-t border-[#1f1f22]">
+            <a href="index.html"
+                class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="arrow-left" class="w-4"></i> Retornar a la red pública
             </a>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col min-h-screen content-layer relative md:ml-64">
-        
+    <main class="flex-1 flex flex-col min-h-screen relative md:ml-64 z-10">
+        <div class="ambient-glow top-0 left-0"></div>
+        <div class="ambient-glow bottom-0 right-0"
+            style="background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, rgba(9,9,11,0) 70%);"></div>
+
         <!-- Mobile Header -->
-        <header class="md:hidden bg-white p-4 flex flex-col gap-3 border-b border-slate-200 sticky top-0 z-50">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <img src="assets/pictures/ruben_executive.png" alt="Rubén" class="w-8 h-8 rounded-full border border-blue-500">
-                    <span class="text-sm font-black text-slate-900">Portal Cliente</span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors" title="Volver al Home"><i class="fas fa-home text-lg"></i></a>
-                    <a href="#agendar" class="bg-blue-500 text-slate-900 text-[10px] font-black uppercase px-3 py-1.5 rounded">Agendar</a>
+        <header
+            class="md:hidden bg-card p-4 flex justify-between items-center border-b border-[#1f1f22] sticky top-0 z-50">
+            <div class="flex items-center gap-2">
+                <img src="assets/perfil_ruben.jpg" alt="Rubén"
+                    class="w-8 h-8 rounded-full border border-primary object-cover">
+                <div>
+                    <span class="text-xs font-black text-white block leading-tight">Portal Cliente</span>
+                    <span class="text-[9px] text-primary uppercase font-mono">Terminal VIP</span>
                 </div>
             </div>
-            <!-- Mobile nav links -->
-            <div class="flex gap-4 text-xs font-bold overflow-x-auto pb-1">
-                <a href="#entrenamiento" class="text-slate-600 hover:text-amber-400 whitespace-nowrap">Entrenamiento</a>
-                <a href="#roadmap" class="text-slate-600 hover:text-blue-400 whitespace-nowrap">Ruta</a>
-                <a href="#sala" class="text-slate-600 hover:text-slate-900 whitespace-nowrap"><i class="fas fa-lock text-[10px]"></i> VIP</a>
-            </div>
+            <a href="index.html" class="p-2 bg-glass border border-glassborder rounded-lg text-white">
+                <i data-lucide="x" class="w-5"></i>
+            </a>
         </header>
 
-        <!-- Content Area (Continuous Scroll) -->
-        <div class="flex-1 p-6 md:p-10 space-y-24 max-w-5xl mx-auto w-full pb-32">
+        <!-- Content Area -->
+        <div class="flex-1 p-6 md:p-12 max-w-5xl mx-auto w-full pb-32 space-y-24">
 
-            <!-- SECTION 1: ENTRENAMIENTO IA -->
-            <section id="entrenamiento" class="pt-8">
-                <!-- Premium Hero Banner -->
-                <div class="mb-8 relative rounded-3xl overflow-hidden glass-panel">
-                    <div style="position:absolute; top:-60px; right:-60px; width:200px; height:200px; background:radial-gradient(circle, rgba(59,130,246,0.1), transparent 70%); pointer-events:none;"></div>
-                    <div style="position:absolute; bottom:-40px; left:-40px; width:160px; height:160px; background:radial-gradient(circle, rgba(245,158,11,0.05), transparent 70%); pointer-events:none;"></div>
-                    <div class="p-8 md:p-12 relative z-10">
-                        <div class="flex flex-wrap items-center gap-3 mb-5">
-                            <span class="px-3 py-1 bg-amber-100 text-amber-700 border border-amber-200 rounded-full text-[10px] font-black uppercase tracking-widest">🔴 En Vivo · Portal Exclusivo</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-700 border border-blue-200 rounded-full text-[10px] font-black uppercase tracking-widest">Impulsado por IA</span>
-                        </div>
-                        <h1 class="text-3xl md:text-5xl font-black text-slate-900 leading-tight mb-6">Bienvenido a tu<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Ecosistema Digital</span> <i class="fas fa-bolt text-blue-500 ml-1 text-3xl"></i></h1>
-                        <div class="p-5 rounded-2xl mb-6 bg-slate-50 border border-slate-200">
-                            <p class="text-slate-600 text-lg font-light italic leading-relaxed">&ldquo;Imagina despertar mañana y ver 5 nuevas citas agendadas por tu propio Agente de IA mientras dormías. Tu negocio generando ingresos 24/7 sin depender de ti. <strong class="text-slate-900 font-bold not-italic">Eso es lo que vamos a construir juntos.</strong>&rdquo;</p>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                            <div class="text-center p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                                <p class="text-3xl font-black text-blue-600" id="counter-1">2+</p>
-                                <p class="text-slate-500 text-xs sm:text-[10px] md:text-xs font-bold uppercase tracking-wider mt-1">Años activo</p>
-                            </div>
-                            <div class="text-center p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                                <p class="text-3xl font-black text-indigo-600">100%</p>
-                                <p class="text-slate-500 text-xs sm:text-[10px] md:text-xs font-bold uppercase tracking-wider mt-1">Proyectos entregados</p>
-                            </div>
-                            <div class="text-center p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                                <p class="text-3xl font-black text-emerald-600">15+</p>
-                                <p class="text-slate-500 text-xs sm:text-[10px] md:text-xs font-bold uppercase tracking-wider mt-1">Herramientas IA</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-3">Tecnologías que uso para construir tu ecosistema:</p>
-                            <div class="flex flex-wrap gap-4 items-center">
-                                <img src="assets/logos/chatgpt.svg" alt="ChatGPT" style="height:20px; opacity:0.7;">
-                                <img src="assets/logos/gemini.svg" alt="Gemini" style="height:20px; opacity:0.7;">
-                                <img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="height:20px; opacity:0.7;">
-                                <img src="assets/logos/supabase.svg" alt="Supabase" style="height:20px; opacity:0.7;">
-                                <img src="assets/logos/stripe.svg" alt="Stripe" style="height:20px; opacity:0.7;">
-                                <img src="assets/logos/github.svg" alt="GitHub" style="height:20px; opacity:0.7;">
-                                <img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:20px; opacity:0.7;">
-                                <svg width="18" height="18" viewBox="0 0 76 65" fill="none" style="opacity:0.7;"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#0f172a"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-5">
-                    <p class="text-slate-600 text-sm font-semibold mb-1">📚 Biblioteca de Inducción &mdash; <span class="text-amber-400">Acceso exclusivo para ti</span></p>
-                    <p class="text-slate-600 text-xs">Recursos que te prepararán para maximizar tu sesión de diagnóstico. Toca cualquier módulo para explorar.</p>
+            <!-- SECTION 1: HERO & ROADMAP EMPAQUETADO -->
+            <section id="onboarding" class="pt-4">
+                <div class="mb-12">
+                    <span
+                        class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-[10px] font-mono uppercase tracking-widest mb-4 inline-block shadow-[0_0_10px_rgba(59,130,246,0.1)]">Pizarra
+                        de Sistemas · En Vivo</span>
+                    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-4">
+                        Despliegue del <br><span class="text-gradient">Ecosistema Inteligente</span>
+                    </h1>
+                    <p class="text-[#a1a1aa] text-lg max-w-2xl font-light">Este portal es tu Centro de Comando. Al haber
+                        adquirido nuestro Paquete Cerrado, hemos eliminado la fricción. Solo seguimos <strong
+                            class="text-white">3 pasos estructurados</strong> para entregar tu ecosistema captando leads
+                        en tiempo récord.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Video Card 1 -->
-                    <div class="glass-panel rounded-2xl overflow-hidden cursor-pointer group video-card relative">
-                        <div class="h-48 relative flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);">
-                            <div class="absolute top-3 left-3 flex gap-2">
-                                <img src="assets/logos/chatgpt.svg" alt="" style="height:16px; opacity:0.7;">
-                                <img src="assets/logos/gemini.svg" alt="" style="height:16px; opacity:0.7;">
-                            </div>
-                            <div class="play-btn w-16 h-16 bg-white shadow-sm rounded-full flex items-center justify-center z-10 transition-all duration-300 border border-slate-200 text-blue-600">
-                                <i class="fas fa-play text-2xl ml-1"></i>
-                            </div>
-                            <span class="absolute bottom-3 right-3 bg-slate-900/80 text-white text-xs font-bold px-2 py-1 rounded">12:45</span>
-                            <span class="absolute bottom-3 left-3 bg-white/90 text-indigo-700 text-[10px] font-black px-2 py-1 rounded uppercase tracking-wide shadow-sm">Módulo 1</span>
-                        </div>
-                        <div class="p-6 relative">
-                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-1 block">Lección 1</span>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">Ingeniería de Prompts 101</h3>
-                            <p class="text-sm text-slate-600 line-clamp-2">La fórmula exacta para pedirle a la IA que redacte correos de ventas que conviertan, sin sonar a robot.</p>
-                            <div class="absolute inset-0 locked-overlay flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                <i class="fas fa-unlock text-3xl text-indigo-600 mb-2"></i>
-                                <p class="text-xs font-bold text-slate-900 uppercase tracking-widest">Ver Lección</p>
-                            </div>
-                        </div>
+                <!-- Productized Roadmap -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                    <!-- Linea conectora backend -->
+                    <div
+                        class="hidden md:block absolute top-1/2 left-10 right-10 h-0.5 bg-gradient-to-r from-blue-500/50 via-secondary/50 to-transparent -translate-y-1/2 z-0">
                     </div>
-                    <!-- Video Card 2 -->
-                    <div class="glass-panel rounded-2xl overflow-hidden cursor-pointer group video-card relative">
-                        <div class="h-48 relative flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #dcfce7 0%, #a7f3d0 100%);">
-                            <div class="absolute top-3 left-3 flex gap-2">
-                                <img src="assets/logos/whatsapp.svg" alt="" style="height:16px; opacity:0.7;">
-                                <img src="assets/logos/chatgpt.svg" alt="" style="height:16px; opacity:0.7;">
-                            </div>
-                            <div class="play-btn w-16 h-16 bg-white shadow-sm rounded-full flex items-center justify-center z-10 transition-all duration-300 border border-slate-200 text-emerald-600">
-                                <i class="fas fa-play text-2xl ml-1"></i>
-                            </div>
-                            <span class="absolute bottom-3 right-3 bg-slate-900/80 text-white text-xs font-bold px-2 py-1 rounded">08:20</span>
-                            <span class="absolute bottom-3 left-3 bg-white/90 text-emerald-700 text-[10px] font-black px-2 py-1 rounded uppercase tracking-wide shadow-sm">Caso Real</span>
+
+                    <!-- Fase 1 -->
+                    <div class="glass-panel p-8 rounded-2xl relative z-10 shadow-lg">
+                        <div
+                            class="w-12 h-12 bg-[#09090b] border border-blue-500/30 text-blue-400 rounded-xl flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                            <i data-lucide="database" class="w-6"></i>
                         </div>
-                        <div class="p-6 relative">
-                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-1 block">Caso de Estudio</span>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">Automatizando el Seguimiento</h3>
-                            <p class="text-sm text-slate-600 line-clamp-2">Cómo conectamos WhatsApp con IA para que un Agente responda FAQs de clientes 24/7 y cierre ventas automáticamente.</p>
-                            <div class="absolute inset-0 locked-overlay flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                <i class="fas fa-unlock text-3xl text-emerald-600 mb-2"></i>
-                                <p class="text-xs font-bold text-slate-900 uppercase tracking-widest">Ver Caso</p>
-                            </div>
-                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Fase 1: Ingesta</h3>
+                        <p class="text-sm text-[#a1a1aa] leading-relaxed">Tras tu compra, envías tus manuales de marca,
+                            FAQs de la empresa y paleta de colores. El agente analiza todo el volumen.</p>
                     </div>
-                    <!-- Video Card 3 — LOCKED TEASER -->
-                    <div class="glass-panel rounded-2xl overflow-hidden border border-amber-200 relative">
-                        <div class="h-48 relative flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);">
-                            <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
-                                <i class="fas fa-lock text-4xl text-amber-600 mb-2"></i>
-                                <p class="text-amber-700 text-xs font-black uppercase tracking-widest bg-white/50 px-3 py-1 rounded-full backdrop-blur-sm">Se desbloquea tras la sesión</p>
-                            </div>
+
+                    <!-- Fase 2 -->
+                    <div
+                        class="glass-panel p-8 rounded-2xl relative z-10 shadow-lg border-primary/40 bg-primary/5 transform md:-translate-y-4">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                            <i data-lucide="cpu" class="w-6"></i>
                         </div>
-                        <div class="p-6">
-                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-1 block">Módulo VIP</span>
-                            <h3 class="text-xl font-bold text-slate-400 mb-2">Tu Agente de IA Personalizado</h3>
-                            <p class="text-sm text-slate-400">El proceso exacto para crear y entrenar tu propio asistente que conoce tu negocio al 100%.</p>
-                        </div>
+                        <span
+                            class="absolute top-4 right-4 text-[10px] text-primary uppercase font-mono font-bold">Laboratorio</span>
+                        <h3 class="text-white font-bold text-lg mb-2">Fase 2: Arquitectura</h3>
+                        <p class="text-sm text-[#a1a1aa] leading-relaxed">Nos aislamos a ensamblar tu Landing Premium
+                            (Max 5 Sec) y a entrenar tu Agente de IA cerrado para evitar alucinaciones.</p>
                     </div>
-                    <!-- Video Card 4 — LOCKED TEASER -->
-                    <div class="glass-panel rounded-2xl overflow-hidden border border-slate-200 relative">
-                        <div class="h-48 relative flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);">
-                            <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
-                                <i class="fas fa-lock text-4xl text-slate-400 mb-2"></i>
-                                <p class="text-slate-600 text-xs font-black uppercase tracking-widest bg-white/50 px-3 py-1 rounded-full backdrop-blur-sm">Próximamente</p>
-                            </div>
+
+                    <!-- Fase 3 -->
+                    <div class="glass-panel p-8 rounded-2xl relative z-10 shadow-lg border-emerald-500/20">
+                        <div
+                            class="w-12 h-12 bg-[#09090b] border border-emerald-500/30 text-emerald-400 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="rocket" class="w-6"></i>
                         </div>
-                        <div class="p-6">
-                            <span class="text-xs font-bold text-indigo-400/60 uppercase tracking-widest mb-1 block">Avanzado</span>
-                            <h3 class="text-xl font-bold text-slate-600 mb-2">Ecosistema de Ventas Automático</h3>
-                            <p class="text-sm text-slate-600">Embudo completo desde captación hasta pago, operando solo.</p>
-                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Fase 3: Ignición</h3>
+                        <p class="text-sm text-[#a1a1aa] leading-relaxed">Conectamos el Server, Dominio y certificado
+                            SSL. Pruebas finales de estrés al bot y entrega de llaves. En menos de 10 días.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- SECTION 2: ROADMAP -->
-            <section id="roadmap" class="pt-8">
-                <div class="mb-10 text-center">
-                    <span class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">El Plan de Acción</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-slate-900">Mapa de Construcción <span class="text-blue-400">Paso a Paso</span></h2>
-                    <p class="text-slate-600 mt-3 max-w-2xl mx-auto">Esta es la ruta exacta por la que llevaremos tu negocio desde el caos manual hasta la eficiencia impulsada por IA.</p>
+            <!-- SECTION 2: ANALIZADOR (LEAD CAPTURE FOR PACKAGES) -->
+            <section id="analizador" class="pt-12 border-t border-glassborder">
+                <div class="mb-10 text-center flex flex-col items-center">
+                    <i data-lucide="fingerprint" class="w-10 h-10 text-primary mb-4 opacity-80"></i>
+                    <h2 class="text-3xl font-black text-white mb-3">Protocolo de <span
+                            class="text-gradient">Integración</span></h2>
+                    <p class="text-[#a1a1aa] max-w-xl mx-auto">Para instalar tu Ecosistema Inteligente ($495 Setup), el
+                        primer paso es que nuestra IA verifique tus cuellos de botella actuales.</p>
                 </div>
-                
-                <!-- Roadmap / Mind Map Visual -->
-                <div class="glass-panel p-6 md:p-10 rounded-3xl mb-8">
-                    <div class="flex flex-col md:flex-row items-stretch justify-between gap-6 relative">
-                        <!-- Línea conectora Desktop -->
-                        <div class="hidden md:block absolute top-[40%] left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 via-blue-400 to-slate-200 -translate-y-1/2 z-0 opacity-50"></div>
-                        
-                        <!-- Nodo 1 -->
-                        <div class="relative z-10 flex-1 bg-white border border-emerald-200 p-6 rounded-2xl text-center shadow-sm hover:-translate-y-2 transition-transform">
-                            <div class="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-emerald-100">
-                                <i class="fas fa-search-dollar"></i>
-                            </div>
-                            <h4 class="text-slate-900 font-black text-lg mb-2">1. Diagnóstico</h4>
-                            <p class="text-sm text-slate-500">Auditoría profunda de tu ecosistema actual. Identificamos dónde pierdes dinero y tiempo.</p>
-                        </div>
-                        
-                        <!-- Flecha móvil -->
-                        <div class="md:hidden flex justify-center text-slate-400"><i class="fas fa-chevron-down text-2xl"></i></div>
 
-                        <!-- Nodo 2 -->
-                        <div class="relative z-10 flex-1 bg-white border-2 border-blue-400 p-6 rounded-2xl text-center shadow-md transform md:-translate-y-6 hover:-translate-y-8 transition-transform">
-                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-500 text-xs font-black px-4 py-1 rounded-full text-white uppercase shadow-sm animate-bounce">
-                                Fase Clave
-                            </div>
-                            <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-blue-200">
-                                <i class="fas fa-microchip"></i>
-                            </div>
-                            <h4 class="text-slate-900 font-black text-lg mb-2">2. Construcción IA</h4>
-                            <p class="text-sm text-slate-600">Ingeniería pura. Entrenamos tus agentes, estructuramos tus bases de datos y creamos la plataforma.</p>
-                        </div>
-
-                        <!-- Flecha móvil -->
-                        <div class="md:hidden flex justify-center text-slate-400"><i class="fas fa-chevron-down text-2xl"></i></div>
-
-                        <!-- Nodo 3 -->
-                        <div class="relative z-10 flex-1 bg-white border border-slate-200 p-6 rounded-2xl text-center shadow-sm hover:-translate-y-2 transition-transform">
-                            <div class="w-16 h-16 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-slate-100">
-                                <i class="fas fa-space-shuttle"></i>
-                            </div>
-                            <h4 class="text-slate-900 font-black text-lg mb-2">3. Lanzamiento</h4>
-                            <p class="text-sm text-slate-500">Despliegue final. Te entregamos las llaves de tu nuevo ecosistema y capacitamos a tu equipo.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 3: AGENDAR (CALENDLY & AI FILTER) -->
-            <section id="agendar" class="pt-12 border-t border-slate-200/60">
-                <div class="mb-8 text-center" id="agendar-header">
-                    <span class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">El Primer Paso</span>
-                    <h2 class="text-4xl font-black text-slate-900">Analizador de Negocio <span class="text-blue-400">IA</span></h2>
-                    <p class="text-slate-600 mt-4 max-w-2xl mx-auto text-lg">Antes de agendar tu diagnóstico, nuestro agente pre-evaluará tu caso para confirmar si eres candidato a escalar con nosotros.</p>
-                </div>
-                
-                <!-- AI Form Container -->
-                <div id="ai-form-container" class="glass-panel p-6 md:p-8 max-w-2xl mx-auto">
-                    <div class="space-y-6">
+                <!-- AI Forms (Dark Mode) -->
+                <div id="ai-form-container"
+                    class="glass-panel p-8 rounded-3xl max-w-2xl mx-auto border-t border-t-white/10">
+                    <div class="space-y-5">
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Tu Nombre y/o Nombre de Negocio</label>
-                            <input type="text" id="ai-empresa" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" placeholder="Ej. Juan Pérez, Agencia Growth, etc.">
+                            <label class="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">ID
+                                Corporativo (Marca Comercial)</label>
+                            <input type="text" id="ai-empresa" class="w-full dark-input rounded-xl px-4 py-3"
+                                placeholder="Ej. Agencia Nexus, Dr. Martínez, etc.">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label
+                                    class="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Nicho
+                                    Operativo</label>
+                                <select id="ai-industria" class="w-full dark-input rounded-xl px-4 py-3">
+                                    <option value="" class="bg-[#09090b]">Definir sector...</option>
+                                    <option value="servicios" class="bg-[#09090b]">Servicios Profesionales / Agencias
+                                    </option>
+                                    <option value="ecommerce" class="bg-[#09090b]">Bienes Raíces / Real Estate</option>
+                                    <option value="info" class="bg-[#09090b]">Infoproductos / Cursos / Coaching</option>
+                                    <option value="salud" class="bg-[#09090b]">Clínica / Salud / Estética</option>
+                                    <option value="tecnologia" class="bg-[#09090b]">Software / Tecnología</option>
+                                    <option value="otro" class="bg-[#09090b]">Otro Ecosistema</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Volumen
+                                    Transaccional</label>
+                                <select id="ai-facturacion" class="w-full dark-input rounded-xl px-4 py-3">
+                                    <option value="" class="bg-[#09090b]">Mensual estimado...</option>
+                                    <option value="0-1k" class="bg-[#09090b]">$0 - $2,500 USD</option>
+                                    <option value="1k-5k" class="bg-[#09090b]">$2,500 - $10,000 USD</option>
+                                    <option value="5k-15k" class="bg-[#09090b]">Más de $10,000 USD</option>
+                                </select>
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Industria o Nicho Principal</label>
-                            <select id="ai-industria" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
-                                <option value="">Selecciona tu industria...</option>
-                                <option value="servicios">Servicios Profesionales / Agencias</option>
-                                <option value="ecommerce">E-commerce / Productos Físicos</option>
-                                <option value="info">Infoproductos / Cursos / Coaching</option>
-                                <option value="salud">Salud / Bienestar / Belleza</option>
-                                <option value="tecnologia">Tecnología / Software / SaaS</option>
-                                <option value="otro">Otro</option>
+                            <label class="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Fricción
+                                Principal (Bottleneck)</label>
+                            <select id="ai-problema" class="w-full dark-input rounded-xl px-4 py-3">
+                                <option value="" class="bg-[#09090b]">¿Dónde pierdes dinero/tiempo hoy?</option>
+                                <option value="ventas" class="bg-[#09090b]">El cliente entra a la web pero no agenda
+                                </option>
+                                <option value="tiempo" class="bg-[#09090b]">Respondo las mismas dudas de soporte mil
+                                    veces</option>
+                                <option value="organizacion" class="bg-[#09090b]">No tengo captación activa de leads
+                                    estructurada</option>
                             </select>
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Nivel de facturación actual (Mensual)</label>
-                            <select id="ai-facturacion" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
-                                <option value="">Selecciona un rango...</option>
-                                <option value="0-1k">Empezando ($0 - $1,000)</option>
-                                <option value="1k-5k">$1,000 - $5,000</option>
-                                <option value="5k-15k">$5,000 - $15,000</option>
-                                <option value="15k+">Más de $15,000</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">¿Cuál es tu mayor cuello de botella actual?</label>
-                            <select id="ai-problema" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
-                                <option value="">Selecciona una opción...</option>
-                                <option value="ventas">Bajas conversiones o poca retención</option>
-                                <option value="tiempo">Falta de tiempo (Procesos muy manuales)</option>
-                                <option value="organizacion">Desorganización de datos y sistemas</option>
-                                <option value="costos">Costos operativos muy altos</option>
-                            </select>
-                        </div>
-                        <button onclick="startAIAnalysis()" class="w-full bg-blue-600 text-white font-black py-4 rounded-xl hover:bg-blue-700 transition-colors shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 mt-4">
-                            <i class="fas fa-brain"></i> Generar Perfil y Escanear IA
+                        <button onclick="startAIAnalysis()"
+                            class="w-full bg-white text-main font-black py-4 rounded-xl hover:bg-gray-200 transition-all flex items-center justify-center gap-2 mt-2 shadow-[0_5px_20px_rgba(255,255,255,0.15)]">
+                            <i data-lucide="cpu"></i> Autorizar Escaneo Neuronal
                         </button>
                     </div>
                 </div>
 
-                <!-- AI Terminal Loading -->
-                <div id="ai-loader" class="hidden glass-panel p-8 max-w-2xl mx-auto border-blue-200">
+                <!-- AI Terminal Loading (Hacker Style) -->
+                <div id="ai-loader" class="hidden glass-panel p-8 max-w-2xl mx-auto rounded-3xl mt-8">
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center border border-blue-200 animate-pulse">
-                            <i class="fas fa-robot text-blue-500 text-xl"></i>
+                        <div
+                            class="w-12 h-12 bg-main rounded-full flex items-center justify-center border border-primary/50 shadow-[0_0_15px_rgba(59,130,246,0.3)] animate-pulse">
+                            <i data-lucide="terminal" class="text-primary w-5"></i>
                         </div>
                         <div>
-                            <h3 class="text-slate-900 font-bold text-lg">Agente Evaluador Activo</h3>
-                            <p class="text-blue-500 text-xs font-mono" id="ai-status">Conectando red neuronal...</p>
+                            <h3 class="text-white font-bold font-mono">Agente Evaluador Activo</h3>
+                            <p class="text-primary text-xs font-mono" id="ai-status">Iniciando protocolo de análisis...
+                            </p>
                         </div>
                     </div>
-                    
-                    <div class="bg-slate-900 rounded-xl p-4 border border-slate-800 font-mono text-xs text-green-400 h-32 overflow-hidden relative">
-                        <div id="terminal-lines" class="flex flex-col gap-2"></div>
-                        <div class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-slate-900 to-transparent"></div>
+
+                    <!-- Terminal Console -->
+                    <div
+                        class="bg-black rounded-xl p-5 border border-[#1f1f22] font-mono text-xs text-emerald-400 h-40 overflow-hidden relative shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]">
+                        <div id="terminal-lines" class="flex flex-col gap-2 opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent">
+                        </div>
                     </div>
                 </div>
-                
+
                 <!-- Calendly Widget (Hidden initially) -->
-                <div id="calendly-container" class="hidden glass-panel overflow-hidden border border-emerald-200">
-                    <div class="bg-emerald-50 p-4 border-b border-emerald-100 flex flex-col md:flex-row items-center justify-center gap-3 text-center">
-                        <i class="fas fa-check-circle text-green-400 text-2xl"></i>
-                        <div>
-                            <span class="text-green-400 font-black text-sm block">Análisis Completado: Ecosistema Optimizable</span>
-                            <span class="text-slate-600 text-xs">Eres candidato elegible. Selecciona fecha y hora a continuación.</span>
+                <div id="calendly-container"
+                    class="hidden mt-8 max-w-4xl mx-auto glass-panel p-2 rounded-3xl overflow-hidden border-emerald-500/30">
+                    <div
+                        class="bg-emerald-500/10 p-5 flex flex-col md:flex-row items-center justify-center gap-4 text-center rounded-2xl mb-2">
+                        <div class="bg-emerald-500/20 p-2 rounded-full border border-emerald-500/50">
+                            <i data-lucide="shield-check" class="text-emerald-400 w-6 h-6"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-emerald-400 font-bold text-sm block">Vulnerabilidades Identificadas.
+                                Solución Viable.</span>
+                            <span class="text-[#a1a1aa] text-xs">Agenda el Onboarding Oficial para autorizar la
+                                construcción de tu Ecosistema Inteligente.</span>
                         </div>
                     </div>
-                    <!-- Calendly inline widget begin -->
-                    <div class="calendly-inline-widget w-full" data-url="https://calendly.com/rubenmedina910/30min" style="min-width:320px;height:1000px;"></div>
-                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-                    <!-- Calendly inline widget end -->
-                    <div class="text-center p-4 border-t border-slate-200">
-                        <button onclick="unlockVIPArea()" class="text-xs text-slate-600 hover:text-slate-900 underline">Simular Cita Agendada (Solo para Pruebas)</button>
+                    <!-- Calendly Nativizado al Dark Mode -->
+                    <div class="calendly-inline-widget w-full"
+                        data-url="https://calendly.com/rubenmedina910/30min?background_color=09090b&text_color=ffffff&primary_color=3b82f6"
+                        style="min-width:320px;height:700px;"></div>
+                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"
+                        async></script>
+
+                    <div class="text-center pb-4">
+                        <button onclick="unlockVIPArea()"
+                            class="text-[10px] text-slate-600 hover:text-white uppercase tracking-widest font-mono transition-colors">Simulación
+                            Developer (Bypass Lock)</button>
                     </div>
                 </div>
             </section>
 
-            <!-- SECTION 4: SALA DE TRABAJO (VIP PREVIEW) -->
-            <section id="sala" class="pt-12">
-                <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <h2 class="text-2xl font-black text-slate-900 flex items-center gap-3">
-                            Sala de Trabajo <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded border border-red-500/30 uppercase tracking-widest">Vista Previa</span>
-                        </h2>
-                        <p class="text-slate-600 mt-1 text-sm">Al ser cliente activo, aquí tendremos nuestros Google Docs integrados para trabajar en vivo en tus reuniones.</p>
-                    </div>
+            <!-- SECTION 3: BÓVEDA VIP (LOCKED PREVIEW) -->
+            <section id="caja-fuerte" class="pt-12">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-black text-white flex items-center gap-3">
+                        <i data-lucide="database" class="text-primary w-6 h-6"></i> Bóveda Digital VIP
+                    </h2>
+                    <p class="text-[#a1a1aa] mt-2 text-sm max-w-xl">En este repositorio asegurado residirán las API
+                        Keys, los prompts maestros y el diseño estructural de tu ecosistema tecnológico tras confirmar
+                        el pago.</p>
                 </div>
 
-                <div class="glass-panel overflow-hidden relative h-[450px]">
-                    <!-- Blurred iframe to create illusion of locked feature -->
-                    <iframe id="sala-iframe" src="https://docs.google.com/document/d/1B71R9c4pD8g8hX6qG5V6w_eWjB8W9y3sK8q8E4xV3q8/preview" class="absolute inset-0 w-full h-full border-0 bg-white opacity-40 filter blur-[4px] pointer-events-none transition-all duration-1000" allowfullscreen></iframe>
-                    
-                    <!-- Dynamic Data Overlay (Shown when unlocked) -->
-                    <div id="sala-data-overlay" class="absolute inset-0 z-0 bg-white/95 backdrop-blur-md p-8 opacity-0 pointer-events-none transition-opacity duration-1000 flex flex-col items-center justify-center">
-                        <div class="max-w-md w-full bg-white border border-slate-200 p-6 rounded-xl shadow-lg">
-                            <h3 class="text-xl font-black text-slate-900 mb-4 border-b border-slate-200 pb-2"><i class="fas fa-file-invoice text-blue-500 mr-2"></i> Expediente Pre-Sesión</h3>
-                            <div class="space-y-3 text-sm">
-                                <p><span class="text-slate-500">Cliente/Empresa:</span> <strong id="vip-empresa" class="text-slate-900">---</strong></p>
-                                <p><span class="text-slate-500">Industria:</span> <strong id="vip-industria" class="text-slate-900 uppercase">---</strong></p>
-                                <p><span class="text-slate-500">Facturación:</span> <strong id="vip-facturacion" class="text-slate-900">---</strong></p>
-                                <p><span class="text-slate-500">Foco Estratégico:</span> <strong id="vip-problema" class="text-amber-600">---</strong></p>
+                <div class="glass-panel overflow-hidden relative h-[450px] rounded-3xl">
+                    <!-- Vista falsa del documento bloquedo -->
+                    <div class="absolute inset-0 bg-[url('assets/bg-doc-fake.png')] bg-cover opacity-10 filter blur-[8px] pointer-events-none transition-all duration-1000"
+                        id="sala-iframe">
+                        <!-- Simulated doc structure -->
+                        <div class="w-full h-full bg-slate-100 flex flex-col items-center pt-10 border opacity-80">
+                            <div class="w-3/4 h-8 bg-slate-300 mb-4"></div>
+                            <div class="w-full h-2 bg-slate-300 mb-2"></div>
+                            <div class="w-full h-2 bg-slate-300 mb-2"></div>
+                            <div class="w-5/6 h-2 bg-slate-300 mb-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Data Inyectable (On Unlock) -->
+                    <div id="sala-data-overlay"
+                        class="absolute inset-0 z-0 bg-main/90 backdrop-blur-xl p-8 opacity-0 pointer-events-none transition-opacity duration-1000 flex flex-col items-center justify-center">
+                        <div
+                            class="max-w-lg w-full bg-card border border-glassborder p-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary">
                             </div>
-                            <div class="mt-6 p-3 bg-blue-50 border border-blue-100 rounded text-xs text-blue-700 italic">
-                                "Este expediente ya fue enviado a mis agentes. En nuestra reunión, abriremos el documento oficial con la estrategia estructurada base."
+                            <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                                <i data-lucide="scroll" class="text-primary w-5"></i> Expediente Pre-Despliegue
+                            </h3>
+                            <div class="space-y-4 text-sm font-mono bg-main p-6 rounded-xl border border-[#27272a]">
+                                <div class="flex justify-between border-b border-[#27272a] pb-3">
+                                    <span class="text-slate-500">ID Cliente:</span>
+                                    <strong id="vip-empresa" class="text-white text-right">---</strong>
+                                </div>
+                                <div class="flex justify-between border-b border-[#27272a] pb-3">
+                                    <span class="text-slate-500">Nicho:</span>
+                                    <strong id="vip-industria" class="text-white uppercase text-right">---</strong>
+                                </div>
+                                <div class="flex justify-between border-b border-[#27272a] pb-3">
+                                    <span class="text-slate-500">Target Operativo:</span>
+                                    <strong id="vip-facturacion" class="text-white text-right">---</strong>
+                                </div>
+                                <div class="flex justify-between pb-1">
+                                    <span class="text-slate-500">Directriz:</span>
+                                    <strong id="vip-problema" class="text-emerald-400 text-right">---</strong>
+                                </div>
+                            </div>
+                            <div class="mt-6 text-center text-[11px] text-primary uppercase tracking-widest font-bold">
+                                // Datos listos para inyección en L-Page //
                             </div>
                         </div>
                     </div>
 
-                    <!-- Locked Overlay -->
-                    <div id="sala-overlay" class="absolute inset-0 locked-overlay flex flex-col items-center justify-center z-10 transition-opacity duration-1000">
-                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 border border-slate-200 shadow-md">
-                            <i class="fas fa-lock text-3xl text-slate-400"></i>
+                    <!-- Locked UI Screen -->
+                    <div id="sala-overlay"
+                        class="absolute inset-0 locked-overlay flex flex-col items-center justify-center z-10 transition-opacity duration-1000">
+                        <div
+                            class="w-20 h-20 bg-glass border border-glassborder rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(0,0,0,0.8)] backdrop-blur-md">
+                            <i data-lucide="lock" class="w-8 h-8 text-primary"></i>
                         </div>
-                        <h3 class="text-2xl font-black text-slate-900 mb-2">Área VIP Bloqueada</h3>
-                        <p class="text-slate-600 mb-6 text-center max-w-md">Esta sala colaborativa se activa únicamente después de nuestra sesión de diagnóstico estratégico.</p>
-                        <a href="#agendar" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-md">
-                            Agendar para Desbloquear
+                        <h3 class="text-xl font-black text-white mb-2">Protocolo de Seguridad</h3>
+                        <p class="text-[#a1a1aa] mb-8 text-center max-w-sm text-sm">El repositorio estructural solo es
+                            accesible tras completar el Diagnóstico IA y asegurar la infraestructura inicial ($495).</p>
+                        <a href="#analizador"
+                            class="bg-white hover:bg-gray-200 text-main font-bold py-3 px-8 rounded-full transition-colors flex items-center gap-2 text-sm shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                            Generar Expediente Visual
                         </a>
                     </div>
                 </div>
             </section>
-
-            <!-- Mobile Footer Back Button -->
-            <div class="md:hidden pt-8 pb-4 text-center border-t border-slate-200/60 mt-12">
-                <a href="index.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors bg-slate-100/50 px-6 py-3 rounded-full border border-slate-700">
-                    <i class="fas fa-arrow-left"></i> Volver a la página principal
-                </a>
-            </div>
-            
         </div>
     </main>
 
+    <!-- Scripts de Interacción -->
     <script>
-        // Smooth scrolling for sidebar links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        lucide.createIcons();
 
-        // Background Particles
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let W, H, pts = [];
-        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-        resize(); window.addEventListener('resize', resize);
-        
-        class Particle {
-            constructor() { this.reset(); }
-            reset() { this.x = Math.random()*W; this.y = Math.random()*H; this.vx=(Math.random()-.5)*.3; this.vy=(Math.random()-.5)*.3; this.r=Math.random()*1.5+.5; this.a=Math.random()*.5+.1; }
-            update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>W||this.y<0||this.y>H) this.reset(); }
-            draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=`rgba(59,130,246,${this.a})`; ctx.fill(); }
-        }
-        for(let i=0;i<60;i++) pts.push(new Particle());
-        
-        function connect() {
-            for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++) {
-                const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
-                if(d<120){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=`rgba(59,130,246,${.15*(1-d/120)})`; ctx.lineWidth=.5; ctx.stroke(); }
-            }
-        }
-        (function loop(){ ctx.clearRect(0,0,W,H); pts.forEach(p=>{p.update();p.draw();}); connect(); requestAnimationFrame(loop); })();
+        // Background Particles JS (Adaptadas a Titanium)
+        /* Removidas por ser pesado y distractor en fondos oscuros. 
+           Usé CSS tech-grid y ambient-glow nativo para mayor velocidad. */
 
-        // AI Analyzer Logic
+        // Simulación de Terminal IA
         function startAIAnalysis() {
             const emp = document.getElementById('ai-empresa').value;
             const ind = document.getElementById('ai-industria').value;
             const fac = document.getElementById('ai-facturacion').value;
             const prob = document.getElementById('ai-problema').value;
-            
-            if(!emp || !ind || !fac || !prob) {
-                alert("Por favor completa todos los campos del perfil para que la IA tenga contexto completo.");
+
+            if (!emp || !ind || !fac || !prob) {
+                alert("ERROR: Datos incompletos. Llena la matriz para encender la red neuronal.");
                 return;
             }
 
             document.getElementById('ai-form-container').classList.add('hidden');
             const loader = document.getElementById('ai-loader');
             loader.classList.remove('hidden');
-            loader.scrollIntoView({behavior: "smooth", block: "center"});
-            
+            loader.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            // Textos Hacker Mode
             const lines = [
-                `Analizando ecosistema operativo: ${emp}...`,
-                `Detectando fugas en el vector: ${prob}...`,
-                "Evaluando puntos de integración de automatización...",
-                "Calculando impacto de agentes de IA generativa...",
-                "Proyectando reducción de fricción operativa...",
-                "Candidatura pre-aprobada..."
+                `> sudo connect_db --target "${emp}"`,
+                `> Analizando arquitectura web existente para la industria [${ind}]...`,
+                `> ERROR 404: Sistema automático no encontrado.`,
+                `> Inyectando módulo de captura de leads... OK`,
+                `> Configurando agente: Rol solucionador para [${prob}]`,
+                `> Verificando factibilidad de ROI basada en facturación [${fac}]...`,
+                `> RESULTADO: Ecosistema 100% Escanable y Escalable.`
             ];
-            
+
             const terminal = document.getElementById('terminal-lines');
             const status = document.getElementById('ai-status');
             terminal.innerHTML = "";
-            
+
             let i = 0;
             const interval = setInterval(() => {
-                if(i < lines.length) {
-                    status.innerText = "Procesando...";
-                    terminal.innerHTML += `<div><span class="text-blue-500">></span> ${lines[i]}</div>`;
+                if (i < lines.length) {
+                    terminal.innerHTML += `<div class="animate-pulse">${lines[i]}</div>`;
+                    // Auto-scroll the terminal inside
+                    terminal.parentElement.scrollTop = terminal.parentElement.scrollHeight;
                     i++;
                 } else {
                     clearInterval(interval);
-                    status.innerText = "Diagnóstico Completado.";
-                    status.classList.remove("text-blue-400");
-                    status.classList.add("text-green-400");
-                    
+                    status.innerText = "Sistematización Viable Aprobada.";
+                    status.classList.remove("text-primary");
+                    status.classList.add("text-emerald-400");
+
                     setTimeout(() => {
                         loader.classList.add('hidden');
-                        document.getElementById('agendar-header').classList.add('hidden');
                         const calendly = document.getElementById('calendly-container');
                         calendly.classList.remove('hidden');
-                        calendly.scrollIntoView({behavior: "smooth", block: "start"});
-                    }, 1200);
+                        calendly.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 1500);
                 }
-            }, 700);
+            }, 800);
         }
-        
-        // Function to unlock VIP area and inject data
+
+        // Desbloqueo Automático (Fake Bóveda)
         function unlockVIPArea() {
             const overlay = document.getElementById('sala-overlay');
             const dataOverlay = document.getElementById('sala-data-overlay');
-            const iframe = document.getElementById('sala-iframe');
-            
-            // Get form values
-            const emp = document.getElementById('ai-empresa').value || 'Usuario Demo';
-            const ind = document.getElementById('ai-industria').options[document.getElementById('ai-industria').selectedIndex]?.text || 'No especificada';
-            const fac = document.getElementById('ai-facturacion').options[document.getElementById('ai-facturacion').selectedIndex]?.text || 'No especificada';
-            const prob = document.getElementById('ai-problema').options[document.getElementById('ai-problema').selectedIndex]?.text || 'No especificado';
-            
-            // Inject into VIP card
+
+            // Get form values safely
+            const indNode = document.getElementById('ai-industria');
+            const facNode = document.getElementById('ai-facturacion');
+            const probNode = document.getElementById('ai-problema');
+
+            const emp = document.getElementById('ai-empresa').value || 'ID-001 (Demo)';
+            const ind = indNode.options[indNode.selectedIndex]?.text || 'Pendiente';
+            const fac = facNode.options[facNode.selectedIndex]?.text || 'No Revelado';
+            const prob = probNode.options[probNode.selectedIndex]?.text || 'No Especificado';
+
+            // Inyectar visualmente en terminal
             document.getElementById('vip-empresa').innerText = emp;
             document.getElementById('vip-industria').innerText = ind;
             document.getElementById('vip-facturacion').innerText = fac;
             document.getElementById('vip-problema').innerText = prob;
 
-            if (overlay && iframe) {
-                // Fade out lock screen
+            if (overlay) {
+                // Fade out del bloqueador
                 overlay.style.opacity = '0';
                 setTimeout(() => overlay.style.display = 'none', 1000);
-                
-                // Dim the iframe further so data is readable
-                iframe.classList.add('opacity-10');
-                
-                // Show data overlay
+
+                // Mostrar data overlay super premium (Simulando archivo liberado)
                 dataOverlay.classList.remove('opacity-0', 'pointer-events-none');
                 dataOverlay.classList.add('opacity-100', 'z-20');
-                
-                // Scroll down
-                document.getElementById('sala').scrollIntoView({behavior: "smooth", block: "center"});
+
+                // Scroll a esa posición
+                setTimeout(() => {
+                    document.getElementById('caja-fuerte').scrollIntoView({ behavior: "smooth", block: "center" });
+                }, 500);
             }
         }
 
-        // Calendly Event Listener for unlocking VIP Area automatically
-        window.addEventListener('message', function(e) {
+        // Si reserva en su cuenta original (Reacciona al embedded iframe API de Calendly)
+        window.addEventListener('message', function (e) {
             if (e.data && e.data.event && e.data.event.indexOf('calendly.event_scheduled') === 0) {
                 unlockVIPArea();
             }
@@ -588,4 +565,5 @@
 
     </script>
 </body>
+
 </html>

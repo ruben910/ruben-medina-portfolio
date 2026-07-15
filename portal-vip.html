@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal VIP | Ecosistema Titanium</title>
+
+    <!-- Tailwind CSS (Titanium Theme) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        main: '#09090b',
+                        card: '#121215',
+                        glass: 'rgba(255, 255, 255, 0.03)',
+                        glassborder: 'rgba(255, 255, 255, 0.08)',
+                        glasshover: 'rgba(255, 255, 255, 0.06)',
+                        primary: '#3b82f6',
+                        secondary: '#6366f1'
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: theme('colors.main');
+            color: #ffffff;
+        }
+
+        .tech-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .glass-panel {
+            background: theme('colors.card');
+            border: 1px solid theme('colors.glassborder');
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: theme('colors.main');
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        .nav-item {
+            transition: all 0.3s ease;
+            color: #a1a1aa;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: theme('colors.glasshover');
+            color: #ffffff;
+            border-left: 3px solid theme('colors.primary');
+        }
+
+        .video-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .video-card:hover .play-btn {
+            transform: scale(1.1);
+            background-color: theme('colors.primary');
+            color: white;
+            border-color: theme('colors.primary');
+        }
+
+        .locked-overlay {
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        .dark-input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid theme('colors.glassborder');
+            color: #fff;
+        }
+
+        .dark-input:focus {
+            border-color: theme('colors.primary');
+            outline: none;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.secondary'));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="flex min-h-screen selection:bg-blue-500 selection:text-white font-sans">
+
+    <div class="tech-grid"></div>
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-card border-r border-[#1f1f22] flex flex-col hidden md:flex fixed inset-y-0 left-0 z-40">
+        <div class="p-6 border-b border-[#1f1f22] flex items-center gap-3">
+            <img src="assets/perfil_ruben.jpg" alt="Rubén"
+                class="w-10 h-10 rounded-full border-2 border-primary object-cover">
+            <div>
+                <h2 class="text-sm font-black text-white">Rubén Medina</h2>
+                <p class="text-[9px] text-blue-400 uppercase tracking-widest font-mono">Portal Cliente</p>
+            </div>
+        </div>
+        <nav class="flex-1 py-4 space-y-1 mt-2">
+            <p class="text-[10px] font-black uppercase tracking-widest text-[#52525b] mb-4 px-6">Centro de Inicio</p>
+            <a href="#entrenamiento" class="nav-item flex items-center gap-3 px-6 py-3 text-sm font-medium"><i
+                    data-lucide="brain-circuit" class="w-4 text-amber-500"></i> Entrenamiento IA</a>
+            <a href="#roadmap" class="nav-item flex items-center gap-3 px-6 py-3 text-sm font-medium"><i
+                    data-lucide="git-branch-plus" class="w-4 text-blue-500"></i> Ruta de Trabajo</a>
+            <a href="#agendar"
+                class="mt-4 mx-4 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-black text-main bg-white hover:bg-gray-200 transition-colors"><i
+                    data-lucide="calendar-check" class="w-4"></i> Agendar Sesión</a>
+            <a href="#sala" class="nav-item flex items-center gap-3 px-6 py-3 text-sm font-medium mt-4"><i
+                    data-lucide="lock" class="w-4 text-slate-500"></i> Sala Privada VIP</a>
+        </nav>
+        <div class="p-6 border-t border-[#1f1f22]">
+            <a href="index.html"
+                class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white transition-colors"><i
+                    data-lucide="arrow-left" class="w-4"></i> Volver a web pública</a>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col min-h-screen relative md:ml-64 z-10">
+        <!-- Mobile Header -->
+        <header
+            class="md:hidden bg-card p-4 flex justify-between items-center border-b border-[#1f1f22] sticky top-0 z-50">
+            <div class="flex items-center gap-2">
+                <img src="assets/perfil_ruben.jpg" alt="Rubén"
+                    class="w-8 h-8 rounded-full border border-primary object-cover">
+                <span class="text-xs font-black text-white">Portal Cliente</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white"><i data-lucide="home" class="w-5 h-5"></i></a>
+        </header>
+
+        <div class="flex-1 p-6 md:p-10 max-w-5xl mx-auto w-full pb-32 space-y-24">
+
+            <!-- SECTION 1: ENTRENAMIENTO IA (THE ORIGINAL LIBRARY, RESTORED AND DARKENED) -->
+            <section id="entrenamiento" class="pt-8">
+                <div class="glass-panel p-8 md:p-12 rounded-3xl mb-8 relative overflow-hidden text-center md:text-left">
+                    <div
+                        style="position:absolute; top:-60px; right:-60px; width:200px; height:200px; background:radial-gradient(circle, rgba(59,130,246,0.1), transparent 70%); pointer-events:none;">
+                    </div>
+                    <div class="flex flex-wrap items-center md:justify-start justify-center gap-3 mb-5 relative z-10">
+                        <span
+                            class="px-3 py-1 bg-amber-500/10 text-amber-500 border border-amber-500/20 rounded-full text-[10px] font-black uppercase tracking-widest">🔴
+                            En Vivo · Portal Exclusivo</span>
+                        <span
+                            class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-[10px] font-black uppercase tracking-widest">Impulsado
+                            por IA</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-6 relative z-10">Bienvenido a
+                        tu<br><span class="text-gradient">Ecosistema Digital</span></h1>
+                    <div class="p-5 rounded-2xl mb-6 bg-main border border-glassborder relative z-10 text-left">
+                        <p class="text-[#a1a1aa] text-lg font-light italic leading-relaxed">&ldquo;Imagina despertar
+                            mañana y ver 5 nuevas citas agendadas por tu propio Agente de IA mientras dormías. Tu
+                            negocio generando ingresos 24/7 sin depender de ti. <strong
+                                class="text-white font-bold not-italic">Eso es lo que vamos a construir
+                                juntos.</strong>&rdquo;</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2 relative z-10">
+                        <div class="text-center p-4 rounded-2xl bg-main border border-glassborder">
+                            <p class="text-3xl font-black text-blue-500">2+</p>
+                            <p class="text-[#a1a1aa] text-xs font-bold uppercase tracking-wider mt-1">Años activo</p>
+                        </div>
+                        <div class="text-center p-4 rounded-2xl bg-main border border-glassborder">
+                            <p class="text-3xl font-black text-indigo-500">100%</p>
+                            <p class="text-[#a1a1aa] text-xs font-bold uppercase tracking-wider mt-1">Proyectos exitosos
+                            </p>
+                        </div>
+                        <div class="text-center p-4 rounded-2xl bg-main border border-glassborder">
+                            <p class="text-3xl font-black text-emerald-500">15+</p>
+                            <p class="text-[#a1a1aa] text-xs font-bold uppercase tracking-wider mt-1">Sistemas IA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-white text-lg font-bold mb-1"><i data-lucide="library"
+                            class="inline w-5 h-5 text-primary mb-1"></i> Biblioteca de Inducción</p>
+                    <p class="text-[#a1a1aa] text-sm">Recursos que te prepararán para maximizar tu sesión de
+                        diagnóstico. Toca cualquier módulo para explorar.</p>
+                </div>
+
+                <!-- Video Modules Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Módulo 1 -->
+                    <div
+                        class="glass-panel rounded-2xl overflow-hidden cursor-pointer group video-card relative border border-transparent">
+                        <div class="h-48 relative flex items-center justify-center overflow-hidden"
+                            style="background: linear-gradient(135deg, rgba(30,58,138,0.5) 0%, rgba(9,9,11,1) 100%); border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <div
+                                class="play-btn w-16 h-16 bg-main shadow-lg rounded-full flex items-center justify-center z-10 transition-all duration-300 border border-glassborder text-blue-500">
+                                <i data-lucide="play" class="w-6 h-6 ml-1"></i>
+                            </div>
+                            <span
+                                class="absolute bottom-3 right-3 bg-black/90 text-white text-xs font-bold px-2 py-1 rounded border border-white/10">12:45</span>
+                            <span
+                                class="absolute bottom-3 left-3 bg-blue-600 text-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-wide">Módulo
+                                1</span>
+                        </div>
+                        <div class="p-6">
+                            <span
+                                class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-2 block">Lección
+                                1</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Ingeniería de Prompts 101</h3>
+                            <p class="text-sm text-[#a1a1aa] line-clamp-2">La fórmula exacta para pedirle a la IA que
+                                redacte correos de ventas que conviertan, sin sonar a robot.</p>
+                            <div
+                                class="absolute inset-0 locked-overlay flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                <i data-lucide="unlock" class="text-indigo-400 w-8 h-8 mb-2"></i>
+                                <p class="text-xs font-bold text-white uppercase tracking-widest">Ver Lección</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 2 -->
+                    <div
+                        class="glass-panel rounded-2xl overflow-hidden cursor-pointer group video-card relative border border-transparent">
+                        <div class="h-48 relative flex items-center justify-center overflow-hidden"
+                            style="background: linear-gradient(135deg, rgba(6,78,59,0.5) 0%, rgba(9,9,11,1) 100%); border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <div
+                                class="play-btn w-16 h-16 bg-main shadow-lg rounded-full flex items-center justify-center z-10 transition-all duration-300 border border-glassborder text-emerald-500">
+                                <i data-lucide="play" class="w-6 h-6 ml-1"></i>
+                            </div>
+                            <span
+                                class="absolute bottom-3 right-3 bg-black/90 text-white text-xs font-bold px-2 py-1 rounded border border-white/10">08:20</span>
+                            <span
+                                class="absolute bottom-3 left-3 bg-emerald-600 text-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-wide">Caso
+                                Real</span>
+                        </div>
+                        <div class="p-6">
+                            <span
+                                class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mb-2 block">Caso
+                                de Estudio</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Automatizando Seguimiento</h3>
+                            <p class="text-sm text-[#a1a1aa] line-clamp-2">Cómo conectamos WhatsApp con IA para que un
+                                Agente responda FAQs de clientes 24/7 y cierre ventas.</p>
+                            <div
+                                class="absolute inset-0 locked-overlay flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                <i data-lucide="unlock" class="text-emerald-400 w-8 h-8 mb-2"></i>
+                                <p class="text-xs font-bold text-white uppercase tracking-widest">Ver Caso</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Locked 1 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-amber-500/20 relative">
+                        <div class="h-48 relative flex items-center justify-center overflow-hidden"
+                            style="background: linear-gradient(135deg, rgba(120,53,15,0.3) 0%, rgba(9,9,11,1) 100%);">
+                            <div
+                                class="absolute inset-0 flex flex-col items-center justify-center z-10 bg-main/50 backdrop-blur-sm">
+                                <i data-lucide="lock" class="w-8 h-8 text-amber-500 mb-2"></i>
+                                <p
+                                    class="text-amber-200 text-[10px] font-black uppercase tracking-widest bg-black/60 px-3 py-1 rounded-full border border-amber-500/30">
+                                    Se desbloquea post-sesión</p>
+                            </div>
+                        </div>
+                        <div class="p-6 opacity-70">
+                            <span
+                                class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-2 block">Módulo
+                                VIP</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Agente IA Personalizado</h3>
+                            <p class="text-sm text-[#a1a1aa]">El proceso exacto para crear y entrenar tu propio
+                                asistente que conoce tu negocio al 100%.</p>
+                        </div>
+                    </div>
+                    <!-- Locked 2 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-slate-700/50 relative">
+                        <div class="h-48 relative flex items-center justify-center overflow-hidden bg-main">
+                            <div
+                                class="absolute inset-0 flex flex-col items-center justify-center z-10 bg-main/50 backdrop-blur-sm">
+                                <i data-lucide="lock" class="w-8 h-8 text-slate-500 mb-2"></i>
+                                <p
+                                    class="text-slate-300 text-[10px] font-black uppercase tracking-widest bg-black/60 px-3 py-1 rounded-full border border-slate-700">
+                                    Sección Bloqueada</p>
+                            </div>
+                        </div>
+                        <div class="p-6 opacity-50">
+                            <span
+                                class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-2 block">Avanzado</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Ecosistema Completo</h3>
+                            <p class="text-sm text-[#a1a1aa]">Embudo maestro desde captación en Meta Ads hasta pago
+                                final, operando 100% solo.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ROADMAP (THE ORIGINAL ROADMAP, IN TITANIUM STYLE) -->
+            <section id="roadmap" class="pt-8">
+                <div class="mb-10 text-center">
+                    <span
+                        class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">Plan
+                        de Acción</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white">Mapa de Construcción</h2>
+                    <p class="text-[#a1a1aa] mt-3 max-w-2xl mx-auto">La ruta exacta por la que llevaremos tu negocio
+                        desde el caos manual hasta la eficiencia impulsada por IA.</p>
+                </div>
+
+                <div class="glass-panel p-6 md:p-10 rounded-3xl mb-8">
+                    <div class="flex flex-col md:flex-row items-stretch justify-between gap-6 relative">
+                        <!-- Línea conectora Desktop -->
+                        <div
+                            class="hidden md:block absolute top-[40%] left-0 right-0 h-1 bg-gradient-to-r from-emerald-500/40 via-blue-500/40 to-slate-800 -translate-y-1/2 z-0">
+                        </div>
+
+                        <!-- Nodo 1 -->
+                        <div
+                            class="relative z-10 flex-1 bg-main border border-emerald-500/30 p-6 rounded-2xl text-center shadow-lg">
+                            <div
+                                class="w-16 h-16 bg-[#09090b] text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                                <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-white font-black text-lg mb-2">1. Diagnóstico</h4>
+                            <p class="text-sm text-[#a1a1aa]">Auditoría profunda de tu ecosistema actual. Identificamos
+                                dónde pierdes dinero y tiempo.</p>
+                        </div>
+
+                        <!-- Nodo 2 -->
+                        <div
+                            class="relative z-10 flex-1 bg-main border-2 border-blue-500 p-6 rounded-2xl text-center shadow-[0_10px_30px_rgba(59,130,246,0.15)] transform md:-translate-y-4">
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-[10px] font-black px-4 py-1 rounded-full text-white uppercase tracking-widest shadow-md">
+                                Fase Clave</div>
+                            <div
+                                class="w-16 h-16 bg-[#09090b] text-blue-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                                <i data-lucide="cpu" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-white font-black text-lg mb-2">2. Construcción IA</h4>
+                            <p class="text-sm text-[#a1a1aa]">Ingeniería pura. Entrenamos agentes, estructuramos bases
+                                de datos y creamos la landing.</p>
+                        </div>
+
+                        <!-- Nodo 3 -->
+                        <div
+                            class="relative z-10 flex-1 bg-main border border-[#27272a] p-6 rounded-2xl text-center shadow-lg">
+                            <div
+                                class="w-16 h-16 bg-[#09090b] text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#27272a]">
+                                <i data-lucide="rocket" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-white font-black text-lg mb-2">3. Lanzamiento</h4>
+                            <p class="text-sm text-[#a1a1aa]">Despliegue final. Te entregamos las llaves del nuevo
+                                ecosistema cerrado y automatizado.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: ANALIZADOR NEURONAL (FORMULARIO ORIGINAL CON HACKER THEME) -->
+            <section id="agendar" class="pt-12 border-t border-glassborder">
+                <div class="mb-8 text-center" id="agendar-header">
+                    <span
+                        class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 inline-block">Analizador
+                        Neuronal</span>
+                    <h2 class="text-4xl font-black text-white">Escáner de Negocio <span class="text-blue-400">IA</span>
+                    </h2>
+                    <p class="text-[#a1a1aa] mt-4 max-w-2xl mx-auto text-lg">Antes de agendar tu diagnóstico, nuestro
+                        agente verificará las métricas de tu empresa.</p>
+                </div>
+
+                <div id="ai-form-container" class="glass-panel p-8 rounded-3xl max-w-2xl mx-auto">
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Nombre
+                                de Negocio</label>
+                            <input type="text" id="ai-empresa" class="w-full dark-input rounded-xl px-4 py-3"
+                                placeholder="Ej. Juan Pérez, Agencia Growth">
+                        </div>
+                        <div>
+                            <label
+                                class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Industria</label>
+                            <select id="ai-industria" class="w-full dark-input rounded-xl px-4 py-3">
+                                <option value="" class="bg-main">Selecciona tu industria...</option>
+                                <option value="servicios" class="bg-main">Servicios Profesionales / Agencias</option>
+                                <option value="ecommerce" class="bg-main">E-commerce / Bienes Raíces</option>
+                                <option value="info" class="bg-main">Infoproductos / Cursos / Coaching</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Facturación
+                                Mensual</label>
+                            <select id="ai-facturacion" class="w-full dark-input rounded-xl px-4 py-3">
+                                <option value="" class="bg-main">Selecciona un rango...</option>
+                                <option value="0-1k" class="bg-main">Empezando ($0 - $1,000)</option>
+                                <option value="1k-5k" class="bg-main">$1,000 - $5,000</option>
+                                <option value="5k-15k" class="bg-main">$5,000 - $15,000</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Cuello
+                                de Botella</label>
+                            <select id="ai-problema" class="w-full dark-input rounded-xl px-4 py-3">
+                                <option value="" class="bg-main">Selecciona una opción...</option>
+                                <option value="ventas" class="bg-main">Bajas conversiones o poca retención</option>
+                                <option value="tiempo" class="bg-main">Falta de tiempo (Procesos manuales)</option>
+                                <option value="organizacion" class="bg-main">Desorganización de datos</option>
+                            </select>
+                        </div>
+                        <button onclick="startAIAnalysis()"
+                            class="w-full bg-white text-main font-black py-4 rounded-xl hover:bg-gray-200 transition-colors shadow-lg mt-4 flex items-center justify-center gap-2">
+                            <i data-lucide="cpu" class="w-5"></i> Iniciar Escaneo Neuronal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Terminal Loading -->
+                <div id="ai-loader"
+                    class="hidden glass-panel p-8 max-w-2xl mx-auto border-blue-500/30 rounded-3xl mt-6">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 bg-main rounded-full flex items-center justify-center border border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)] animate-pulse">
+                            <i data-lucide="bot" class="text-blue-500 w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg font-mono">Agente Evaluador Activo</h3>
+                            <p class="text-blue-500 text-xs font-mono" id="ai-status">Conectando red neuronal...</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-black rounded-xl p-5 border border-[#1f1f22] font-mono text-xs text-emerald-400 h-40 overflow-hidden relative shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]">
+                        <div id="terminal-lines" class="flex flex-col gap-2 opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendly Widget -->
+                <div id="calendly-container"
+                    class="hidden glass-panel border border-emerald-500/30 mt-8 max-w-4xl mx-auto rounded-3xl overflow-hidden p-2">
+                    <div
+                        class="bg-emerald-500/10 p-5 border-b border-emerald-500/20 flex flex-col md:flex-row items-center justify-center gap-4 text-center rounded-2xl mb-2">
+                        <div class="bg-emerald-500/20 p-2 rounded-full border border-emerald-500/50">
+                            <i data-lucide="check-circle-2" class="text-emerald-400 w-6 h-6"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-emerald-400 font-bold text-sm block">Análisis Completado: Ecosistema
+                                Optimizable</span>
+                            <span class="text-zinc-400 text-xs">Eres candidato elegible. Selecciona fecha a
+                                continuación.</span>
+                        </div>
+                    </div>
+                    <div class="calendly-inline-widget w-full"
+                        data-url="https://calendly.com/rubenmedina910/30min?background_color=09090b&text_color=ffffff&primary_color=3b82f6"
+                        style="min-width:320px;height:700px;"></div>
+                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"
+                        async></script>
+                    <div class="text-center p-4">
+                        <button onclick="unlockVIPArea()"
+                            class="text-[10px] text-zinc-600 hover:text-white underline font-mono tracking-widest uppercase">Simular
+                            Developer Bypass</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: SALA DE TRABAJO (VIP PREVIEW ORIGINAL) -->
+            <section id="sala" class="pt-12">
+                <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-black text-white flex items-center gap-3">
+                            <i data-lucide="folder-lock" class="text-primary w-6 h-6"></i> Sala Privada VIP <span
+                                class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded border border-red-500/20 uppercase tracking-widest font-mono">Vista
+                                Previa</span>
+                        </h2>
+                        <p class="text-[#a1a1aa] mt-2 text-sm max-w-xl">Al ser cliente activo, aquí tendremos nuestros
+                            Google Docs integrados para trabajar en vivo la estrategia.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel overflow-hidden relative h-[450px] rounded-3xl">
+                    <!-- Fake Google Doc Frame (Blurred in Dark Mode) -->
+                    <iframe id="sala-iframe"
+                        src="https://docs.google.com/document/d/1B71R9c4pD8g8hX6qG5V6w_eWjB8W9y3sK8q8E4xV3q8/preview"
+                        class="absolute inset-0 w-full h-full border-0 bg-white opacity-[0.15] filter blur-[4px] pointer-events-none transition-all duration-1000"
+                        allowfullscreen></iframe>
+
+                    <div id="sala-data-overlay"
+                        class="absolute inset-0 z-0 bg-main/90 backdrop-blur-md p-8 opacity-0 pointer-events-none transition-opacity duration-1000 flex flex-col items-center justify-center">
+                        <div
+                            class="max-w-md w-full bg-card border border-glassborder p-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary">
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                                <i data-lucide="file-text" class="text-primary w-5"></i> Expediente Captado
+                            </h3>
+                            <div class="space-y-4 text-sm font-mono bg-main p-6 rounded-xl border border-[#27272a]">
+                                <div class="flex justify-between border-b border-[#27272a] pb-3">
+                                    <span class="text-zinc-500">Cliente/Empresa:</span>
+                                    <strong id="vip-empresa" class="text-white text-right">---</strong>
+                                </div>
+                                <div class="flex justify-between border-b border-[#27272a] pb-3">
+                                    <span class="text-zinc-500">Nicho:</span>
+                                    <strong id="vip-industria" class="text-white uppercase text-right">---</strong>
+                                </div>
+                                <div class="flex justify-between border-b border-[#27272a] pb-3">
+                                    <span class="text-zinc-500">Facturación:</span>
+                                    <strong id="vip-facturacion" class="text-white text-right">---</strong>
+                                </div>
+                                <div class="flex justify-between pb-1">
+                                    <span class="text-zinc-500">Foco Estratégico:</span>
+                                    <strong id="vip-problema" class="text-amber-400 text-right">---</strong>
+                                </div>
+                            </div>
+                            <div class="mt-6 text-center text-[10px] text-zinc-400 italic">
+                                "Este expediente ha sido captado por la red. Durante nuestra reunión sincronizaremos el
+                                Ecosistema."
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sala-overlay"
+                        class="absolute inset-0 locked-overlay flex flex-col items-center justify-center z-10 transition-opacity duration-1000">
+                        <div
+                            class="w-20 h-20 bg-card rounded-full flex items-center justify-center mb-4 border border-glassborder shadow-[0_0_20px_rgba(0,0,0,0.8)]">
+                            <i data-lucide="lock" class="w-8 h-8 text-zinc-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-2">Área VIP Bloqueada</h3>
+                        <p class="text-zinc-400 mb-6 text-center max-w-md text-sm">Esta sala colaborativa se activa
+                            únicamente después de finalizar tu análisis neuronal y agendar diagnóstico.</p>
+                        <a href="#agendar"
+                            class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-md">
+                            Agendar para Desbloquear
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        function startAIAnalysis() {
+            const emp = document.getElementById('ai-empresa').value;
+            const ind = document.getElementById('ai-industria').value;
+            const fac = document.getElementById('ai-facturacion').value;
+            const prob = document.getElementById('ai-problema').value;
+
+            if (!emp || !ind || !fac || !prob) {
+                alert("ERROR: Por favor completa todos los campos del perfil para que la IA tenga contexto completo.");
+                return;
+            }
+
+            document.getElementById('ai-form-container').classList.add('hidden');
+            const loader = document.getElementById('ai-loader');
+            loader.classList.remove('hidden');
+            loader.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            const lines = [
+                `> Analizando ecosistema de: ${emp}...`,
+                `> Detectando fugas algorítmicas en el vector: ${prob}...`,
+                "> Construyendo simuladores de retención y ventas...",
+                "> Evaluando puntos de integración de Inteligencia Artificial...",
+                `> Cuantificando el impacto para facturación escala ${fac}...`,
+                "> RESULTADO: Candidatura de escalabilidad aprobada."
+            ];
+
+            const terminal = document.getElementById('terminal-lines');
+            const status = document.getElementById('ai-status');
+            terminal.innerHTML = "";
+
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < lines.length) {
+                    terminal.innerHTML += `<div class="animate-pulse">${lines[i]}</div>`;
+                    terminal.parentElement.scrollTop = terminal.parentElement.scrollHeight;
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    status.innerText = "Diagnóstico Completado.";
+                    status.classList.remove("text-blue-500");
+                    status.classList.add("text-emerald-400");
+
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                        document.getElementById('agendar-header').classList.add('hidden');
+                        const calendly = document.getElementById('calendly-container');
+                        calendly.classList.remove('hidden');
+                        calendly.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 1200);
+                }
+            }, 700);
+        }
+
+        function unlockVIPArea() {
+            const overlay = document.getElementById('sala-overlay');
+            const dataOverlay = document.getElementById('sala-data-overlay');
+            const iframe = document.getElementById('sala-iframe');
+
+            const indNode = document.getElementById('ai-industria');
+            const facNode = document.getElementById('ai-facturacion');
+            const probNode = document.getElementById('ai-problema');
+
+            const emp = document.getElementById('ai-empresa').value || 'ID-001 Demo';
+            const ind = indNode.options[indNode.selectedIndex]?.text || 'Pendiente';
+            const fac = facNode.options[facNode.selectedIndex]?.text || 'No revelado';
+            const prob = probNode.options[probNode.selectedIndex]?.text || 'Análisis en curso';
+
+            document.getElementById('vip-empresa').innerText = emp;
+            document.getElementById('vip-industria').innerText = ind;
+            document.getElementById('vip-facturacion').innerText = fac;
+            document.getElementById('vip-problema').innerText = prob;
+
+            if (overlay && iframe) {
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.style.display = 'none', 1000);
+
+                iframe.classList.add('opacity-10');
+
+                dataOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                dataOverlay.classList.add('opacity-100', 'z-20');
+
+                setTimeout(() => {
+                    document.getElementById('sala').scrollIntoView({ behavior: "smooth", block: "center" });
+                }, 500);
+            }
+        }
+
+        window.addEventListener('message', function (e) {
+            if (e.data && e.data.event && e.data.event.indexOf('calendly.event_scheduled') === 0) {
+                unlockVIPArea();
+            }
+        });
+    </script>
+</body>
+
+</html>
