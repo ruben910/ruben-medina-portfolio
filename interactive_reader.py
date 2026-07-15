@@ -1,0 +1,415 @@
+import os
+
+html_content = """<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lectura: E-book Blueprint IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        main: '#09090b', card: '#121215', primary: '#3b82f6', secondary: '#6366f1',
+                        glassborder: 'rgba(255,255,255,0.1)'
+                    },
+                    fontFamily: { sans: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #09090b; color: #ffffff; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        
+        .section-fade {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-link.active {
+            border-left-color: #3b82f6;
+            color: #ffffff;
+            background: linear-gradient(90deg, rgba(59,130,246,0.1) 0%, transparent 100%);
+        }
+        
+        /* Custom UI Diagram Elements */
+        .diagram-node { background: #121215; border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 1.5rem; text-align: center; }
+        .code-block { background: #000; border: 1px solid #333; border-radius: 12px; padding: 1.5rem; font-family: monospace; }
+        
+        .kanban-col { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem; }
+        .kanban-card { background: #121215; border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid #3b82f6; border-radius: 8px; padding: 1rem; margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body class="flex min-h-screen relative font-sans">
+    
+    <!-- Sidebar / Navigation -->
+    <aside id="sidebar" class="w-72 h-screen fixed left-0 top-0 bg-card border-r border-[#1f1f22] flex flex-col p-6 z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+        <div class="flex items-center justify-between border-b border-[#1f1f22] pb-6 mb-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center border border-blue-500/30 text-blue-400">
+                    <i data-lucide="book-open"></i>
+                </div>
+                <div>
+                    <p class="text-[9px] text-blue-400 uppercase font-black tracking-widest leading-tight">Acceso Lectura</p>
+                    <p class="font-black text-white text-sm">Blueprint IA</p>
+                </div>
+            </div>
+            <button class="md:hidden text-slate-400" onclick="toggleSidebar()"><i data-lucide="x"></i></button>
+        </div>
+        
+        <!-- Chapter Navigation -->
+        <nav class="flex-1 space-y-2 text-sm font-medium" id="toc">
+            <button onclick="goToSec(1)" id="btn-sec-1" class="nav-link active w-full text-left block text-slate-400 hover:text-white transition-colors border-l-2 border-transparent pl-4 py-2 rounded-r-lg">
+                1. Portada y Manifiesto
+            </button>
+            <button onclick="goToSec(2)" id="btn-sec-2" class="nav-link w-full text-left block text-slate-400 hover:text-white transition-colors border-l-2 border-transparent pl-4 py-2 rounded-r-lg">
+                2. Arquitectura de $10K
+            </button>
+            <button onclick="goToSec(3)" id="btn-sec-3" class="nav-link w-full text-left block text-slate-400 hover:text-white transition-colors border-l-2 border-transparent pl-4 py-2 rounded-r-lg">
+                3. Ingeniería de Prompts
+            </button>
+            <button onclick="goToSec(4)" id="btn-sec-4" class="nav-link w-full text-left block text-slate-400 hover:text-white transition-colors border-l-2 border-transparent pl-4 py-2 rounded-r-lg">
+                4. Automatización Whats
+            </button>
+            <button onclick="goToSec(5)" id="btn-sec-5" class="nav-link w-full text-left block text-slate-400 hover:text-white transition-colors border-l-2 border-transparent pl-4 py-2 rounded-r-lg">
+                5. Cerebro CRM
+            </button>
+            <button onclick="goToSec(6)" id="btn-sec-6" class="nav-link w-full text-left block text-slate-400 hover:text-white transition-colors border-l-2 border-transparent pl-4 py-2 rounded-r-lg">
+                6. El Jaque Mate
+            </button>
+        </nav>
+
+        <div class="mt-auto pt-6 border-t border-[#1f1f22]">
+            <div class="w-full bg-[#09090b] rounded-lg p-4 border border-white/5 mb-4 text-center">
+                <span class="text-xs text-slate-400 block mb-1">Progreso</span>
+                <div class="w-full bg-white/10 rounded-full h-1.5"><div id="progress-bar" class="bg-blue-500 h-1.5 rounded-full" style="width: 16%;"></div></div>
+            </div>
+            <a href="portal-vip.html" class="flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-500 transition-colors shadow-lg">
+                <i data-lucide="shield" class="w-4 h-4"></i> Sala VIP
+            </a>
+        </div>
+    </aside>
+
+    <!-- Reading Canvas -->
+    <main class="flex-1 md:ml-72 bg-main relative min-h-screen">
+        <!-- Mobile Header -->
+        <header class="md:hidden flex items-center justify-between p-4 border-b border-[#1f1f22] bg-card sticky top-0 z-30">
+            <button onclick="toggleSidebar()" class="text-white"><i data-lucide="menu"></i></button>
+            <span class="text-sm font-black text-blue-400">Blueprint IA</span>
+            <div class="w-6"></div>
+        </header>
+
+        <div class="max-w-4xl mx-auto px-6 py-12 md:py-16">
+
+            <!-- SECTION 1 -->
+            <section id="sec-1" class="section-fade prose prose-invert prose-lg max-w-none">
+                <span class="text-blue-400 text-sm font-black uppercase tracking-widest block mb-2">Página 1</span>
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">El Manifiesto del Fundador</h1>
+                
+                <div class="w-full h-64 md:h-80 bg-card rounded-2xl border border-glassborder mb-10 overflow-hidden relative flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-black/80 z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tech Setup" class="absolute inset-0 w-full h-full object-cover opacity-30">
+                    <div class="relative z-20 text-center px-4">
+                        <i data-lucide="clock" class="w-12 h-12 text-blue-400 mx-auto mb-4"></i>
+                        <h2 class="text-2xl font-black text-white m-0">El tiempo es tu único activo no renovable.</h2>
+                    </div>
+                </div>
+
+                <p class="text-xl text-slate-300 leading-relaxed font-light">El mayor error de los emprendedores de esta década es creer que necesitan trabajar más horas para escalar sus ingresos.</p>
+                <p class="text-lg text-slate-400 leading-relaxed mb-6">Si estás leyendo esto, es probable que estés atrapado en el "ciclo del operador": envías correos masivos manualmente, pasas horas persiguiendo prospectos que te dejan en visto, agendas reuniones con personas no cualificadas y, al final del día, te das cuenta de que no tuviste tiempo para hacer lo único que importa: <strong class="text-white">cerrar ventas y entregar resultados.</strong></p>
+                <p class="text-lg text-slate-400 leading-relaxed mb-6">La diferencia entre una agencia o profesional que factura $1,000 al mes sudando sangre, y uno que factura $10,000+ operando con tranquilidad, no es el talento. <strong class="text-white">Son los sistemas.</strong></p>
+                
+                <blockquote class="border-l-4 border-blue-500 bg-blue-500/10 p-6 rounded-r-xl text-lg text-blue-100 my-8 italic">
+                    La Inteligencia Artificial ya no es una "tendencia del futuro". Es la infraestructura básica del presente. Quien no integra IA para delegar el trabajo mecánico, está compitiendo en desventaja contra ejércitos digitales que no duermen.
+                </blockquote>
+                
+                <p class="text-lg text-slate-400 leading-relaxed mb-10">Este <em>Blueprint</em> no es un libro teórico lleno de humo. Es el desglose estructural (el "código fuente") de los ecosistemas que construyo para negocios de alto valor. Desde la captación en frío hasta el cierre, aquí verás cómo se orquesta un sistema que opera al 100% solo.</p>
+                
+                <div class="flex justify-end border-t border-glassborder pt-8">
+                    <button onclick="goToSec(2)" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl flex flex-row items-center gap-2 transition-all">Siguiente Capítulo <i data-lucide="arrow-right"></i></button>
+                </div>
+            </section>
+
+            <!-- SECTION 2 -->
+            <section id="sec-2" class="section-fade hidden prose prose-invert prose-lg max-w-none">
+                <span class="text-blue-400 text-sm font-black uppercase tracking-widest block mb-2">Página 2</span>
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">La Arquitectura de $10K</h1>
+                
+                <p class="text-lg text-slate-400 leading-relaxed mb-8">Para llegar a facturaciones de 5 cifras mensuales sin contratar a un equipo corporativo enorme, tu negocio necesita comportarse como una máquina industrial. Un prospecto entra por un lado, un cliente facturado sale por el otro. Y en el medio, <strong class="text-blue-400">la IA hace la fricción.</strong></p>
+                
+                <!-- VISUAL DIAGRAM -->
+                <div class="bg-[#121215] border border-glassborder rounded-2xl p-8 mb-10 shadow-2xl relative">
+                    <div class="absolute top-0 right-0 p-3 bg-blue-500/10 rounded-bl-2xl border-b border-l border-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest uppercase">Ecosistema Base</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 pt-4">
+                        
+                        <!-- Step 1 -->
+                        <div class="diagram-node">
+                            <i data-lucide="magnet" class="w-8 h-8 text-blue-400 mx-auto mb-3"></i>
+                            <h4 class="text-white font-bold text-lg mb-1">1. Captura</h4>
+                            <p class="text-xs text-slate-400">Landing Page + Lead Magnet (Fricción Cero)</p>
+                        </div>
+                        
+                        <!-- Step 2 -->
+                        <div class="diagram-node relative border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.15)] transform md:-translate-y-4">
+                            <div class="absolute -left-6 top-1/2 -translate-y-1/2 md:block hidden text-slate-500"><i data-lucide="arrow-right"></i></div>
+                            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded text-white tracking-widest uppercase shadow-md">IA Core</span>
+                            <i data-lucide="bot" class="w-8 h-8 text-blue-500 mx-auto mb-3"></i>
+                            <h4 class="text-white font-bold text-lg mb-1">2. Cualificación</h4>
+                            <p class="text-xs text-slate-400">WhatsApp + ChatGPT (Ventas 24/7)</p>
+                        </div>
+                        
+                        <!-- Step 3 -->
+                        <div class="diagram-node relative">
+                            <div class="absolute -left-6 top-1/2 -translate-y-1/2 md:block hidden text-slate-500"><i data-lucide="arrow-right"></i></div>
+                            <i data-lucide="database" class="w-8 h-8 text-emerald-400 mx-auto mb-3"></i>
+                            <h4 class="text-white font-bold text-lg mb-1">3. Cerebro</h4>
+                            <p class="text-xs text-slate-400">Airtable / Supabase (CRM Centralizado)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-white mt-8 mb-4">Los 3 Pilares Exactos</h3>
+                <ul class="space-y-4 mb-10 border-l-2 border-blue-500/30 pl-4">
+                    <li><strong class="text-blue-200">1. El Imán (Captura):</strong> Nada de pop-ups aburridos. Usamos formularios neuronales que pre-califican al usuario desde el segundo cero.</li>
+                    <li><strong class="text-blue-200">2. El Agente 24/7:</strong> El Agente contacta al lead a los 3 minutos. Descubre su dolor, verifica si tienen capital, y envía el link de Calendly.</li>
+                    <li><strong class="text-blue-200">3. El Cerebro CRM:</strong> Todo se envía transparente a tu Dashboard. Tu único trabajo será hacer la llamada final y cobrar.</li>
+                </ul>
+
+                <div class="flex justify-between border-t border-glassborder pt-8">
+                    <button onclick="goToSec(1)" class="text-slate-400 hover:text-white px-4 py-2 rounded-xl transition-all">Anterior</button>
+                    <button onclick="goToSec(3)" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl flex items-center gap-2 transition-all">Siguiente Capítulo <i data-lucide="arrow-right"></i></button>
+                </div>
+            </section>
+
+            <!-- SECTION 3 -->
+            <section id="sec-3" class="section-fade hidden prose prose-invert prose-lg max-w-none">
+                <span class="text-blue-400 text-sm font-black uppercase tracking-widest block mb-2">Página 3 y 4</span>
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">Ingeniería de Prompts 101</h1>
+                
+                <p class="text-xl font-light text-slate-300 mb-6">El 99% de los emprendedores dicen: <em>"La IA escribe como un robot aburrido"</em>. Y tienen razón. Pero no es culpa de la tecnología, sino de cómo la configuran.</p>
+                
+                <!-- RICA VISUAL -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                    <div class="bg-card p-4 rounded-xl border border-glassborder text-center">
+                        <div class="text-blue-500 font-black text-2xl mb-1">R</div>
+                        <div class="text-white font-bold text-sm">ROL</div>
+                        <div class="text-xs text-slate-500 mt-1">¿Quién es la IA?</div>
+                    </div>
+                    <div class="bg-card p-4 rounded-xl border border-glassborder text-center">
+                        <div class="text-blue-500 font-black text-2xl mb-1">I</div>
+                        <div class="text-white font-bold text-sm">INSTRUCCIÓN</div>
+                        <div class="text-xs text-slate-500 mt-1">¿Qué debe hacer?</div>
+                    </div>
+                    <div class="bg-card p-4 rounded-xl border border-glassborder text-center">
+                        <div class="text-blue-500 font-black text-2xl mb-1">C</div>
+                        <div class="text-white font-bold text-sm">CONTEXTO</div>
+                        <div class="text-xs text-slate-500 mt-1">¿Por qué importa?</div>
+                    </div>
+                    <div class="bg-card p-4 rounded-xl border border-glassborder text-center">
+                        <div class="text-blue-500 font-black text-2xl mb-1">A</div>
+                        <div class="text-white font-bold text-sm">ACCIÓN</div>
+                        <div class="text-xs text-slate-500 mt-1">¿Cómo lo entrega?</div>
+                    </div>
+                </div>
+
+                <div class="code-block relative shadow-2xl mb-10">
+                    <div class="absolute top-0 left-0 w-full h-8 bg-[#27272a] rounded-t-xl flex items-center px-4 gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                        <span class="ml-4 text-[10px] text-slate-400 font-sans tracking-custom uppercase">Terminal.exe - Prompt Maestro</span>
+                    </div>
+                    <div class="pt-8 text-sm text-green-400 leading-relaxed font-mono">
+                        <span class="text-blue-400">&gt; Actúa como</span> un Copywriter Senior B2B especializado en ventas High-Ticket <span class="text-white/50">(Rol).</span><br><br>
+                        <span class="text-blue-400">&gt; Debes redactar</span> un correo electrónico en frío de máximo 4 párrafos cortos y precisos <span class="text-white/50">(Instrucción).</span><br><br>
+                        <span class="text-blue-400">&gt; Nuestro objetivo</span> no es vender de inmediato, sino generar intriga para agendar una sesión de 15 min. Va dirigido a dueños de agencia que facturan $5k pero no tienen tiempo libre <span class="text-white/50">(Contexto).</span><br><br>
+                        <span class="text-blue-400">&gt; Escribe en</span> un tono corporativo agresivo... e incluye un Call To Action en forma de pregunta de sí/no al final <span class="text-white/50">(Acción).</span><span class="animate-pulse">_</span>
+                    </div>
+                </div>
+
+                <p class="text-lg text-slate-400 text-center italic">Cuando utilizas este nivel de granularidad, no obtienes textos; <strong class="text-white not-italic">obtienes armas de conversión masiva.</strong></p>
+
+                <div class="flex justify-between border-t border-glassborder pt-8 mt-8">
+                    <button onclick="goToSec(2)" class="text-slate-400 hover:text-white px-4 py-2 rounded-xl transition-all">Anterior</button>
+                    <button onclick="goToSec(4)" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl flex items-center gap-2 transition-all">Siguiente Capítulo <i data-lucide="arrow-right"></i></button>
+                </div>
+            </section>
+
+            <!-- SECTION 4 -->
+            <section id="sec-4" class="section-fade hidden prose prose-invert prose-lg max-w-none">
+                <span class="text-blue-400 text-sm font-black uppercase tracking-widest block mb-2">Página 5 y 6</span>
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">Automatización 24/7</h1>
+                
+                <p class="text-lg text-slate-400 mb-8">Si un prospecto se interesa en tu negocio a las 2:00 AM un domingo, tu competencia lo dejará esperando hasta el lunes a las 9:00 AM. <strong class="text-white">Tú no.</strong> Tú lo cualificarás y agendarás mientras duermes usando <span class="text-emerald-400">WhatsApp Business API + OpenAI</span>.</p>
+
+                <!-- FLOW DIAGRAM -->
+                <div class="bg-card p-6 md:p-10 rounded-2xl border border-glassborder mb-10">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center relative">
+                        <!-- Line connectors -->
+                        <div class="hidden md:block absolute top-1/2 left-10 right-10 h-0.5 bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 -translate-y-1/2 z-0"></div>
+                        
+                        <div class="relative z-10 bg-main p-4 rounded-full border border-emerald-500/30 w-24 h-24 flex flex-col items-center justify-center shadow-lg">
+                            <i data-lucide="message-circle" class="w-8 h-8 text-emerald-400 mb-1"></i>
+                            <span class="text-[9px] text-white">Mensaje Ciente</span>
+                        </div>
+                        
+                        <div class="relative z-10 bg-main p-4 rounded-full border border-blue-500 w-24 h-24 flex flex-col items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                            <i data-lucide="brain" class="w-8 h-8 text-blue-400 mb-1"></i>
+                            <span class="text-[9px] text-white">IA Filtra</span>
+                        </div>
+                        
+                        <div class="relative z-10 bg-main p-4 rounded-full border border-indigo-500/30 w-24 h-24 flex flex-col items-center justify-center shadow-lg">
+                            <i data-lucide="calendar-check" class="w-8 h-8 text-indigo-400 mb-1"></i>
+                            <span class="text-[9px] text-white">Agendado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-white mb-4">La Lógica (Sin Código Complejo):</h3>
+                <ul class="space-y-4 text-slate-400 list-decimal pl-5">
+                    <li><strong class="text-white">El Disparador (Make o Zapier):</strong> Detecta el mensaje en menos de 1 segundo.</li>
+                    <li><strong class="text-white">El Filtro Cognitivo:</strong> Tu cerebro de IA (ChatGPT) analiza y pre-califica basándose en reglas estrictas (no regala precios).</li>
+                    <li><strong class="text-white">Ramificación Lógica:</strong> Si no aplica, lo manda a contenido gratuito. Si es un lead Highly Qualified, le envía el link de Calendly.</li>
+                    <li><strong class="text-white">Cierre del Bucle:</strong> Tú solo recibes un email: <em>"Sesión de $10K agendada con Cliente X."</em>.</li>
+                </ul>
+
+                <div class="flex justify-between border-t border-glassborder pt-8 mt-10">
+                    <button onclick="goToSec(3)" class="text-slate-400 hover:text-white px-4 py-2 rounded-xl transition-all">Anterior</button>
+                    <button onclick="goToSec(5)" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl flex items-center gap-2 transition-all">Siguiente Capítulo <i data-lucide="arrow-right"></i></button>
+                </div>
+            </section>
+
+            <!-- SECTION 5 -->
+            <section id="sec-5" class="section-fade hidden prose prose-invert prose-lg max-w-none">
+                <span class="text-blue-400 text-sm font-black uppercase tracking-widest block mb-2">Página 7</span>
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">El Cerebro CRM</h1>
+                
+                <p class="text-xl text-slate-300 italic mb-8 border-l-4 border-indigo-500 pl-4 py-1">"Lead que no está en el CRM, lead que no existe."</p>
+
+                <!-- FAKE KANBAN UI -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 bg-black/40 p-6 rounded-2xl border border-glassborder">
+                    <div class="kanban-col">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-slate-500"></div>
+                            <span class="text-xs font-bold text-slate-300 uppercase">Leads (Entrantes)</span>
+                        </div>
+                        <div class="kanban-card opacity-50"><p class="text-white font-bold text-sm mb-1">Agencia SEO Madrid</p><p class="text-xs text-slate-500 line-clamp-1">Consulta inicial vía WhatsApp...</p></div>
+                    </div>
+                    <div class="kanban-col">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                            <span class="text-xs font-bold text-slate-300 uppercase">Cualificados (IA)</span>
+                        </div>
+                        <div class="kanban-card border-blue-500">
+                            <div class="flex justify-between items-start">
+                                <p class="text-white font-bold text-sm mb-1">Growth Partners LLC</p>
+                                <span class="bg-blue-500/20 text-blue-400 text-[9px] px-2 py-0.5 rounded">HOT</span>
+                            </div>
+                            <p class="text-xs text-slate-500">$15k MRR. Buscan escalar...</p>
+                        </div>
+                    </div>
+                    <div class="kanban-col bg-emerald-500/5 border-emerald-500/20">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                            <span class="text-xs font-bold text-emerald-400 uppercase">Sesión VIP</span>
+                        </div>
+                        <div class="kanban-card border-emerald-500 bg-emerald-500/10">
+                            <p class="text-white font-bold text-sm mb-1">Ecom Titans</p>
+                            <p class="text-xs text-emerald-300"><i data-lucide="calendar" class="inline w-3 h-3"></i> Hoy, 15:00 hrs (Zoom)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-lg text-slate-400">Abre tu dashboard por la mañana. No verás notificaciones caóticas en WhatsApp. Verás este panel Kanban limpio donde tu Agente ya movió a cada prospecto a su columna. Tú solo te dedicas al factor humano: la videollamada y el cierre.</p>
+
+                <div class="flex justify-between border-t border-glassborder pt-8 mt-10">
+                    <button onclick="goToSec(4)" class="text-slate-400 hover:text-white px-4 py-2 rounded-xl transition-all">Anterior</button>
+                    <button onclick="goToSec(6)" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl flex items-center gap-2 transition-all">Gran Final <i data-lucide="arrow-right"></i></button>
+                </div>
+            </section>
+
+            <!-- SECTION 6 (Upsell) -->
+            <section id="sec-6" class="section-fade hidden prose prose-invert prose-lg max-w-none text-center pt-8">
+                
+                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/30 text-blue-400 mx-auto mb-6 shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+                    <i data-lucide="rocket" class="w-8 h-8"></i>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">El Jaque Mate.</h1>
+                <p class="text-xl text-slate-400 font-light max-w-2xl mx-auto mb-12">Tienes en tus manos la arquitectura exacta de los ecosistemas digitales. La pregunta es: ¿tienes el tiempo para programarlo todo solo?</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto mb-12">
+                    <div class="bg-card p-8 rounded-2xl border border-glassborder opacity-70">
+                        <h4 class="text-white font-bold text-lg mb-2">Camino A (Operador):</h4>
+                        <p class="text-sm text-slate-400">Pasar 3 a 6 meses estrellándote con errores de la API de WhatsApp, Webhooks caídos de Make y prompts que alucinan.</p>
+                    </div>
+                    <div class="bg-main p-8 rounded-2xl border border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                        <h4 class="text-white font-bold text-lg mb-2 flex items-center gap-2"><i data-lucide="zap" class="text-blue-400 w-5"></i> Camino B (Líder):</h4>
+                        <p class="text-sm text-slate-400">Entregarme las llaves. Mi agencia diseña tu landing, programa tu Agente Inteligente, orquesta el CRM y te entrega una máquina llave en mano en 7 días.</p>
+                    </div>
+                </div>
+
+                <div class="p-8 bg-blue-500/10 border border-blue-500/30 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-black text-white mb-4">¿Estás listo para delegarlo todo?</h3>
+                    <p class="text-slate-400 mb-8 max-w-xl mx-auto text-sm">El acceso a la auditoría VIP está limitado a dueños de negocio listos para invertir en escalabilidad.</p>
+                    <a href="portal-vip.html" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-[0_5px_20px_rgba(59,130,246,0.5)] uppercase tracking-wide">
+                        Entrar a la Sala Privada VIP
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+            }
+        }
+
+        function goToSec(id) {
+            // Hide all sections
+            for(let i=1; i<=6; i++) {
+                document.getElementById('sec-'+i).classList.add('hidden');
+                document.getElementById('btn-sec-'+i).classList.remove('active');
+            }
+            
+            // Show target
+            document.getElementById('sec-'+id).classList.remove('hidden');
+            document.getElementById('btn-sec-'+id).classList.add('active');
+            
+            // Update progress
+            const progress = (id / 6) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            
+            // Auto close sidebar on mobile
+            if(window.innerWidth < 768) {
+                toggleSidebar();
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
+"""
+
+with open('leer-blueprint.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)

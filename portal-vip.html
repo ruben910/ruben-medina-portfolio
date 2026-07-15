@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
 <head>
@@ -42,7 +42,7 @@
 
     <style>
         body {
-            background-color: theme('colors.main');
+            background-color: #09090b;
             color: #ffffff;
         }
 
@@ -58,8 +58,8 @@
         }
 
         .glass-panel {
-            background: theme('colors.card');
-            border: 1px solid theme('colors.glassborder');
+            background: #121215;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(12px);
         }
@@ -69,7 +69,7 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: theme('colors.main');
+            background: #09090b;
         }
 
         ::-webkit-scrollbar-thumb {
@@ -84,9 +84,9 @@
 
         .nav-item:hover,
         .nav-item.active {
-            background: theme('colors.glasshover');
+            background: rgba(255, 255, 255, 0.06);
             color: #ffffff;
-            border-left: 3px solid theme('colors.primary');
+            border-left: 3px solid #3b82f6;
         }
 
         .video-card {
@@ -101,9 +101,9 @@
 
         .video-card:hover .play-btn {
             transform: scale(1.1);
-            background-color: theme('colors.primary');
+            background-color: #3b82f6;
             color: white;
-            border-color: theme('colors.primary');
+            border-color: #3b82f6;
         }
 
         .locked-overlay {
@@ -113,18 +113,18 @@
 
         .dark-input {
             background: rgba(0, 0, 0, 0.4);
-            border: 1px solid theme('colors.glassborder');
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: #fff;
         }
 
         .dark-input:focus {
-            border-color: theme('colors.primary');
+            border-color: #3b82f6;
             outline: none;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.secondary'));
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -388,7 +388,7 @@
                 </div>
             </section>
 
-            <!-- SECTION 3: ANALIZADOR NEURONAL (FORMULARIO ORIGINAL CON HACKER THEME) -->
+            <!-- SECTION 3: ANALIZADOR NEURONAL -->
             <section id="agendar" class="pt-12 border-t border-glassborder">
                 <div class="mb-8 text-center" id="agendar-header">
                     <span
@@ -496,7 +496,7 @@
                 </div>
             </section>
 
-            <!-- SECTION 4: SALA DE TRABAJO (VIP PREVIEW ORIGINAL) -->
+            <!-- SECTION 4: SALA DE TRABAJO -->
             <section id="sala" class="pt-12">
                 <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
@@ -511,7 +511,6 @@
                 </div>
 
                 <div class="glass-panel overflow-hidden relative h-[450px] rounded-3xl">
-                    <!-- Fake Google Doc Frame (Blurred in Dark Mode) -->
                     <iframe id="sala-iframe"
                         src="https://docs.google.com/document/d/1B71R9c4pD8g8hX6qG5V6w_eWjB8W9y3sK8q8E4xV3q8/preview"
                         class="absolute inset-0 w-full h-full border-0 bg-white opacity-[0.15] filter blur-[4px] pointer-events-none transition-all duration-1000"

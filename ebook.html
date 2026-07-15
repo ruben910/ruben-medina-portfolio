@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-book: El Blueprint de la IA | Rubén Medina</title>
+
+    <!-- Tailwind CSS (Titanium Theme) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        main: '#09090b', card: '#121215', glass: 'rgba(255, 255, 255, 0.03)',
+                        glassborder: 'rgba(255, 255, 255, 0.08)', primary: '#3b82f6', secondary: '#6366f1'
+                    },
+                    fontFamily: { sans: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #09090b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .tech-grid {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            height: 100vh;
+            background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(9, 9, 11, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-panel {
+            background: #121215;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 3D Ebook Mockup */
+        .ebook-3d {
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateY(-18deg) rotateX(10deg);
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
+            box-shadow: -30px 30px 50px rgba(0, 0, 0, 0.9), inset 2px 0 5px rgba(255, 255, 255, 0.3);
+            position: relative;
+            background: linear-gradient(145deg, #1e3a8a, #09090b);
+            border-radius: 4px 16px 16px 4px;
+        }
+
+        .ebook-3d:hover {
+            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg) translateY(-10px);
+            box-shadow: -15px 35px 60px rgba(59, 130, 246, 0.3), inset 2px 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .ebook-3d::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 35px;
+            background: linear-gradient(to right, #0f172a, #1e3a8a);
+            transform-origin: left;
+            transform: rotateY(-90deg);
+            border-radius: 4px 0 0 4px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Accordion Smooth Height */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .accordion-content.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        /* Bento Hover Glow */
+        .bento-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+        }
+    </style>
+</head>
+
+<body class="relative">
+
+    <!-- Ambient / Background -->
+    <div class="tech-grid top-0 left-0 w-full"></div>
+    <div class="ambient-glow top-20 left-10"></div>
+    <div class="ambient-glow bottom-20 right-10"
+        style="background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, rgba(9,9,11,0) 70%);"></div>
+
+    <!-- Minimal Header -->
+    <nav class="fixed top-0 w-full z-40 bg-main/80 backdrop-blur-md border-b border-glassborder">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div
+                    class="w-8 h-8 rounded-full bg-card border border-glassborder flex items-center justify-center group-hover:border-primary transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4 text-slate-400 group-hover:text-white"></i>
+                </div>
+                <span class="text-sm font-black text-white">Volver</span>
+            </a>
+            <div class="text-xs font-mono text-slate-400 bg-glass px-3 py-1 rounded-full border border-glassborder">
+                📚 PRODUCTO DIGITAL
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 pt-28 pb-32 max-w-6xl mx-auto px-6">
+
+        <!-- === HERO (Split View) === -->
+        <section class="flex flex-col lg:flex-row items-center gap-16 mb-24">
+
+            <!-- Left Copy -->
+            <div class="flex-1 space-y-6">
+                <!-- Badge vs Pill UI Element -->
+                <div
+                    class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                    <i data-lucide="zap" class="w-3 h-3"></i> Top #1 en Ventas B2B
+                </div>
+
+                <h1 class="text-5xl lg:text-7xl font-black leading-[1.1] text-white">
+                    El Código Fuente de la <br><span class="text-gradient">Automatización IA</span>
+                </h1>
+
+                <p class="text-lg text-[#a1a1aa] font-light max-w-xl leading-relaxed">
+                    Descubre el mapa exacto que usan los Solo-Preneurs modernos para clonar su tiempo, automatizar su
+                    prospección y transformar atención en ingresos sin escribir código.
+                </p>
+
+                <div class="pt-4 flex items-center gap-4">
+                    <button onclick="triggerCheckout()"
+                        class="bg-blue-600 hover:bg-blue-500 text-white font-black text-lg px-8 py-4 rounded-xl transition-all shadow-[0_5px_20px_rgba(59,130,246,0.3)] hover:-translate-y-1">
+                        Adquirir Ahora - $19 USD
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <!-- Simulated Avatars (Trust signals) -->
+                        <div class="flex -space-x-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-slate-800 border-2 border-main shadow-lg overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=J+P&background=3b82f6&color=fff" alt="">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-slate-800 border-2 border-main shadow-lg overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=M+L&background=6366f1&color=fff" alt="">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-slate-800 border-2 border-main shadow-lg overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=A+R&background=10b981&color=fff" alt="">
+                            </div>
+                        </div>
+                        <div class="ml-4 text-xs">
+                            <div class="flex text-amber-400 text-[10px]"><i data-lucide="star"
+                                    class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-current"></i></div>
+                            <span class="text-slate-400 font-bold">+1,200 Lectores</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right 3D Mockup -->
+            <div class="flex-1 flex justify-center lg:justify-end w-full">
+                <!-- Our 3D Book built entirely in CSS for crazy fast loading -->
+                <div onclick="triggerCheckout()"
+                    class="w-[280px] h-[380px] md:w-[340px] md:h-[460px] ebook-3d flex flex-col p-8 border border-blue-500/20 relative z-10 cursor-pointer overflow-hidden">
+                    <!-- Glass glare effect inside book cover -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-50 z-0">
+                    </div>
+
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <span
+                            class="text-[9px] font-mono text-blue-300 tracking-widest border border-blue-400/30 bg-blue-500/10 self-start px-2 py-0.5 rounded">R.
+                            MEDINA EDITIONS</span>
+
+                        <div class="mt-auto mb-10">
+                            <h2 class="text-3xl md:text-5xl font-black text-white leading-none tracking-tight mb-2">
+                                Ecosistema<br><span class="text-blue-400">Inteligente</span></h2>
+                            <p class="text-blue-100/70 text-sm italic font-light">Escala a $10K/mes con un ejército de
+                                Agentes.</p>
+                        </div>
+
+                        <div
+                            class="pt-4 border-t border-blue-500/30 flex justify-between items-center text-xs text-blue-300">
+                            <span class="font-bold">VOL. 01</span>
+                            <div class="flex items-center gap-1"><i data-lucide="cpu" class="w-3 h-3"></i> Premium Guide
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- === BENTO GRID (LO QUE DESCUBRIRÁS) === -->
+        <!-- OMITTED PARA ENFOCARNOS EN EL LEAD GEN -->
+
+        <!-- === ACCORDION (DISCLOSURE / FAQS) === -->
+        <section class="max-w-3xl mx-auto mb-24">
+            <h2 class="text-3xl font-black text-center text-white mb-10">Preguntas <span
+                    class="text-blue-400">Frecuentes</span></h2>
+
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <div class="glass-panel rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none"
+                        onclick="toggleAccordion('faq1', this)">
+                        <span class="font-bold text-white">¿Necesito saber programar para aplicar esto?</span>
+                        <i data-lucide="chevron-down"
+                            class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq1" class="accordion-content bg-card/50">
+                        <div class="px-6 pb-5 text-sm text-slate-400 text-left">
+                            Absolutamente no. El Blueprint está diseñado con un enfoque <em>No-Code</em>. Utilizamos
+                            plataformas visuales que se conectan entre sí con unos cuantos clics y los prompts
+                            pre-diseñados que te entrego.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- === FIXED/STICKY CTA (Mobile bottom bar) === -->
+    <div
+        class="fixed bottom-0 left-0 w-full md:hidden bg-[#121215]/90 backdrop-blur-xl border-t border-glassborder p-4 z-30 flex justify-between items-center">
+        <div>
+            <p class="text-white font-black">Blueprint IA</p>
+            <p class="text-blue-400 text-sm font-bold">$19 USD</p>
+        </div>
+        <button onclick="triggerCheckout()"
+            class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-full shadow-lg">
+            Descargar Ahora
+        </button>
+    </div>
+
+    <!-- Lead Capture Modal (Organic Acquisition) -->
+    <div id="lead-modal"
+        class="fixed inset-0 z-50 bg-[#09090b]/90 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-[#121215] w-full max-w-md p-8 rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative transform scale-95 transition-transform duration-300"
+            id="lead-scale-box">
+
+            <button onclick="closeLeadModal()"
+                class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div
+                class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-6 border border-blue-500/20">
+                <i data-lucide="unlock" class="w-6 h-6"></i>
+            </div>
+
+            <h3 class="text-2xl font-black text-white mb-2">Desbloquea el Blueprint</h3>
+            <p class="text-sm text-slate-400 mb-6">Inicia tu proceso de transformación digital. Ingresa tus datos para
+                acceder oficialmente al documento maestro.</p>
+
+            <form onsubmit="handleLeadSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Nombre
+                        Completo</label>
+                    <input type="text" required placeholder="Ej. Carlos Martínez"
+                        class="w-full bg-[#09090b] border border-[#27272a] text-white rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Correo
+                        Corporativo</label>
+                    <input type="email" required placeholder="tu@empresa.com"
+                        class="w-full bg-[#09090b] border border-[#27272a] text-white rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all">
+                </div>
+
+                <button type="submit" id="submit-lead-btn"
+                    class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl mt-4 flex justify-center items-center gap-2 transition-all shadow-lg">
+                    <span>Adquirir y Leer Ahora</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </form>
+
+            <p class="text-[10px] text-center text-slate-500 mt-4"><i data-lucide="shield-check"
+                    class="w-3 h-3 inline mr-1 text-emerald-500"></i> Conexión encriptada SSL. No compartimos tus datos.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // 1. Accordion Logic
+        function toggleAccordion(id, btn) {
+            const content = document.getElementById(id);
+            const icon = btn.querySelector('i');
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
+                document.querySelectorAll('button i').forEach(el => el.style.transform = 'rotate(0deg)');
+                content.classList.add('open');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // 2. Lead Capture Modal Handling
+        function triggerCheckout() {
+            const modal = document.getElementById('lead-modal');
+            const box = document.getElementById('lead-scale-box');
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            box.classList.remove('scale-95');
+            box.classList.add('scale-100');
+        }
+
+        function closeLeadModal() {
+            const modal = document.getElementById('lead-modal');
+            const box = document.getElementById('lead-scale-box');
+
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            box.classList.remove('scale-100');
+            box.classList.add('scale-95');
+        }
+
+        function handleLeadSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-lead-btn');
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Registrando lead...';
+            btn.classList.add('opacity-80', 'pointer-events-none');
+            lucide.createIcons();
+
+            // Simular petición backend
+            setTimeout(() => {
+                btn.innerHTML = '<i data-lucide="check" class="w-5 h-5 text-green-400"></i> ¡Acceso Concedido!';
+                btn.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+                btn.classList.add('bg-[#09090b]', 'border', 'border-emerald-500');
+                lucide.createIcons();
+
+                // Redirigir al lector web del eBook (generado recientemente)
+                setTimeout(() => {
+                    window.location.href = 'leer-blueprint.html';
+                }, 800);
+            }, 1000); // reduced timeout for snappier demo feel
+        }
+    </script>
+</body>
+
+</html>
