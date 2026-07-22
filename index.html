@@ -4,38 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Open Graph & PWA Icons -->
-    <meta property="og:image" content="assets/og_image_premium.png">
-    <link rel="apple-touch-icon" href="assets/og_image_premium.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Rubén Medina | Software Developer & AI Specialist</title>
+    <meta name="description"
+        content="Portafolio profesional de Rubén Medina. Desarrollador web y especialista en integraciones de Inteligencia Artificial.">
 
-    <title>Rubén Medina | Developer & IA</title>
+    <!-- Open Graph for LinkedIn / Sharing -->
+    <meta property="og:title" content="Rubén Medina | Software Developer & AI Specialist">
+    <meta property="og:description"
+        content="Portafolio profesional de Rubén Medina. Desarrollador web y especialista en integraciones de Inteligencia Artificial.">
+    <meta property="og:image" content="assets/perfil_ruben.jpg">
+    <meta property="og:type" content="website">
 
     <!-- Modern Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- FontAwesome for Brand Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- FontAwesome for Brand Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            /* High-end Dark Theme (Titanium style) */
-            --bg-main: #09090b;
-            /* Very dark zinc */
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            /* Zinc-400 */
-            --accent-primary: #3b82f6;
-            /* Electric Blue */
-            --accent-secondary: #6366f1;
-            /* Indigo */
+            /* Premium Dark Theme */
+            --bg-main: #0a0a0a;
+            --bg-secondary: #121212;
+            --text-main: #ffffff;
+            --text-muted: #a3a3a3;
+            --accent: #38bdf8;
+            /* Subtle blue for professional look */
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --border-color: #262626;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
@@ -44,385 +52,393 @@
             box-sizing: border-box;
         }
 
-        body,
-        html {
-            height: 100%;
-            font-family: 'Outfit', sans-serif;
+        body {
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
-            color: var(--text-primary);
+            color: var(--text-main);
+            line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Ambient Glow behind text */
-        .bg-glow {
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(9, 9, 11, 0) 70%);
+        /* Ambient subtle gradient */
+        .ambient-bg {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, rgba(10, 10, 10, 0) 50%);
             z-index: 0;
-            border-radius: 50%;
             pointer-events: none;
-            animation: pulse-glow 8s infinite alternate;
         }
 
-        .landing-container {
-            display: flex;
-            min-height: 100vh;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            max-width: 1600px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        /* Left Side: Copy and Actions */
-        .content-section {
-            flex: 1.15;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 4rem 8%;
+            padding: 0 5%;
+            position: relative;
             z-index: 10;
         }
 
-        /* Right Side: Image */
-        .image-section {
-            flex: 0.85;
-            position: relative;
+        /* Header / Nav */
+        header {
+            padding: 2rem 0;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 4rem;
+            border-bottom: 1px solid var(--glass-border);
+            animation: fadeInDown 0.8s ease-out;
         }
 
-        /* Content Styles */
-        .profile-badge {
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: calc(100vh - 100px);
+            padding: 4rem 0;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .availability-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: 100px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: 2rem;
             backdrop-filter: blur(10px);
-            align-self: flex-start;
-            animation: slideDown 0.8s ease-out;
         }
 
-        .profile-badge i {
-            width: 16px;
-            height: 16px;
-            color: var(--accent-primary);
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            /* green */
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+            animation: pulse-dot 2s infinite;
         }
 
-        .main-title {
-            font-size: 4.5rem;
-            font-weight: 800;
-            line-height: 1.05;
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
             letter-spacing: -1.5px;
             margin-bottom: 1.5rem;
-            animation: fadeUp 0.8s ease-out 0.2s backwards;
         }
 
-        .text-gradient {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        .gradient-text {
+            color: transparent;
+            background: linear-gradient(90deg, #ffffff, var(--accent));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-            line-height: 1.6;
-            margin-bottom: 3rem;
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
             max-width: 90%;
-            animation: fadeUp 0.8s ease-out 0.4s backwards;
-        }
-
-        /* The Strategy: Primary Lead Magnet Box */
-        .lead-magnet-box {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(20px);
             margin-bottom: 2.5rem;
-            animation: fadeUp 0.8s ease-out 0.6s backwards;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .lead-magnet-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-        }
-
-        .lead-header {
+        .social-links {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1rem;
+            gap: 1rem;
         }
 
-        .lead-header h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .lead-desc {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.8rem;
-            line-height: 1.5;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 12px;
-        }
-
-        .input-group input {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 14px 20px;
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 1rem;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .input-group input:focus {
-            border-color: var(--accent-primary);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-primary {
-            background: var(--text-primary);
-            color: var(--bg-main);
-            border: none;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: var(--transition);
+        .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--text-main);
+            color: var(--bg-main);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* Secondary Nav Links */
-        .secondary-nav {
-            display: flex;
-            gap: 2rem;
-            animation: fadeUp 0.8s ease-out 0.8s backwards;
-            flex-wrap: wrap;
+        .btn-secondary {
+            background-color: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
         }
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-
-        .nav-link:hover {
-            color: var(--text-primary);
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.08);
             transform: translateY(-2px);
         }
 
-        .nav-link.premium-link {
-            color: var(--text-primary);
+        /* Hero Image */
+        .hero-image-wrapper {
+            flex: 0.8;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInRight 1s ease-out;
         }
 
-        .nav-link.premium-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
+        .image-container {
+            position: relative;
             width: 100%;
-            height: 1px;
-            background: var(--glass-border);
-            transition: var(--transition);
-        }
-
-        .nav-link.premium-link:hover::after {
-            background: var(--text-primary);
-        }
-
-        /* Right Side: Visuals */
-        .image-wrapper {
-            position: relative;
-            width: 85%;
-            max-width: 500px;
+            max-width: 420px;
             aspect-ratio: 4/5;
-            border-radius: 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-            animation: fadeScale 1s ease-out;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
         }
 
-        .image-wrapper:hover {
-            transform: scale(1.02);
-            box-shadow: 0 40px 70px rgba(59, 130, 246, 0.2);
-        }
-
-        .image-wrapper::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            pointer-events: none;
-        }
-
-        .image-wrapper img {
+        .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 24px;
+            transition: transform 0.7s ease;
         }
 
-        /* Floating Micro-interaction Card */
-        .floating-card {
+        .image-container:hover img {
+            transform: scale(1.03);
+        }
+
+        .capabilities {
+            padding: 5rem 0;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 2rem;
+        }
+
+        .floating-logos-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-logo {
             position: absolute;
-            bottom: 40px;
-            left: -40px;
-            background: rgba(20, 20, 24, 0.85);
-            /* Darker glass focus */
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            padding: 1.25rem 1.5rem;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            animation: float 5s ease-in-out infinite;
-            z-index: 10;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            transition: var(--transition);
+            width: 120px;
+            opacity: 0.04;
+            filter: grayscale(100%) brightness(200%);
+            animation: float-logo 35s infinite ease-in-out;
+            pointer-events: auto;
+            /* interactive */
             cursor: pointer;
+            transition: opacity 0.5s, filter 0.5s, transform 0.3s;
         }
 
-        .floating-card:hover {
-            transform: translateY(-5px) scale(1.02);
+        .floating-logo:hover {
+            opacity: 0.6;
+            filter: grayscale(0%) brightness(100%) invert(0) !important;
+            transform: scale(1.1) !important;
+            animation-play-state: paused;
+        }
+
+        .logo-1 {
+            top: 10%;
+            left: 5%;
+            animation-duration: 35s;
+        }
+
+        .logo-2 {
+            top: 75%;
+            left: -5%;
+            animation-duration: 42s;
+            animation-direction: reverse;
+            width: 180px;
+        }
+
+        .logo-3 {
+            top: 20%;
+            right: 10%;
+            animation-duration: 38s;
+        }
+
+        .logo-4 {
+            top: 60%;
+            right: 5%;
+            animation-duration: 45s;
+            animation-direction: reverse;
+            filter: invert(1);
+        }
+
+        .logo-5 {
+            top: 85%;
+            left: 35%;
+            animation-duration: 32s;
+            width: 100px;
+            filter: invert(1);
+        }
+
+        .logo-6 {
+            top: 45%;
+            left: 50%;
+            animation-duration: 40s;
+            animation-delay: -10s;
+            width: 130px;
+            filter: invert(1);
+        }
+
+        @keyframes float-logo {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            20% {
+                transform: translate(12vw, -15vh) rotate(15deg);
+            }
+
+            40% {
+                transform: translate(-10vw, 20vh) rotate(-10deg);
+            }
+
+            60% {
+                transform: translate(15vw, 5vh) rotate(25deg);
+            }
+
+            80% {
+                transform: translate(-5vw, -15vh) rotate(-15deg);
+            }
+        }
+
+        .capabilities h2,
+        .capabilities .grid {
+            position: relative;
+            z-index: 2;
+            /* Above floating logos */
+        }
+
+        .capabilities h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .capabilities h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
             border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .floating-icon {
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.1));
-            border-radius: 10px;
-            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            color: var(--accent);
         }
 
-        .floating-text h4 {
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
             font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 2px;
         }
 
-        .floating-text p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        /* Integrations / Brands */
-        .tech-stack {
-            margin-top: 3.5rem;
-            padding-top: 2rem;
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
             border-top: 1px solid var(--glass-border);
-            animation: fadeUp 0.8s ease-out 1s backwards;
-        }
-
-        .tech-stack p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
-        }
-
-        .brands-row {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .brands-row img {
-            height: 22px;
-            filter: grayscale(100%) opacity(0.4) brightness(1.5);
-            transition: var(--transition);
-        }
-
-        .brands-row img:hover {
-            filter: grayscale(0%) opacity(1) brightness(1);
-            transform: translateY(-2px);
-        }
-
-        .brand-text {
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: -0.5px;
-            filter: opacity(0.4);
-            transition: var(--transition);
-            cursor: default;
-        }
-
-        .brand-text:hover {
-            filter: opacity(1);
-            color: var(--text-primary);
         }
 
         /* Animations */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        @keyframes pulse-dot {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            70% {
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
             }
         }
 
-        @keyframes slideDown {
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
@@ -434,310 +450,212 @@
             }
         }
 
-        @keyframes fadeScale {
+        @keyframes fadeInLeft {
             from {
                 opacity: 0;
-                transform: scale(0.95);
+                transform: translateX(-30px);
             }
 
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateX(0);
             }
         }
 
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-
-        @keyframes pulse-glow {
+        @keyframes fadeInRight {
             from {
-                opacity: 0.7;
-                transform: scale(1);
+                opacity: 0;
+                transform: translateX(30px);
             }
 
             to {
                 opacity: 1;
-                transform: scale(1.05);
+                transform: translateX(0);
             }
-        }
-
-        @keyframes rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .spin {
-            animation: rotate 2s linear infinite;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .main-title {
-                font-size: 3.8rem;
-            }
-
-            .content-section {
-                padding: 4rem 5%;
-                flex: 1;
-            }
-
-            .image-section {
-                flex: 1;
-                padding: 2rem;
-            }
-
-            .image-wrapper {
-                width: 100%;
-                aspect-ratio: 1/1;
-            }
-
-            .floating-card {
-                left: -20px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .landing-container {
+        @media (max-width: 900px) {
+            .hero {
                 flex-direction: column;
-                overflow-y: auto;
+                text-align: center;
+                padding: 2rem 0;
             }
 
-            .image-section {
-                padding: 2rem;
-                flex: none;
-                height: auto;
-                order: -1;
-                padding-top: 3rem;
+            .hero-content {
+                order: 2;
             }
 
-            .content-section {
-                padding: 2rem;
-                flex: none;
+            .hero-image-wrapper {
+                order: 1;
+                margin-bottom: 2rem;
             }
 
-            .main-title {
-                font-size: 3rem;
+            .hero p {
+                max-width: 100%;
+                margin: 0 auto 2rem auto;
             }
 
-            .image-wrapper {
-                width: 100%;
-                max-width: 400px;
+            .availability-badge {
+                margin: 0 auto 2rem auto;
             }
 
-            .floating-card {
-                left: 10px;
-                bottom: -10px;
-                padding: 1rem;
-            }
-
-            .input-group {
-                flex-direction: column;
-            }
-
-            .btn-primary {
-                width: 100%;
+            .social-links {
                 justify-content: center;
             }
 
-            .tech-stack {
-                margin-top: 2.5rem;
-            }
-
-            .brands-row {
-                flex-wrap: wrap;
-                gap: 1.5rem;
-            }
-        }
-    
-        .tech-stack {
-            position: relative;
-            overflow: hidden; /* Contains the sweeping glow */
-            border-radius: 20px; /* if any background exists */
-        }
-        
-        .tech-stack::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: -100px;
-            width: 150px;
-            background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.4), rgba(255, 255, 255, 0.6), rgba(96, 165, 250, 0.4), transparent);
-            transform: skewX(-25deg);
-            animation: sweepScanner 5s infinite;
-            z-index: 10;
-            pointer-events: none;
-            filter: blur(8px);
-        }
-
-        @keyframes sweepScanner {
-            0% { right: -150px; opacity: 0; }
-            5% { opacity: 1; }
-            40% { right: 120%; opacity: 1; }
-            50% { right: 120%; opacity: 0; }
-            100% { right: 120%; opacity: 0; }
-        }
-
-        .brands-row > * {
-            animation: colorPop 5s infinite;
-        }
-        
-        @keyframes colorPop {
-            0%, 5%, 35%, 100% {
-                filter: grayscale(100%) opacity(0.4) brightness(1.5);
-                transform: translateY(0);
-            }
-            15% {
-                filter: grayscale(0%) opacity(1) brightness(1.2) drop-shadow(0 0 10px rgba(59,130,246,0.3));
-                transform: translateY(-3px);
+            .hero h1 {
+                font-size: 3rem;
             }
         }
 
+        @media (max-width: 600px) {
+            .social-links {
+                flex-direction: column;
+            }
+
+            nav a {
+                display: none;
+                /* Hide nav links on very small screens for ultra minimalism */
+            }
+        }
     </style>
 </head>
 
 <body>
-    <!-- Background Ambient Effect -->
-    <div class="bg-glow"></div>
+    <div class="ambient-bg"></div>
 
-    <div class="landing-container">
-
-        <!-- Left Side: Core Message & Lead Capture -->
-        <div class="content-section">
-
-            <div class="profile-badge">
-                <i data-lucide="check-circle"></i> Developer & Especialista AI
-            </div>
-
-            <h1 class="main-title">
-                Escala tu Negocio con <br>
-                <span class="text-gradient">Inteligencia Artificial.</span>
-            </h1>
-
-            <p class="subtitle">
-                Dejo atrás las páginas web estáticas para construir <strong>ecosistemas digitales premium</strong> que
-                automatizan tus procesos y captan clientes en piloto automático.
-            </p>
-
-            <!-- Lead Magnet Box (The "Basic Knowledge" Hook) -->
-            <div class="lead-magnet-box">
-                <div class="lead-header">
-                    <i data-lucide="book-open" class="text-gradient"
-                        style="stroke: var(--accent-primary); width: 24px; height: 24px;"></i>
-                    <h3>Accede a mi Hub de Conocimiento Gratuito</h3>
-                </div>
-                <p class="lead-desc">
-                    Descubre cómo usar la IA en tu día a día sin saber programar. Únete a mi newsletter privada y recibe
-                    estrategias prácticas.
-                </p>
-
-                <form class="input-group" id="leadForm">
-                    <input type="email" placeholder="Tu mejor correo electrónico" required>
-                    <button type="submit" class="btn-primary">
-                        Acceder Ahora <i data-lucide="arrow-right" style="width:18px;height:18px;"></i>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Secondary Navigation (The "Next Steps") -->
-            <div class="secondary-nav">
-                <a href="ebook.html" class="nav-link" style="border: 1px solid rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); color: #60a5fa;">
-                    <i data-lucide="book-open"></i> E-book IA
-                </a>
-
-                <a href="servicios.html" class="nav-link">
-                    <i data-lucide="layout-grid"></i> Ecosistemas a Medida
-                </a>
-                <a href="orquestador-ia.html" class="nav-link">
-                    <i data-lucide="cpu"></i> Modelos AI
-                </a>
-                <a href="presentacion.html" class="nav-link">
-                    <i data-lucide="bar-chart-2"></i> Presentación
-                </a>
-                <a href="portal-vip.html" class="nav-link premium-link">
-                    <i data-lucide="lock"></i> Portal Clientes
-                </a>
-            </div>
-
-            <!-- Integrations Row (Social Proof) -->
-            <div class="tech-stack">
-                <p>Tecnologías Premium de las que soy partner</p>
-                <div class="brands-row">
-                    <img src="assets/logos/google-cloud.svg" alt="Google Cloud" style="animation-delay: 1.4s" onerror="this.style.display='none'">
-                    <img src="assets/logos/meta.svg" alt="Meta" style="animation-delay: 1.1s" onerror="this.style.display='none'">
-                    <img src="assets/logos/supabase.svg" alt="Supabase" style="animation-delay: 0.8s" onerror="this.style.display='none'">
-                    <img src="assets/logos/github.svg" alt="GitHub" style="animation-delay: 0.5s" onerror="this.style.display='none'">
-                    <span class="brand-text" style="animation-delay: 0.2s">Antigravity</span>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Right Side: High-End Visuals -->
-        <div class="image-section">
-            <div class="image-wrapper">
-                <img src="assets/perfil_ruben.jpg" alt="Rubén Medina - IA y Desarrollo Web Premium">
-
-                <!-- Micro-interaction / Hover UI -->
-                <div class="floating-card" onclick="alert('Aquí abriremos la última píldora de conocimiento')">
-                    <div class="floating-icon">
-                        <i data-lucide="zap" style="width: 20px; height: 20px;"></i>
-                    </div>
-                    <div class="floating-text">
-                        <h4>Insights Automáticos</h4>
-                        <p>Último artículo hace 2h</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class="floating-logos-bg">
+        <img src="assets/logos/stripe.svg" class="floating-logo logo-1" alt="Stripe">
+        <img src="assets/logos/meta.svg" class="floating-logo logo-2" alt="Meta">
+        <img src="assets/logos/supabase.svg" class="floating-logo logo-3" alt="Supabase">
+        <img src="assets/logos/github.svg" class="floating-logo logo-4" alt="GitHub">
+        <img src="assets/logos/gemini.svg" class="floating-logo logo-5" alt="Gemini">
+        <img src="assets/logos/antigravity.svg" class="floating-logo logo-6" alt="Antigravity">
     </div>
 
-    <!-- Script for UI Feedback -->
+    <div class="container">
+        <header>
+            <a href="#" class="logo">Rubén<span>.</span></a>
+            <nav>
+                <a href="#about">Sobre Mí</a>
+                <a href="#capabilities">Capacidades</a>
+                <a href="resume.html">Resumé</a>
+                <a href="#contact">Contacto</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero" id="about">
+                <div class="hero-content">
+                    <div class="availability-badge">
+                        <span class="status-dot"></span> Abierto a nuevas oportunidades
+                    </div>
+                    <h1>
+                        Software <span class="gradient-text">Developer</span> <br>
+                        & AI Specialist
+                    </h1>
+                    <p>
+                        Hola, soy <strong>Rubén Medina</strong>. Construyo software escalable y aplicaciones web
+                        modernas.
+                        Me especializo en integrar modelos de Inteligencia Artificial para resolver problemas complejos
+                        y automatizar procesos,
+                        aportando valor técnico y soluciones robustas.
+                    </p>
+
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/ruben-medina-343985291" target="_blank"
+                            rel="noopener noreferrer" class="btn btn-primary">
+                            <i class="fa-brands fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/ruben910" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-secondary">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                        <a href="mailto:rubenmedina910@gmail.com" class="btn btn-secondary">
+                            <i data-lucide="mail"></i> Email
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-image-wrapper">
+                    <div class="image-container">
+                        <img src="assets/perfil_ruben.jpg" alt="Rubén Medina">
+                    </div>
+                </div>
+            </section>
+
+            <section class="capabilities" id="capabilities">
+                <h2>Lo que construyo</h2>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i data-lucide="code-2"></i>
+                        </div>
+                        <h3>Desarrollo Full-Stack</h3>
+                        <p>Creación de aplicaciones web modernas, rápidas y seguras utilizando tecnologías
+                            vanguardistas. Desde la arquitectura hasta la interfaz de usuario.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i data-lucide="bot"></i>
+                        </div>
+                        <h3>Integración de IA</h3>
+                        <p>Implementación de modelos de procesamiento de lenguaje natural y agentes inteligentes en
+                            ecosistemas de software para mejorar la toma de decisiones.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i data-lucide="workflow"></i>
+                        </div>
+                        <h3>Automatización & APIs</h3>
+                        <p>Diseño de flujos de trabajo automatizados y conexiones robustas entre diferentes servicios y
+                            plataformas a través de APIs escalables.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer id="contact">
+            <style>
+                .footer-socials {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1.5rem;
+                    margin-bottom: 1.5rem;
+                    flex-wrap: wrap;
+                }
+
+                .footer-socials a {
+                    color: var(--text-muted);
+                    transition: var(--transition);
+                }
+
+                .footer-socials a:hover {
+                    color: var(--text-main);
+                    transform: translateY(-2px);
+                }
+            </style>
+            <div class="footer-socials">
+                <a href="https://www.linkedin.com/in/ruben-medina-343985291" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/ruben910" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i
+                        class="fa-brands fa-github"></i></a>
+                <a href="mailto:rubenmedina910@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+                <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i
+                        class="fa-brands fa-facebook"></i></a>
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i
+                        class="fa-brands fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2026 Rubén Medina. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
     <script>
+        // Inicializar íconos de Lucide
         lucide.createIcons();
-
-        // Simulación de UX Premium en el formulario de captura
-        document.getElementById('leadForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalContent = btn.innerHTML;
-
-            // Estado de Carga
-            btn.innerHTML = `<i data-lucide="loader" class="spin"></i> Procesando...`;
-            btn.style.pointerEvents = 'none';
-            btn.style.opacity = '0.9';
-            lucide.createIcons();
-
-            // Simulación de respuesta al usuario
-            setTimeout(() => {
-                btn.innerHTML = `<i data-lucide="check"></i> ¡Acceso Enviado!`;
-                btn.style.background = '#10b981'; // Success Green
-                btn.style.color = '#fff';
-                lucide.createIcons();
-
-                // Reset a los pocos segundos
-                setTimeout(() => {
-                    btn.innerHTML = originalContent;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                    btn.style.pointerEvents = 'auto';
-                    btn.style.opacity = '1';
-                    lucide.createIcons();
-                    e.target.reset();
-                }, 3500);
-            }, 1500);
-        });
     </script>
 </body>
 

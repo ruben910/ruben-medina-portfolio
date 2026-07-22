@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubén Medina | Resumé</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-main: #0a0a0a;
+            --bg-secondary: #121212;
+            --text-main: #ffffff;
+            --text-muted: #a3a3a3;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --border-color: #262626;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, rgba(10, 10, 10, 0) 50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .back-btn {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            color: var(--text-main);
+        }
+
+        .resume-content {
+            padding: 4rem 0;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .resume-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .resume-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Grid specific for resume */
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .resume-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        .info-block {
+            margin-bottom: 2rem;
+        }
+
+        .info-block h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .info-block span {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-block p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Certificate Styling */
+        .cert-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .cert-container img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .cert-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .cert-container p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient-bg"></div>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">Rubén<span>.</span></a>
+            <a href="index.html" class="back-btn"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                Volver al Portafolio</a>
+        </header>
+
+        <main class="resume-content">
+            <div class="resume-header">
+                <h1>Resumé</h1>
+                <p>Experiencia, Educación y Certificaciones Oficiales</p>
+            </div>
+
+            <div class="resume-grid">
+                <!-- Left Column: Experience & Education -->
+                <div>
+                    <h2 class="section-title"><i data-lucide="briefcase"></i> Experiencia Profesional</h2>
+
+                    <div class="info-block">
+                        <h3>Especialista & Integrador de IA</h3>
+                        <span>2024 - Presente</span>
+                        <p>Diseño y despliegue de agentes inteligentes, automatizaciones conversacionales y ecosistemas
+                            web impulsados por IA para la optimización de procesos de venta y operaciones.</p>
+                    </div>
+
+                    <div class="info-block">
+                        <h3>Desarrollador Full-Stack</h3>
+                        <span>2022 - Presente</span>
+                        <p>Desarrollo de portales VIP, paneles de control (CRM) customizados e integraciones robustas
+                            utilizando arquitectura moderna, asegurando escalabilidad y rendimiento excepcional.</p>
+                    </div>
+
+                    <h2 class="section-title" style="margin-top: 3rem;"><i data-lucide="graduation-cap"></i> Educación
+                    </h2>
+
+                    <div class="info-block">
+                        <h3>Escuela Superior Arsenio Martínez</h3>
+                        <span>Cuarto Año</span>
+                        <p>Educación Secundaria.</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Certifications -->
+                <div>
+                    <h2 class="section-title"><i data-lucide="award"></i> Certificaciones</h2>
+                    <div class="cert-container">
+                        <a href="assets/pictures/certificado_ia.jpg" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/pictures/certificado_ia.jpg" alt="Certificado IA de Rubén Medina">
+                        </a>
+                        <p>Certificación en Inteligencia Artificial Generativa y Soluciones Empresariales.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
