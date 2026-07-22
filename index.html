@@ -13,6 +13,7 @@
     <meta property="og:description"
         content="Portafolio profesional de Rubén Medina. Desarrollador web y especialista en integraciones de Inteligencia Artificial.">
     <meta property="og:image" content="assets/perfil_ruben.jpg">
+    <link rel="icon" type="image/jpeg" href="assets/perfil_ruben.jpg">
     <meta property="og:type" content="website">
 
     <!-- Modern Typography -->
@@ -509,14 +510,44 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .social-links {
-                flex-direction: column;
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            z-index: 60;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
             }
 
-            nav a {
-                display: none;
-                /* Hide nav links on very small screens for ultra minimalism */
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                z-index: 50;
+                border-left: 1px solid var(--glass-border);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            .social-links {
+                flex-direction: column;
             }
         }
     </style>
@@ -537,11 +568,16 @@
     <div class="container">
         <header>
             <a href="#" class="logo">Rubén<span>.</span></a>
+            <button class="mobile-menu-btn" aria-label="Menu"
+                onclick="document.querySelector('nav').classList.toggle('active')">
+                <i data-lucide="menu"></i>
+            </button>
             <nav>
-                <a href="#about">Sobre Mí</a>
-                <a href="#capabilities">Capacidades</a>
+                <a href="#about" onclick="document.querySelector('nav').classList.remove('active')">Sobre Mí</a>
+                <a href="#capabilities"
+                    onclick="document.querySelector('nav').classList.remove('active')">Capacidades</a>
                 <a href="resume.html">Resumé</a>
-                <a href="#contact">Contacto</a>
+                <a href="#contact" onclick="document.querySelector('nav').classList.remove('active')">Contacto</a>
             </nav>
         </header>
 
