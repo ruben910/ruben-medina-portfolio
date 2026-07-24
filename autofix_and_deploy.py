@@ -40,8 +40,9 @@ print("3. Ejecutando comandos de Git (Add, Commit, Push)...")
 os.chdir(workspace_dir)
 
 try:
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", "Añadir nuevas imágenes de perfil al resumé"], check=True)
+    subprocess.run(["git", "add", "."], check=False)
+    subprocess.run(["git", "commit", "-m", "Añadir nuevas imágenes de perfil al resumé"], check=False)
+    print("Reintentando la subida a GitHub (Git Push)...")
     subprocess.run(["git", "push"], check=True)
     print(" Git Push completado con exito. ¡Todo esta en tu repositorio!")
 except Exception as e:
